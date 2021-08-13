@@ -1,0 +1,13 @@
+.mainbody {
+  display: flex;
+  height: 100%;
+}
+
+.leftnavi {
+  display: flex;
+  flex-basis: 30%;
+}
+.rightcontent {
+  flex-basis: 1;
+  display: flex;
+}
