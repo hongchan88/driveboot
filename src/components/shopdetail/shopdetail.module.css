@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 60%;
+  height: 200px;
+  background-color: white;
+  border: grey solid 1px;
+  border-radius: 2px;
+  box-shadow: 5px 10px #888888;
+}

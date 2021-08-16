@@ -3,7 +3,7 @@ import Shops from "../shops/shops";
 
 const Contents = ({ shops }) => {
   return (
-    <div>
+    <div class="w-full">
       <Shops shops={shops} />
     </div>
   );

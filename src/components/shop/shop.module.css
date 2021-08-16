@@ -4,7 +4,6 @@
   flex-basis: 150px;
   flex-grow: 1;
   flex-shrink: 1;
-  max-width: 200px;
-  min-width: 100px;
+
   height: 100px;
 }

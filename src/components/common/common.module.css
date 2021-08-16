@@ -6,15 +6,17 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .globalheader {
-  height: 10%;
-}
-.globalfooter {
-  height: 10%;
+  min-height: 10vh;
 }
 .globalcontent {
   height: 80%;
+  min-height: 80vh;
+}
+
+.globalfooter {
+  min-height: 10vh;
 }

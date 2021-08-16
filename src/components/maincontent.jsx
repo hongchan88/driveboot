@@ -13,10 +13,44 @@ const Maincontent = ({ path }) => {
       location: "",
       id: 1,
     },
-    2: { name: "Asian market", desc: "", ShopImg: "", location: "", id: 2 },
+    2: {
+      name: "Asian market",
+      desc: "",
+      ShopImg: "",
+      location: "",
+      id: 2,
+      product: {
+        1: {
+          name: "rice",
+          price: 22,
+          description: "Please ask for EXP",
+          brand: "Chungjungwon",
+          size: "",
+          id: 1,
+        },
+        2: {
+          name: "chilli pepper",
+          price: 23,
+          description: "only have fine",
+          id: 2,
+        },
+        3: {
+          name: "gochujang",
+          price: 23,
+          description: "only have fine",
+          id: 3,
+        },
+        4: {
+          name: "dasida",
+          price: 23,
+          description: "only have fine",
+          id: 4,
+        },
+      },
+    },
     3: { name: "Chiken Zone", desc: "", ShopImg: "", location: "", id: 3 },
-    4: { name: "Chiken Zone", desc: "", ShopImg: "", location: "", id: 3 },
-    5: { name: "Chiken Zone", desc: "", ShopImg: "", location: "", id: 3 },
+    4: { name: "Noodle shop", desc: "", ShopImg: "", location: "", id: 4 },
+    5: { name: "Korean rice", desc: "", ShopImg: "", location: "", id: 5 },
   });
 
   const pathsNavi = (path) => {
