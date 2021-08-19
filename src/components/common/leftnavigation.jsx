@@ -5,12 +5,14 @@ const Leftnavigation = (props) => {
   return (
     <ul className={styles.listcontainer}>
       <li>
-        <Link to="/welcome">Welcome</Link>
+        <Link to="/">Welcome</Link>
       </li>
       <li>
-        <Link to="/">Shop</Link>
+        <Link to="/shop">Shop</Link>
       </li>
-      <li>Order history</li>
+      <li>
+        <Link to="/order">Order history</Link>
+      </li>
       <li>Profile</li>
     </ul>
   );

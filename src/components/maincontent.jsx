@@ -4,7 +4,9 @@ import Leftnavigation from "./common/leftnavigation";
 import styles from "./maincontent.module.css";
 import Welcome from "./welcome";
 import Shopdetail from "./shopdetail/shopdetail";
+import Ordermain from "./order/ordermain";
 const Maincontent = ({ path }) => {
+  const [order, setOrder] = useState();
   const [shops, setShops] = useState({
     1: {
       name: "Fresh Grocery",
@@ -33,18 +35,35 @@ const Maincontent = ({ path }) => {
           price: 23,
           description: "only have fine",
           id: 2,
+          brand: "haetae",
         },
         3: {
-          name: "gochujang",
+          name: "pepper",
           price: 23,
           description: "only have fine",
           id: 3,
+          brand: "ottogi",
         },
         4: {
           name: "dasida",
           price: 23,
           description: "only have fine",
           id: 4,
+          brand: "wang",
+        },
+        5: {
+          name: "soy pepper",
+          price: 23,
+          description: "only have fine",
+          id: 5,
+          brand: "Chung",
+        },
+        6: {
+          name: "tofu sauce",
+          price: 23,
+          description: "only have fine",
+          id: 6,
+          brand: "fresh",
         },
       },
     },
@@ -53,15 +72,33 @@ const Maincontent = ({ path }) => {
     5: { name: "Korean rice", desc: "", ShopImg: "", location: "", id: 5 },
   });
 
+  const addOrder = (newOrder) => {
+    setOrder((prev) => {
+      console.log(prev);
+      let updated = {};
+      if (prev == undefined) {
+        updated[newOrder.id] = { ...newOrder };
+
+        return updated;
+      } else {
+        updated = { ...prev };
+        updated[newOrder.id] = { ...newOrder };
+        return updated;
+      }
+    });
+  };
+
   const pathsNavi = (path) => {
     switch (path) {
-      case "/":
+      case "/shop":
         return <Contents shops={shops} />;
 
-      case "/welcome":
+      case "/":
         return <Welcome />;
       case "/shop/:id":
-        return <Shopdetail shops={shops} />;
+        return <Shopdetail shops={shops} addOrder={addOrder} />;
+      case "/order":
+        return <Ordermain order={order} />;
     }
   };
   return (

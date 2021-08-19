@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+
+  justify-content: center;
+  width: 100%;
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.order {
+  position: absolute;
+  font-size: 0.8em;
+  margin-left: 50%;
+}
+
+.process {
+  position: absolute;
+  font-size: 0.8em;
+}
+.confirm {
+  position: absolute;
+  font-size: 0.8em;
+}
+
+.done {
+  position: absolute;
+  font-size: 0.8em;
+}

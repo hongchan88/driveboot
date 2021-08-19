@@ -4,7 +4,7 @@ import Cartitems from "./cartitems";
 const Cart = ({ cart, removeItem, addQty }) => {
   console.log(Object.keys(cart).length);
   return (
-    <>
+    <div class="mt-24">
       {Object.keys(cart).length != 0 ? (
         Object.keys(cart).map((key) => {
           return (
@@ -35,7 +35,7 @@ const Cart = ({ cart, removeItem, addQty }) => {
           );
         })
       ) : (
-        <div className="hidden sm:block" aria-hidden="true">
+        <div className="-mt-12 hidden sm:block" aria-hidden="true">
           <div className="py-5">
             <div className="border-t border-gray-200 my-10" />
             <div class="flex justify-center">
@@ -45,7 +45,7 @@ const Cart = ({ cart, removeItem, addQty }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
