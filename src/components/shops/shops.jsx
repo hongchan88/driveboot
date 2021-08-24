@@ -6,9 +6,8 @@ const Shops = ({ shops }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
-        {Object.keys(shops).map((key) => (
-          <Shop key={key} shop={shops[key]} />
-        ))}
+        {shops &&
+          Object.keys(shops).map((key) => <Shop key={key} shop={shops[key]} />)}
       </ul>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 const SearchList = ({ product, addonCart }) => {
-  console.log(product, "searchlist");
   const [nonFiltered, setNonFiltered] = useState(false);
 
   useEffect(() => {
