@@ -97,7 +97,14 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
         case "/":
           return <Welcome user={user} />;
         case "/shop/:id":
-          return <Shopdetail shops={shops} addOrder={addOrder} user={user} />;
+          return (
+            <Shopdetail
+              shops={shops}
+              addOrder={addOrder}
+              user={user}
+              profile={profile}
+            />
+          );
         case "/order":
           return (
             <Ordermain order={order} user={user} deleteOrder={deleteOrder} />

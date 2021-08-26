@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import Cart from "./cart";
 import Search from "../search/search";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 
 const Bootdrivethru = ({
   filteredSearch,
@@ -18,17 +18,51 @@ const Bootdrivethru = ({
   addOrder,
   shops,
   shopid,
+  profile,
 }) => {
-  const { register, handleSubmit, reset, setValue } = useForm();
+  const { register, handleSubmit, reset, setValue, getValues } = useForm();
+
+  const [getprofile, setProfile] = useState();
+  const [error, setError] = useState();
+  useEffect(() => {
+    setProfile(profile);
+  }, [profile]);
+
+  const onChange = (e) => {
+    e.preventDefault();
+
+    const updated = {
+      ...getprofile,
+      [e.currentTarget.name]: e.currentTarget.value,
+    };
+    setProfile(updated);
+  };
+
   const onSubmit = (data) => {
+    setError(null);
     const newOrder = {
       ...data,
+      firstname: getprofile.firstname,
+      lastname: getprofile.lastname,
+      plate: getprofile.plate,
+      email: getprofile.email,
       id: Date.now(),
       totalprice,
       cart,
       shopname: shops[shopid].name,
     };
-    addOrder(newOrder);
+    console.log(newOrder);
+    const emptyValidation = Object.keys(newOrder).filter(
+      (key) => newOrder[key] == ""
+    );
+
+    if (Object.keys(cart).length == 0) {
+      alert("Please add product before you submit order");
+    } else if (emptyValidation.length != 0) {
+      setError(emptyValidation);
+    } else {
+      addOrder(newOrder);
+    }
   };
 
   return (
@@ -74,14 +108,20 @@ const Bootdrivethru = ({
                     >
                       First name
                     </label>
+
                     <input
-                      {...register("first-name")}
+                      {...register("firstname")}
                       type="text"
-                      name="first-name"
-                      id="first-name"
+                      name="firstname"
+                      value={getprofile?.firstname}
+                      onChange={onChange}
+                      id="firstname"
                       autoComplete="given-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
+                    {error?.includes("firstname") ? (
+                      <small class="text-red-400">first name requried</small>
+                    ) : null}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -92,13 +132,18 @@ const Bootdrivethru = ({
                       Last name
                     </label>
                     <input
-                      {...register("last-name")}
+                      {...register("lastname")}
+                      value={getprofile?.lastname}
+                      onChange={onChange}
                       type="text"
-                      name="last-name"
-                      id="last-name"
+                      name="lastname"
+                      id="lastname"
                       autoComplete="family-name"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
+                    {error?.includes("lastname") ? (
+                      <small class="text-red-400">last name requried</small>
+                    ) : null}
                   </div>
 
                   <div className="col-span-6 sm:col-span-4">
@@ -109,13 +154,18 @@ const Bootdrivethru = ({
                       Email address
                     </label>
                     <input
-                      {...register("email-address")}
+                      {...register("email")}
+                      value={getprofile?.email}
+                      onChange={onChange}
                       type="text"
-                      name="email-address"
-                      id="email-address"
+                      name="email"
+                      id="email"
                       autoComplete="email"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
+                    {error?.includes("email") ? (
+                      <small class="text-red-400">email requried</small>
+                    ) : null}
                   </div>
                   <div className="col-span-6">
                     <label
@@ -132,6 +182,9 @@ const Bootdrivethru = ({
                       autoComplete="street-address"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
+                    {error?.includes("date") ? (
+                      <small class="text-red-400">date requried</small>
+                    ) : null}
                   </div>
 
                   <div className="col-span-6">
@@ -149,6 +202,9 @@ const Bootdrivethru = ({
                       autoComplete="street-address"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
+                    {error?.includes("time") ? (
+                      <small class="text-red-400">pick up time requried</small>
+                    ) : null}
                   </div>
                   <div className="col-span-6">
                     <label
@@ -159,11 +215,18 @@ const Bootdrivethru = ({
                     </label>
                     <input
                       {...register("plate")}
+                      value={getprofile?.plate}
+                      onChange={onChange}
                       type="text"
                       name="plate"
                       id="plate"
                       className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
+                    {error?.includes("plate") ? (
+                      <small class="text-red-400">
+                        car plate number requried
+                      </small>
+                    ) : null}
                   </div>
                   <div className="col-span-6 ">
                     <label

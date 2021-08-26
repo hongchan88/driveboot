@@ -6,7 +6,7 @@ import "react-tabs/style/react-tabs.css";
 import Pickuplocation from "./pickuplocation";
 import orderRepo from "../service/order_repository";
 const firebaseRepository = new orderRepo();
-const Shopdetail = ({ addOrder, user, shops }) => {
+const Shopdetail = ({ addOrder, user, shops, profile }) => {
   const { id } = useParams();
 
   const { name, product } = shops ? shops[id] : {};
@@ -188,6 +188,7 @@ const Shopdetail = ({ addOrder, user, shops }) => {
             addOrder={addOrder}
             shops={shops}
             shopid={id}
+            profile={profile}
           />
         </section>
       ) : (

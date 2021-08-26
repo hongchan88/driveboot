@@ -3,21 +3,29 @@ import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
 
 import styles from "./profile.module.css";
-
+import Imageupload from "../service/imageupload";
+const imageupload = new Imageupload();
 const Profile = ({ user, updateProfile, profile }) => {
   const { register, handleSubmit, reset, setValue } = useForm();
   const [editToggle, setEdit] = useState(false);
   const [Saveprofile, setSaveprofile] = useState();
   const uploadRef = useRef();
+  const [imageUrl, setImage] = useState(null);
+
+  console.log(profile);
 
   useEffect(() => {
     setSaveprofile(profile);
   }, [profile]);
 
+  useEffect(() => {
+    setImage(profile?.profileimage);
+  }, []);
+
   const onSubmit = (data, event) => {
     setEdit(false);
     setSaveprofile(data);
-    const newData = { ...Saveprofile, id: user.uid };
+    const newData = { ...Saveprofile, id: user.uid, profileimage: imageUrl };
     updateProfile(newData);
     cogoToast.success("Success saved!");
   };
@@ -30,12 +38,21 @@ const Profile = ({ user, updateProfile, profile }) => {
     setEdit(true);
     const newData = {
       ...Saveprofile,
+
       [e.currentTarget.name]: e.currentTarget.value,
     };
     setSaveprofile(newData);
   };
   const submitData = () => {
     updateProfile(Saveprofile);
+  };
+
+  const onChange = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const imgUrl = await imageupload.upload(file);
+    setImage(imgUrl.url);
+    setEdit(true);
   };
 
   return (
@@ -53,20 +70,25 @@ const Profile = ({ user, updateProfile, profile }) => {
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
-                      <div class="col-start-3 col-end-5 h-28">
+                      <div class="col-start-3 col-end-5 h-28 ">
                         <div class="flex w-full justify-center">
-                          <div class="flex w-28 h-28 rounded-full overflow-hidden">
+                          <div class="flex justify-center w-28 h-28 rounded-full overflow-hidden">
                             <input
                               type="file"
                               class="hidden"
                               id="img"
                               ref={uploadRef}
+                              onChange={onChange}
                             />
                             <div className={styles.container}>
                               <img
                                 onClick={() => uploadImg()}
-                                src="img/header.jpg"
-                                class="cursor-pointer h-full w-full"
+                                src={
+                                  imageUrl == null
+                                    ? "img/grocery.jpg"
+                                    : imageUrl
+                                }
+                                class="cursor-pointer w-32 h-32"
                               />
                               <div className={styles.overlay}>
                                 <svg
@@ -74,7 +96,6 @@ const Profile = ({ user, updateProfile, profile }) => {
                                   class="h-5 w-5 right-0 cursor-pointer"
                                   viewBox="0 0 20 20"
                                   fill="currentColor"
-                                  onClick={() => uploadImg()}
                                 >
                                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                   <path
