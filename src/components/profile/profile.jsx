@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
+import ClipLoader from "react-spinners/ClipLoader";
 
 import styles from "./profile.module.css";
 import Imageupload from "../service/imageupload";
@@ -11,6 +12,7 @@ const Profile = ({ user, updateProfile, profile }) => {
   const [Saveprofile, setSaveprofile] = useState();
   const uploadRef = useRef();
   const [imageUrl, setImage] = useState(null);
+  const [isloading, setisLoading] = useState(false);
 
   console.log(profile);
 
@@ -49,10 +51,15 @@ const Profile = ({ user, updateProfile, profile }) => {
 
   const onChange = async (e) => {
     e.preventDefault();
+    setisLoading(true);
     const file = e.target.files[0];
-    const imgUrl = await imageupload.upload(file);
-    setImage(imgUrl.url);
-    setEdit(true);
+    if (file) {
+      const imgUrl = await imageupload.upload(file);
+      setImage(imgUrl.url);
+      setEdit(true);
+      setisLoading(false);
+    }
+    setisLoading(false);
   };
 
   return (
@@ -70,7 +77,16 @@ const Profile = ({ user, updateProfile, profile }) => {
                 <div className="shadow overflow-hidden sm:rounded-md">
                   <div className="px-4 py-5 bg-white sm:p-6">
                     <div className="grid grid-cols-6 gap-6">
-                      <div class="col-start-3 col-end-5 h-28 ">
+                      <div class="col-start-2 col-end-6 h-28 ">
+                        <div className={styles.loadingCotainer}>
+                          <div className={styles.loading}>
+                            <ClipLoader
+                              color="gray"
+                              loading={isloading}
+                              size="25"
+                            />
+                          </div>
+                        </div>
                         <div class="flex w-full justify-center">
                           <div class="flex justify-center w-28 h-28 rounded-full overflow-hidden">
                             <input
@@ -80,9 +96,10 @@ const Profile = ({ user, updateProfile, profile }) => {
                               ref={uploadRef}
                               onChange={onChange}
                             />
+
                             <div className={styles.container}>
                               <img
-                                onClick={() => uploadImg()}
+                                onClick={isloading ? null : () => uploadImg()}
                                 src={
                                   imageUrl == null
                                     ? "img/grocery.jpg"
@@ -96,6 +113,7 @@ const Profile = ({ user, updateProfile, profile }) => {
                                   class="h-5 w-5 right-0 cursor-pointer"
                                   viewBox="0 0 20 20"
                                   fill="currentColor"
+                                  onClick={isloading ? null : () => uploadImg()}
                                 >
                                   <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                   <path

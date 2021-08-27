@@ -16,3 +16,15 @@
 .container:hover .overlay {
   opacity: 1;
 }
+
+.loadingCotainer {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+}
+
+.loading {
+  position: absolute;
+  transform: translateX(-50%);
+}

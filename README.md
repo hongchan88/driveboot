@@ -13,7 +13,8 @@ Customer web
 [x] submit form  
 [x] get data from profile  
 [x] validation error  
-[] submit success toast -> new page
+[x] validation error toast msg
+[x] submit success toast
 
 [x] order history page  
 [x] show product  
@@ -28,9 +29,13 @@ Customer web
 
 [] loading spinner for all pages
 
+[] add more detail in order form (phone number, comment)
+
 CSS
 [] heading + github  
 [] footer  
 [] menu
 
 Shop owner
+
+[] update order status ( process , ready , picked up)
