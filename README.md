@@ -20,6 +20,8 @@ Customer web
 [x] show product  
 [x] show location of the shop  
 [x] order stage process bar
+[x] order newest top
+[x] order is empty page
 
 [x] profile
 [x] profile edit + data store in firebase  
@@ -27,15 +29,23 @@ Customer web
 [x] profile change photo  
 [x] api using Cloudnary
 
+shop Page  
+[] shop search
+
 [] loading spinner for all pages
 
 [] add more detail in order form (phone number, comment)
+[] validation date in the future + time pickup set by shop ower
 
 CSS
 [] heading + github  
 [] footer  
-[] menu
+[] menu  
+[] welcome page
 
 Shop owner
+
+[] add/edit shop info / pickup / trading hours
+[] add items/ delte items edit name/brand/price
 
 [] update order status ( process , ready , picked up)

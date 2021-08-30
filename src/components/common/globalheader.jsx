@@ -8,8 +8,14 @@ const Globalheader = ({ authProvider }) => {
   const history = useHistory();
 
   return (
-    <section>
-      <div class="flex justify-end"></div>
+    <section class="flex font-mono justify-between px-10 py-10 ">
+      <div class="flex">
+        <p class="font-bold">Boot Drive Thru</p>
+      </div>
+      <div class="flex">
+        <p>Git hub</p>
+        <p>Git hub</p>
+      </div>
     </section>
   );
 };

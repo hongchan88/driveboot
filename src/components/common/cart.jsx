@@ -35,7 +35,7 @@ const Cart = ({ cart, removeItem, addQty }) => {
           );
         })
       ) : (
-        <div className="-mt-12 hidden sm:block" aria-hidden="true">
+        <div className="-mt-12 ">
           <div className="py-5">
             <div className="border-t border-gray-200 my-10" />
             <div class="flex justify-center">

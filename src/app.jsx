@@ -1,6 +1,12 @@
 import Maincontent from "./components/maincontent";
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 
 import HeaderFooter from "./components/common/headerFooter";
 import Welcome from "./components/welcome";
@@ -9,6 +15,13 @@ import { useEffect, useState } from "react";
 
 function App({ authProvider }) {
   const [user, setUser] = useState();
+  const [isBuyer, setisBuyer] = useState(true);
+
+  const changeBuyerOrSeller = () => {
+    setisBuyer((prev) => {
+      return !prev;
+    });
+  };
 
   const setLoggedInUser = (user) => {
     setUser(user);
@@ -26,49 +39,102 @@ function App({ authProvider }) {
       user={user}
       setLoggedInUser={setLoggedInUser}
     >
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/shop">
-            <Maincontent
-              path={"/shop"}
-              user={user}
-              authProvider={authProvider}
-              setLoggedInUser={setLoggedInUser}
-            />
-          </Route>
-          <Route exact path="/">
-            <Maincontent
-              path={"/"}
-              user={user}
-              authProvider={authProvider}
-              setLoggedInUser={setLoggedInUser}
-            />
-          </Route>
-          <Route path="/shop/:id">
-            <Maincontent
-              path={"/shop/:id"}
-              user={user}
-              authProvider={authProvider}
-              setLoggedInUser={setLoggedInUser}
-            />
-          </Route>
-          <Route exact path="/order">
-            <Maincontent
-              path={"/order"}
-              user={user}
-              authProvider={authProvider}
-              setLoggedInUser={setLoggedInUser}
-            />
-          </Route>
-          <Route exact path="/profile">
-            <Maincontent
-              path={"/profile"}
-              user={user}
-              authProvider={authProvider}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      {isBuyer ? (
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/shop">
+              <Maincontent
+                path={"/shop"}
+                user={user}
+                authProvider={authProvider}
+                setLoggedInUser={setLoggedInUser}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route exact path="/">
+              <Maincontent
+                path={"/"}
+                user={user}
+                authProvider={authProvider}
+                setLoggedInUser={setLoggedInUser}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route path="/shop/:id">
+              <Maincontent
+                path={"/shop/:id"}
+                user={user}
+                authProvider={authProvider}
+                setLoggedInUser={setLoggedInUser}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route exact path="/order">
+              <Maincontent
+                path={"/order"}
+                user={user}
+                authProvider={authProvider}
+                setLoggedInUser={setLoggedInUser}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route exact path="/profile">
+              <Maincontent
+                path={"/profile"}
+                user={user}
+                authProvider={authProvider}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      ) : (
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/">
+              <Maincontent
+                path={"/"}
+                user={user}
+                authProvider={authProvider}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route exact path="/myshop">
+              <Maincontent
+                path={"/myshop"}
+                user={user}
+                authProvider={authProvider}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route exact path="/myshop/:id">
+              <Maincontent
+                path={"/myshop/:id"}
+                user={user}
+                authProvider={authProvider}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route exact path="/manageorder">
+              <Maincontent
+                path={"/manageorder"}
+                user={user}
+                authProvider={authProvider}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      )}
     </HeaderFooter>
   );
 }

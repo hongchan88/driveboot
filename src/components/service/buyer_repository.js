@@ -1,6 +1,6 @@
 import { firebaseDatabase } from "./firebase";
 
-class orderRepo {
+class buyerRepo {
   constructor() {}
 
   writeUserData(uid, data) {
@@ -36,27 +36,6 @@ class orderRepo {
     });
     return () => starCountRef.off();
   }
-
-  // async getShops() {
-  //   const dbRef = firebaseDatabase.ref();
-
-  //   return dbRef
-  //     .child("shops")
-
-  //     .get()
-  //     .then((snapshot) => {
-  //       if (snapshot.exists()) {
-  //         const data = snapshot.val();
-  //         console.log(data);
-  //         return data;
-  //       } else {
-  //         console.log("No data available");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error(error, " error");
-  //     });
-  // }
 }
 
-export default orderRepo;
+export default buyerRepo;

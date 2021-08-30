@@ -6,13 +6,26 @@ import Welcome from "./welcome";
 import Shopdetail from "./shopdetail/shopdetail";
 import Ordermain from "./order/ordermain";
 
-import orderRepo from "./service/order_repository";
 import { set } from "react-hook-form";
 import Profile from "./profile/profile";
+import SellerWelcome from "./seller/sellerwelcome/sellerwelcome";
+import Myshop from "./seller/myshop/myshop";
+import Manageorder from "./seller/manageorder/manageorder";
+import buyerRepo from "./service/buyer_repository";
+import sellerRepo from "./service/seller_repository";
+import Createshopform from "./seller/myshop/createshopform";
 
-const firebaseRepository = new orderRepo();
+const firebaseBuyerRepo = new buyerRepo();
+const firebaseSellerRepo = new sellerRepo();
 
-const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
+const Maincontent = ({
+  path,
+  user,
+  authProvider,
+  setLoggedInUser,
+  isBuyer,
+  changeBuyerOrSeller,
+}) => {
   const [order, setOrder] = useState();
   const [shops, setShops] = useState();
   const [profile, setProfile] = useState();
@@ -20,12 +33,12 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
   const updateProfile = (data) => {
     const updated = { ...data };
     setProfile(updated);
-    firebaseRepository.writeProfile(user.uid, updated);
+    firebaseBuyerRepo.writeProfile(user.uid, updated);
   };
 
   useEffect(() => {
     if (user) {
-      const synoff = firebaseRepository.syncProfile(user.uid, (data) => {
+      const synoff = firebaseBuyerRepo.syncProfile(user.uid, (data) => {
         setProfile(data);
       });
       return () => synoff();
@@ -36,7 +49,7 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
 
   useEffect(() => {
     if (user) {
-      const synoff = firebaseRepository.syncOrders(user.uid, (data) => {
+      const synoff = firebaseBuyerRepo.syncOrders(user.uid, (data) => {
         setOrder(data);
         console.log(shops);
       });
@@ -47,7 +60,7 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
   }, [user]);
 
   useEffect(() => {
-    const synoff = firebaseRepository.syncShops((data) => {
+    const synoff = firebaseBuyerRepo.syncShops((data) => {
       setShops(data);
       console.log("shop updated");
     });
@@ -66,12 +79,12 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
       let updated = {};
       if (prev == undefined) {
         updated[newOrder.id] = { ...newOrder };
-        firebaseRepository.writeUserData(user.uid, updated);
+        firebaseBuyerRepo.writeUserData(user.uid, updated);
         return updated;
       } else {
         updated = { ...prev };
         updated[newOrder.id] = { ...newOrder };
-        firebaseRepository.writeUserData(user.uid, updated);
+        firebaseBuyerRepo.writeUserData(user.uid, updated);
         return updated;
       }
     });
@@ -81,15 +94,33 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
     setOrder((prev) => {
       const updated = { ...prev };
       delete updated[deleteOrderId];
-      firebaseRepository.writeUserData(user.uid, updated);
+      firebaseBuyerRepo.writeUserData(user.uid, updated);
       return updated;
     });
   };
 
+  const addShop = (uid) => {
+    if (!shops[uid]) {
+      const updated = {
+        shopImg: "img/grocery",
+        id: uid,
+        name: "Asiana Airlines",
+        location: "",
+        desc: "",
+      };
+      firebaseSellerRepo.writeShopData(uid, updated);
+    }
+  };
+  const editShop = (uid, data) => {
+    const updated = { ...shops };
+    updated[uid] = { ...data };
+    firebaseSellerRepo.writeShopData(uid, updated);
+    setShops(updated);
+  };
   const pathsNavi = (path) => {
     if (!user) {
       return <Welcome />;
-    } else if (user) {
+    } else if (user && isBuyer) {
       switch (path) {
         case "/shop":
           return <Contents shops={shops} user={user} />;
@@ -119,6 +150,28 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
             />
           );
       }
+    } else if (user && !isBuyer) {
+      switch (path) {
+        case "/":
+          return <SellerWelcome user={user} />;
+
+        case "/myshop":
+          return (
+            <Myshop user={user} shops={shops?.user?.uid} addShop={addShop} />
+          );
+        case "/myshop/:id":
+          return (
+            <Createshopform
+              user={user}
+              shops={shops}
+              addShop={addShop}
+              editShop={editShop}
+            />
+          );
+
+        case "/manageorder":
+          return <Manageorder user={user} />;
+      }
     }
   };
   return (
@@ -128,6 +181,8 @@ const Maincontent = ({ path, user, authProvider, setLoggedInUser }) => {
           authProvider={authProvider}
           setLoggedInUser={setLoggedInUser}
           user={user}
+          changeBuyerOrSeller={changeBuyerOrSeller}
+          isBuyer={isBuyer}
         />
       </section>
       <section className={styles.rightcontent}>{pathsNavi(path)}</section>

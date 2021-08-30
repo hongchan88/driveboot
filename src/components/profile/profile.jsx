@@ -57,7 +57,6 @@ const Profile = ({ user, updateProfile, profile }) => {
       const imgUrl = await imageupload.upload(file);
       setImage(imgUrl.url);
       setEdit(true);
-      setisLoading(false);
     }
     setisLoading(false);
   };

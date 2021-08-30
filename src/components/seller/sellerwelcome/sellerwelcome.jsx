@@ -2,7 +2,7 @@ import React from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import GoogleButton from "react-google-button";
 
-const Welcome = ({ user }) => {
+const SellerWelcome = ({ user }) => {
   return (
     <>
       {user ? (
@@ -32,4 +32,4 @@ const Welcome = ({ user }) => {
   );
 };
 
-export default Welcome;
+export default SellerWelcome;
