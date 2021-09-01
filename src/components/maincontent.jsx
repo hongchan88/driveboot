@@ -100,23 +100,30 @@ const Maincontent = ({
   };
 
   const addShop = (uid) => {
-    if (!shops[uid]) {
-      const updated = {
-        shopImg: "img/grocery",
-        id: uid,
-        name: "Asiana Airlines",
-        location: "",
-        desc: "",
-      };
-      firebaseSellerRepo.writeShopData(uid, updated);
-    }
+    const updated = {
+      shopImg: "img/grocery",
+      id: uid,
+      name: "Asiana Airlines",
+      location: "",
+      desc: "hellgg",
+    };
+
+    firebaseSellerRepo.writeShopData(uid, updated);
   };
   const editShop = (uid, data) => {
     const updated = { ...shops };
     updated[uid] = { ...data };
-    firebaseSellerRepo.writeShopData(uid, updated);
-    setShops(updated);
+
+    firebaseSellerRepo.updateShopData(updated);
   };
+
+  const updateTradingTime = (uid, data, dateOrTime) => {
+    const updated = { ...shops };
+    updated[uid][dateOrTime] = { ...data };
+
+    firebaseSellerRepo.updateShopData(updated);
+  };
+
   const pathsNavi = (path) => {
     if (!user) {
       return <Welcome />;
@@ -157,7 +164,7 @@ const Maincontent = ({
 
         case "/myshop":
           return (
-            <Myshop user={user} shops={shops?.user?.uid} addShop={addShop} />
+            <Myshop user={user} shop={shops?.[user.uid]} addShop={addShop} />
           );
         case "/myshop/:id":
           return (
@@ -166,6 +173,9 @@ const Maincontent = ({
               shops={shops}
               addShop={addShop}
               editShop={editShop}
+              updateTradingTime={updateTradingTime}
+              tradingToggle={shops?.[user.uid]?.opencloseDate}
+              tradingTime={shops?.[user.uid]?.opencloseTime}
             />
           );
 
