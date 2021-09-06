@@ -10,6 +10,12 @@ const Createshopform = ({
   updateTradingTime,
   tradingToggle,
   tradingTime,
+  filteredSearch,
+  optionSearch,
+  filtered,
+  searchOption,
+  deleteProduct,
+  addProduct,
 }) => {
   const { id } = useParams();
   console.log(tradingToggle);
@@ -22,6 +28,12 @@ const Createshopform = ({
         updateTradingTime={updateTradingTime}
         tradingToggle={tradingToggle}
         tradingTime={tradingTime}
+        filteredSearch={filteredSearch}
+        optionSearch={optionSearch}
+        filtered={filtered}
+        searchOption={searchOption}
+        deleteProduct={deleteProduct}
+        addProduct={addProduct}
       />
     </section>
   );

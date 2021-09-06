@@ -8,7 +8,7 @@ const Orderform = ({ product, addOrder, shops, shopid, profile }) => {
 
   const [cart, setCart] = useState({});
   const [searchOption, setSearchOption] = useState("name");
-  console.log(filtered);
+
   const filteredSearch = (e, query) => {
     let filteredKey = [];
     if (searchOption == "name") {

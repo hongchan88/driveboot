@@ -4,7 +4,7 @@ import Leftnavigation from "./common/leftnavigation";
 import styles from "./maincontent.module.css";
 import Welcome from "./welcome";
 import Shopdetail from "./shopdetail/shopdetail";
-import Ordermain from "./order/ordermain";
+import Ordermain from "./orderhistory/ordermain";
 
 import { set } from "react-hook-form";
 import Profile from "./profile/profile";
@@ -29,6 +29,57 @@ const Maincontent = ({
   const [order, setOrder] = useState();
   const [shops, setShops] = useState();
   const [profile, setProfile] = useState();
+
+  const [filtered, setFiltered] = useState();
+  const [searchOption, setSearchOption] = useState("name");
+
+  const deleteProduct = (productId) => {
+    setShops((prev) => {
+      const updatedProductShop = { ...prev };
+      delete updatedProductShop[user.uid].product[productId];
+
+      firebaseSellerRepo.updateShopData(updatedProductShop);
+      return updatedProductShop;
+    });
+  };
+
+  const addProduct = (data) => {
+    setShops((prev) => {
+      const productId = data.id;
+      const updatedProductShop = { ...prev };
+      if (data.id === 1) {
+        updatedProductShop[user.uid]["product"] = {
+          [data.id]: { ...data },
+        };
+      } else {
+        updatedProductShop[user.uid]["product"][data.id] = { ...data };
+      }
+
+      firebaseSellerRepo.updateShopData(updatedProductShop);
+      return updatedProductShop;
+    });
+  };
+
+  const filteredSearch = (product, query) => {
+    let filteredKey = [];
+    if (searchOption == "name") {
+      filteredKey = Object.keys(product).filter((key) =>
+        product[key].name.toLowerCase().includes(query.toLowerCase())
+      );
+    } else {
+      filteredKey = Object.keys(product).filter((key) =>
+        product[key].brand.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+
+    setFiltered(filteredKey);
+    console.log(filtered, "filtered");
+  };
+
+  const optionSearch = (optionValue) => {
+    console.log(optionValue);
+    setSearchOption(optionValue);
+  };
 
   const updateProfile = (data) => {
     const updated = { ...data };
@@ -176,6 +227,12 @@ const Maincontent = ({
               updateTradingTime={updateTradingTime}
               tradingToggle={shops?.[user.uid]?.opencloseDate}
               tradingTime={shops?.[user.uid]?.opencloseTime}
+              filteredSearch={filteredSearch}
+              optionSearch={optionSearch}
+              filtered={filtered}
+              searchOption={searchOption}
+              deleteProduct={deleteProduct}
+              addProduct={addProduct}
             />
           );
 
