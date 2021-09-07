@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import SearchList from "./searchlist";
 import ResultNone from "./resultNone";
 
@@ -9,9 +9,13 @@ const Search = ({
   filtered,
   searchOption,
   addonCart,
+  setFiltered,
 }) => {
-  const searchRef = useRef("");
-  const optionRef = useRef("");
+  const searchRef = useRef();
+  const optionRef = useRef();
+  useEffect(() => {
+    setFiltered(null);
+  }, []);
   return (
     <section class="relative w-full max-w px-5 py-4 mx-auto rounded-md">
       <div class="relative">
@@ -33,7 +37,7 @@ const Search = ({
             class="w-5/6 py-3 pl-10 pr-4 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             placeholder="Search"
             ref={searchRef}
-            onChange={(e) => filteredSearch(e, searchRef.current.value)}
+            onChange={() => filteredSearch(product, searchRef.current.value)}
           />
           <select
             class="py-3 pl-4 pr-4 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -46,8 +50,39 @@ const Search = ({
           </select>
         </div>
       </div>
-      {console.log(filtered?.length, "check filter")}
       {filtered?.length > 0 ? (
+        <div class="block sinset-x-0 px-6 py-3 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent">
+          {filtered.map((key) => {
+            return (
+              <SearchList
+                key={key}
+                product={product[key]}
+                addonCart={addonCart}
+              />
+            );
+          })}
+        </div>
+      ) : filtered == 0 ? (
+        <ResultNone message={"None product Found. Try other keywords."} />
+      ) : product === undefined || Object?.keys(product)?.length == 0 ? (
+        <ResultNone message={"There is no products listed"} />
+      ) : (
+        <div
+          class={`block inset-x-0 px-6 py-3 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent`}
+        >
+          {Object.keys(product)
+            .reverse()
+            .map((key) => {
+              return (
+                <SearchList
+                  key={key}
+                  product={product[key]}
+                  addonCart={addonCart}
+                />
+              );
+            })}
+
+          {/* {filtered?.length > 0 ? (
         <div class="absolute inset-x-0 px-6 py-3 mx-5 mt-4 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent">
           {filtered.map((key) => {
             return (
@@ -60,7 +95,7 @@ const Search = ({
           })}
         </div>
       ) : filtered == 0 ? (
-        <ResultNone />
+        <ResultNone message={"None product Found. Try other keywords."} />
       ) : (
         <div
           class={`absolute inset-x-0 px-6 py-3 mx-5 mt-4 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent`}
@@ -73,7 +108,7 @@ const Search = ({
                 addonCart={addonCart}
               />
             );
-          })}
+          })} */}
         </div>
       )}
     </section>

@@ -1,31 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import Bootdrivethru from "./bootdrivethru";
 
-const Orderform = ({ product, addOrder, shops, shopid, profile }) => {
-  const [filtered, setFiltered] = useState();
+const Orderform = ({
+  product,
+  addOrder,
+  shops,
+  shopid,
+  profile,
+  filteredSearch,
+  filtered,
+  optionSearch,
+  setFiltered,
+}) => {
+  // const [filtered, setFiltered] = useState();
   const [hideOrall, setHideorAll] = useState("");
   const [totalPrice, setTotal] = useState(0);
 
   const [cart, setCart] = useState({});
   const [searchOption, setSearchOption] = useState("name");
-
-  const filteredSearch = (e, query) => {
-    let filteredKey = [];
-    if (searchOption == "name") {
-      filteredKey = Object.keys(product).filter((key) =>
-        product[key].name.toLowerCase().includes(query.toLowerCase())
-      );
-    } else {
-      console.log("hello");
-
-      filteredKey = Object.keys(product).filter((key) =>
-        product[key].brand.toLowerCase().includes(query.toLowerCase())
-      );
-    }
-
-    setFiltered(filteredKey);
-    console.log(filtered, "filtered");
-  };
 
   const addonCart = (itemId, itemName, itemPrice, e) => {
     e.preventDefault();
@@ -72,14 +64,13 @@ const Orderform = ({ product, addOrder, shops, shopid, profile }) => {
     setTotal(totalPrice);
   }, [cart]);
 
-  const optionSearch = (optionValue) => {
-    console.log(optionValue);
-    setSearchOption(optionValue);
-  };
+  // const optionSearch = (optionValue) => {
+  //   console.log(optionValue);
+  //   setSearchOption(optionValue);
+  // };
 
   return (
     <Bootdrivethru
-      filteredSearch={filteredSearch}
       optionSearch={optionSearch}
       product={product}
       addonCart={addonCart}
@@ -94,6 +85,9 @@ const Orderform = ({ product, addOrder, shops, shopid, profile }) => {
       shops={shops}
       shopid={shopid}
       profile={profile}
+      filteredSearch={filteredSearch}
+      optionSearch={optionSearch}
+      setFiltered={setFiltered}
     />
   );
 };

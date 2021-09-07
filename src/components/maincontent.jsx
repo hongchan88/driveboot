@@ -30,15 +30,25 @@ const Maincontent = ({
   const [shops, setShops] = useState();
   const [profile, setProfile] = useState();
 
-  const [filtered, setFiltered] = useState();
+  const [filtered, setFiltered] = useState(null);
   const [searchOption, setSearchOption] = useState("name");
 
-  const deleteProduct = (productId) => {
+  const deleteProduct = (productId, e, filterOn) => {
+    e.preventDefault();
+
+    if (filterOn) {
+      setFiltered((prev) => {
+        return prev.filter((key) => key != productId);
+      });
+    }
+
     setShops((prev) => {
       const updatedProductShop = { ...prev };
       delete updatedProductShop[user.uid].product[productId];
 
       firebaseSellerRepo.updateShopData(updatedProductShop);
+
+      console.log(filtered, "delete filter");
       return updatedProductShop;
     });
   };
@@ -47,7 +57,7 @@ const Maincontent = ({
     setShops((prev) => {
       const productId = data.id;
       const updatedProductShop = { ...prev };
-      if (data.id === 1) {
+      if (data.id == 1) {
         updatedProductShop[user.uid]["product"] = {
           [data.id]: { ...data },
         };
@@ -62,18 +72,23 @@ const Maincontent = ({
 
   const filteredSearch = (product, query) => {
     let filteredKey = [];
-    if (searchOption == "name") {
+    console.log(query);
+
+    if (product === undefined) {
+      return;
+    } else if (query != "" && searchOption == "name") {
       filteredKey = Object.keys(product).filter((key) =>
         product[key].name.toLowerCase().includes(query.toLowerCase())
       );
-    } else {
+      return setFiltered(filteredKey);
+    } else if (query != "" && searchOption == "brand") {
       filteredKey = Object.keys(product).filter((key) =>
         product[key].brand.toLowerCase().includes(query.toLowerCase())
       );
+      return setFiltered(filteredKey);
     }
 
-    setFiltered(filteredKey);
-    console.log(filtered, "filtered");
+    return setFiltered(null);
   };
 
   const optionSearch = (optionValue) => {
@@ -157,6 +172,15 @@ const Maincontent = ({
       name: "Asiana Airlines",
       location: "",
       desc: "hellgg",
+      opencloseTime: {
+        monday: { open: "08:00", close: "18:00" },
+        tuesday: { open: "08:00", close: "18:00" },
+        wednesday: { open: "08:00", close: "18:00" },
+        thursday: { open: "08:00", close: "18:00" },
+        friday: { open: "08:00", close: "18:00" },
+        saturday: { open: "08:00", close: "18:00" },
+        sunday: { open: "08:00", close: "18:00" },
+      },
     };
 
     firebaseSellerRepo.writeShopData(uid, updated);
@@ -192,6 +216,10 @@ const Maincontent = ({
               addOrder={addOrder}
               user={user}
               profile={profile}
+              filteredSearch={filteredSearch}
+              filtered={filtered}
+              optionSearch={optionSearch}
+              setFiltered={setFiltered}
             />
           );
         case "/order":
@@ -233,6 +261,7 @@ const Maincontent = ({
               searchOption={searchOption}
               deleteProduct={deleteProduct}
               addProduct={addProduct}
+              setFiltered={setFiltered}
             />
           );
 

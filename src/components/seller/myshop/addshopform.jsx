@@ -4,8 +4,9 @@ import { EditText, EditTextarea } from "react-edit-text";
 import "react-edit-text/dist/index.css";
 import { Link } from "react-router-dom";
 import Shops from "../../shops/shops";
-
-import SellerSearch from "../sellersearch/sellersearch";
+import styles from "./addshopform.module.css";
+import SellerSearch from "../sellerProducts/sellerproducts";
+import SellerProducts from "../sellerProducts/sellerproducts";
 
 const Addshopform = ({
   shop,
@@ -20,6 +21,7 @@ const Addshopform = ({
   searchOption,
   deleteProduct,
   addProduct,
+  setFiltered,
 }) => {
   console.log(shop?.id, "new");
 
@@ -28,7 +30,7 @@ const Addshopform = ({
       ...shop,
       [name]: value,
     };
-    console.log(updated);
+
     editShop(id, updated);
   };
 
@@ -53,10 +55,10 @@ const Addshopform = ({
 
     const updated = { ...tradingTime };
     updated[date][openOrclose] = time;
+
     updateTradingTime(id, updated, "opencloseTime");
   };
 
-  console.log(tradingTime);
   return (
     <Tabs>
       <TabList>
@@ -186,8 +188,15 @@ const Addshopform = ({
                   <ul>
                     <li>
                       <span class="inline-block w-28">
-                        <button name="monday" onClick={tradingToggleOn}>
-                          Monday:
+                        <button
+                          name="monday"
+                          onClick={tradingToggleOn}
+                          class={styles.button}
+                        >
+                          <span class={styles.date}>Monday:</span>
+                          <span class={styles.openclose}>
+                            {tradingToggle?.["monday"] ? "Closing " : "Open"}
+                          </span>
                         </button>
                       </span>
                       {tradingToggle?.["monday"] ? (
@@ -196,6 +205,7 @@ const Addshopform = ({
                             type="time"
                             name="open"
                             id="monday"
+                            className="cursor-pointer "
                             onChange={timeOnChange}
                             defaultValue={tradingTime?.monday?.open}
                           />
@@ -203,6 +213,7 @@ const Addshopform = ({
                           <input
                             name="close"
                             type="time"
+                            className="cursor-pointer "
                             id="monday"
                             onChange={timeOnChange}
                             defaultValue={tradingTime?.monday?.close}
@@ -214,14 +225,22 @@ const Addshopform = ({
                     </li>
                     <li>
                       <span class="inline-block w-28">
-                        <button name="tuesday" onClick={tradingToggleOn}>
-                          Tuesday:
+                        <button
+                          name="tuesday"
+                          onClick={tradingToggleOn}
+                          class={styles.button}
+                        >
+                          <span class={styles.date}>Tuesday:</span>
+                          <span class={styles.openclose}>
+                            {tradingToggle?.["tuesday"] ? "Closing " : "Open"}
+                          </span>
                         </button>
                       </span>
                       {tradingToggle?.["tuesday"] ? (
                         <span>
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="open"
                             id="tuesday"
                             onChange={timeOnChange}
@@ -230,6 +249,7 @@ const Addshopform = ({
                           &#160; - &#160;
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="close"
                             id="tuesday"
                             onChange={timeOnChange}
@@ -242,14 +262,22 @@ const Addshopform = ({
                     </li>
                     <li>
                       <span class="inline-block w-28">
-                        <button name="wednesday" onClick={tradingToggleOn}>
-                          Wednesday:
+                        <button
+                          name="wednesday"
+                          onClick={tradingToggleOn}
+                          class={styles.button}
+                        >
+                          <span class={styles.date}>Wednesday:</span>
+                          <span class={styles.openclose}>
+                            {tradingToggle?.["wednesday"] ? "Closing " : "Open"}
+                          </span>
                         </button>
                       </span>
                       {tradingToggle?.["wednesday"] ? (
                         <span>
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="open"
                             id="wednesday"
                             onChange={timeOnChange}
@@ -258,6 +286,7 @@ const Addshopform = ({
                           &#160; - &#160;
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="close"
                             id="wednesday"
                             onChange={timeOnChange}
@@ -270,14 +299,22 @@ const Addshopform = ({
                     </li>
                     <li>
                       <span class="inline-block w-28">
-                        <button name="thursday" onClick={tradingToggleOn}>
-                          Thursday:
+                        <button
+                          name="thursday"
+                          class={styles.button}
+                          onClick={tradingToggleOn}
+                        >
+                          <span class={styles.date}>Thursday:</span>
+                          <span class={styles.openclose}>
+                            {tradingToggle?.["thursday"] ? "Closing " : "Open"}
+                          </span>
                         </button>
                       </span>
                       {tradingToggle?.["thursday"] ? (
                         <span>
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="open"
                             id="thursday"
                             onChange={timeOnChange}
@@ -286,6 +323,7 @@ const Addshopform = ({
                           &#160; - &#160;
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="close"
                             id="thursday"
                             onChange={timeOnChange}
@@ -298,14 +336,22 @@ const Addshopform = ({
                     </li>
                     <li>
                       <span class="inline-block w-28">
-                        <button name="friday" onClick={tradingToggleOn}>
-                          Friday:
+                        <button
+                          name="friday"
+                          onClick={tradingToggleOn}
+                          class={styles.button}
+                        >
+                          <span class={styles.date}>Friday:</span>
+                          <span class={styles.openclose}>
+                            {tradingToggle?.["friday"] ? "Closing " : "Open"}
+                          </span>
                         </button>
                       </span>
                       {tradingToggle?.["friday"] ? (
                         <span>
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="open"
                             id="friday"
                             onChange={timeOnChange}
@@ -314,6 +360,7 @@ const Addshopform = ({
                           &#160; - &#160;
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="close"
                             id="friday"
                             onChange={timeOnChange}
@@ -326,14 +373,23 @@ const Addshopform = ({
                     </li>
                     <li>
                       <span class="inline-block w-28">
-                        <button name="saturday" onClick={tradingToggleOn}>
-                          Saturday:
+                        <button
+                          name="saturday"
+                          onClick={tradingToggleOn}
+                          class={styles.button}
+                        >
+                          <span class={styles.date}>Saturday:</span>
+                          <span class={styles.openclose}>
+                            {tradingToggle?.["saturday"] ? "Closing " : "Open"}
+                          </span>
+                          :
                         </button>
                       </span>
                       {tradingToggle?.["saturday"] ? (
                         <span>
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="open"
                             id="saturday"
                             onChange={timeOnChange}
@@ -342,6 +398,7 @@ const Addshopform = ({
                           &#160; - &#160;
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="close"
                             id="saturday"
                             onChange={timeOnChange}
@@ -354,14 +411,22 @@ const Addshopform = ({
                     </li>
                     <li>
                       <span class="inline-block w-28">
-                        <button name="sunday" onClick={tradingToggleOn}>
-                          Sunday:
+                        <button
+                          name="sunday"
+                          onClick={tradingToggleOn}
+                          class={styles.button}
+                        >
+                          <span class={styles.date}>Sunday:</span>
+                          <span class={styles.openclose}>
+                            {tradingToggle?.["sunday"] ? "Closing " : "Open"}
+                          </span>
                         </button>
                       </span>
                       {tradingToggle?.["sunday"] ? (
                         <span class="font-bold">
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="open"
                             id="sunday"
                             onChange={timeOnChange}
@@ -370,6 +435,7 @@ const Addshopform = ({
                           &#160; - &#160;
                           <input
                             type="time"
+                            className="cursor-pointer "
                             name="close"
                             id="sunday"
                             onChange={timeOnChange}
@@ -403,13 +469,9 @@ const Addshopform = ({
         <section class="bg-white dark:bg-gray-800">
           <div class="container px-6 py-8 mx-auto">
             <div class="items-center lg:flex">
-              <div class="lg:w-1/2">
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
-                  Add Products
-                </h2>
-
-                <div class="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-md">
-                  <SellerSearch
+              <div class="">
+                <div class="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-4xl	">
+                  <SellerProducts
                     shop={shop}
                     filteredSearch={filteredSearch}
                     optionSearch={optionSearch}
@@ -417,11 +479,12 @@ const Addshopform = ({
                     searchOption={searchOption}
                     deleteProduct={deleteProduct}
                     addProduct={addProduct}
+                    setFiltered={setFiltered}
                   />
                 </div>
               </div>
 
-              <div class="mt-8 lg:mt-0 lg:w-1/2">
+              {/* <div class="mt-8 lg:mt-0 lg:w-1/2">
                 <div class="flex items-center justify-center lg:justify-end">
                   <div class="max-w-lg">
                     <img
@@ -431,7 +494,7 @@ const Addshopform = ({
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

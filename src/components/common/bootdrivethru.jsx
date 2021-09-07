@@ -20,6 +20,7 @@ const Bootdrivethru = ({
   shops,
   shopid,
   profile,
+  setFiltered,
 }) => {
   const { register, handleSubmit, reset, setValue, getValues } = useForm();
 
@@ -88,9 +89,10 @@ const Bootdrivethru = ({
             addonCart={addonCart}
             searchOption={searchOption}
             filtered={filtered}
+            setFiltered={setFiltered}
           />
 
-          <div class="mt-80">
+          <div class="mb-3">
             <Cart cart={cart} removeItem={removeItemonCart} addQty={addQty} />
           </div>
 

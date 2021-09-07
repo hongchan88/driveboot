@@ -9,7 +9,16 @@ import Shopinfopanel from "./shopinfopanel";
 
 import buyerRepo from "../service/buyer_repository";
 const firebaseRepository = new buyerRepo();
-const Shopdetail = ({ addOrder, user, shops, profile }) => {
+const Shopdetail = ({
+  addOrder,
+  user,
+  shops,
+  profile,
+  filteredSearch,
+  filtered,
+  optionSearch,
+  setFiltered,
+}) => {
   const { id } = useParams();
 
   const { name, product } = shops ? shops[id] : {};
@@ -25,6 +34,10 @@ const Shopdetail = ({ addOrder, user, shops, profile }) => {
             shops={shops}
             shopid={id}
             profile={profile}
+            filteredSearch={filteredSearch}
+            filtered={filtered}
+            optionSearch={optionSearch}
+            setFiltered={setFiltered}
           />
         </section>
       ) : (

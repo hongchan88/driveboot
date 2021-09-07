@@ -29,7 +29,8 @@ Customer web
 [x] profile change photo  
 [x] api using Cloudnary
 
-shop Page  
+shop Page
+
 [] shop search
 
 [] loading spinner for all pages
@@ -38,14 +39,16 @@ shop Page
 [] validation date in the future + time pickup set by shop ower
 
 CSS
+
 [] heading + github  
 [] footer  
 [] menu  
 [] welcome page
 
 Shop owner
-
-[] add/edit shop info / pickup / trading hours
-[] add items/ delte items edit name/brand/price
+[] add shop
+[] trading hour / open close date
+[x] pickup / info edit
+[x] add items/ delte items name/brand/price
 
 [] update order status ( process , ready , picked up)

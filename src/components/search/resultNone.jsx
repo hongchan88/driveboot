@@ -1,9 +1,9 @@
 import React from "react";
 
-const ResultNone = (props) => {
+const ResultNone = ({ message }) => {
   return (
     <div class="flex justify-center mt-10">
-      <p>None product found. Try other keyword</p>
+      <p>{message}</p>
     </div>
   );
 };

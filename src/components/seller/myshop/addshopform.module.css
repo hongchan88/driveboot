@@ -1,0 +1,16 @@
+.button:hover {
+  background-color: rgba(107, 114, 128, 0.7);
+  color: white;
+  padding: 0.1em;
+}
+
+.button:hover .date {
+  display: none;
+}
+.openclose {
+  display: none;
+}
+
+.button:hover .openclose {
+  display: inline;
+}
