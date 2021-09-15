@@ -53,6 +53,8 @@ const Bootdrivethru = ({
       totalprice,
       cart,
       shopname: shops[shopid].name,
+      shopid,
+      OrderStatus: "orderplaced",
     };
     console.log(newOrder);
     const emptyValidation = Object.keys(newOrder).filter(

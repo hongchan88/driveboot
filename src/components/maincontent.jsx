@@ -27,11 +27,32 @@ const Maincontent = ({
   changeBuyerOrSeller,
 }) => {
   const [order, setOrder] = useState();
+  const [sellerOrders, setSellerOrder] = useState();
   const [shops, setShops] = useState();
   const [profile, setProfile] = useState();
 
   const [filtered, setFiltered] = useState(null);
   const [searchOption, setSearchOption] = useState("name");
+
+  const updatedSellerOrderStatus = (orderData, updateStatus) => {
+    const updated = { ...orderData };
+    console.log(updateStatus["id"], "update status");
+
+    updated["OrderStatus"] = updateStatus["id"];
+    const orderId = updated.id;
+
+    firebaseSellerRepo.updateOrderStatus(user.uid, orderId, updated);
+    firebaseBuyerRepo.updateUserStat(user.uid, orderId, updated);
+  };
+
+  useEffect(() => {
+    if (isBuyer && user) {
+      const synoff = firebaseSellerRepo.syncOrders(user.uid, (data) => {
+        setSellerOrder(data);
+      });
+      return () => synoff();
+    }
+  }, [user]);
 
   const deleteProduct = (productId, e, filterOn) => {
     e.preventDefault();
@@ -140,20 +161,28 @@ const Maincontent = ({
   // }, []);
 
   const addOrder = (newOrder) => {
+    orderToSeller(newOrder);
     setOrder((prev) => {
       console.log(prev);
       let updated = {};
       if (prev == undefined) {
         updated[newOrder.id] = { ...newOrder };
-        firebaseBuyerRepo.writeUserData(user.uid, updated);
+        firebaseBuyerRepo.writeUserOrder(user.uid, updated);
+
         return updated;
       } else {
         updated = { ...prev };
         updated[newOrder.id] = { ...newOrder };
-        firebaseBuyerRepo.writeUserData(user.uid, updated);
+        firebaseBuyerRepo.writeUserOrder(user.uid, updated);
+
         return updated;
       }
     });
+  };
+
+  const orderToSeller = (newOrderData) => {
+    console.log(newOrderData.shopid);
+    firebaseBuyerRepo.writeOrderToSeller(newOrderData);
   };
 
   const deleteOrder = (deleteOrderId) => {
@@ -266,7 +295,13 @@ const Maincontent = ({
           );
 
         case "/manageorder":
-          return <Manageorder user={user} />;
+          return (
+            <Manageorder
+              user={user}
+              sellerOrders={sellerOrders}
+              updatedSellerOrderStatus={updatedSellerOrderStatus}
+            />
+          );
       }
     }
   };

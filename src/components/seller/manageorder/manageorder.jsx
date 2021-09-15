@@ -1,6 +1,33 @@
 import React from "react";
 
-const Manageorder = (props) => {
-  return <>manage order</>;
+import SellerOrderList from "./sellerorderlist";
+
+const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
+  console.log(sellerOrders, "updated");
+  return sellerOrders ? (
+    <div class="flex flex-col w-11/12 h-full">
+      {Object.keys(sellerOrders)
+        .reverse()
+        .map((key) => (
+          <div class="border-2 border-gray-100 mt-10 rounded-lg w-full h-72 max-w-5xl min-w-custom shadow-sm py-4 px-6">
+            <SellerOrderList
+              key={key}
+              sellerOrder={sellerOrders[key]}
+              updatedSellerOrderStatus={updatedSellerOrderStatus}
+            />
+          </div>
+        ))}
+    </div>
+  ) : (
+    <div className="-mt-12 w-5/6 max-w-xl ">
+      <div className="py-5">
+        <div className="border-t border-gray-200 my-10" />
+        <div class="flex justify-center">
+          <p class="text-lg">Order does exist</p>
+        </div>
+        <div className="border-t border-gray-200 my-10" />
+      </div>
+    </div>
+  );
 };
 export default Manageorder;

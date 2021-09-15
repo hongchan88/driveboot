@@ -1,13 +1,34 @@
 import React from "react";
-import Shopdetail from "../shopdetail/shopdetail";
-import styles from "./ordermain.module.css";
+
+import styles from "./sellerorderlist.module.css";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import Orderproducts from "./orderproducts";
-import "./style.css";
-import Pickuplocation from "../shopdetail/pickuplocation";
 
-const Order = ({ order, deleteOrder }) => {
+import "./style.css";
+import Orderstatuscomponent from "./orderstatuscomponent";
+
+const SellerOrderList = ({
+  sellerOrder,
+  deleteOrder,
+  updatedSellerOrderStatus,
+}) => {
+  const status = sellerOrder.OrderStatus;
+  console.log(status);
+
+  const statusBar = (status) => {
+    console.log(status);
+    switch (status) {
+      case 0:
+        return "1/5";
+      case 1:
+        return "2/5";
+      case 2:
+        return "3/5";
+      case 3:
+        return "5/5";
+    }
+  };
+
   return (
     <div class="flex flex-col h-full">
       <div class="relative">
@@ -45,7 +66,7 @@ const Order = ({ order, deleteOrder }) => {
               <div class="flex justify-evenly">
                 <button
                   class="text-xl mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => deleteOrder(order.id)}
+                  onClick={() => deleteOrder(sellerOrder.id)}
                 >
                   Confirm
                 </button>
@@ -66,7 +87,7 @@ const Order = ({ order, deleteOrder }) => {
       <section class="flex justify-between h-1/2 ">
         <section class="flex flex-col">
           <div>
-            <p class="font-bold text-lg">Order #{order.id}</p>
+            <p class="font-bold text-lg">Order #{sellerOrder.id}</p>
           </div>
           <div>
             <Popup
@@ -89,13 +110,15 @@ const Order = ({ order, deleteOrder }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(order.cart).map((key) => {
+                  {/* {Object.keys(order.cart).map((key) => {
                     return <Orderproducts key={key} items={order.cart[key]} />;
-                  })}
+                  })} */}
                 </tbody>
               </table>
               <div class="flex w-full justify-center">
-                <p class="font-bold text-xl">Total: ${order.totalprice}</p>
+                <p class="font-bold text-xl">
+                  Total: ${sellerOrder.totalprice}
+                </p>
               </div>
             </Popup>
           </div>
@@ -103,12 +126,12 @@ const Order = ({ order, deleteOrder }) => {
             <Popup
               trigger={
                 <p class="text-sm cursor-pointer">
-                  {order.shopname} pick up location
+                  {sellerOrder.shopname} pick up location
                 </p>
               }
               modal
             >
-              <Pickuplocation name={order.shopname} />
+              {/* <Pickuplocation name={sellerOrder.shopname} /> */}
             </Popup>
           </div>
           <div></div>
@@ -118,19 +141,19 @@ const Order = ({ order, deleteOrder }) => {
             <div>
               <p class="font-bold">Payment</p>
 
-              <p class="text-sm">{order.payment}</p>
+              <p class="text-sm">{sellerOrder.payment}</p>
             </div>
             <div>
               <p class="font-bold">Car Number</p>
-              <p>{order.plate}</p>
+              <p>{sellerOrder.plate}</p>
             </div>
             <div>
               <p class="font-bold">Pick up Date</p>
-              <p>{order.date}</p>
+              <p>{sellerOrder.date}</p>
             </div>
             <div>
               <p class="font-bold">Pick up Time</p>
-              <p>{order.time}</p>
+              <p>{sellerOrder.time}</p>
             </div>
           </div>
         </section>
@@ -138,7 +161,13 @@ const Order = ({ order, deleteOrder }) => {
 
       <div className="border-t border-gray-200 w-full mt-12"></div>
       <div class="flex flex-col justify-center text-lg h-3/6">
-        <span class="font-bold text-lg">Order is ready to pick up</span>
+        <span class="font-bold text-lg">
+          <Orderstatuscomponent
+            status={status}
+            updatedSellerOrderStatus={updatedSellerOrderStatus}
+            sellerOrder={sellerOrder}
+          />
+        </span>
       </div>
       <section class="flex h-1/2 items-center">
         <div class="grid grid-cols-6 w-full">
@@ -148,7 +177,9 @@ const Order = ({ order, deleteOrder }) => {
 
               <div
                 id="bar"
-                class="transition-all ease-out duration-1000 h-full bg-green-500 relative w-3/5"
+                class={`transition-all ease-out duration-1000 h-full bg-green-500 relative w-${statusBar(
+                  status
+                )}`}
               ></div>
             </div>
           </div>
@@ -170,4 +201,4 @@ const Order = ({ order, deleteOrder }) => {
   );
 };
 
-export default Order;
+export default SellerOrderList;

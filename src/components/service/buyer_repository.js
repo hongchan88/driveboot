@@ -3,12 +3,27 @@ import { firebaseDatabase } from "./firebase";
 class buyerRepo {
   constructor() {}
 
-  writeUserData(uid, data) {
+  // updateOrderStatus(uid, orderId, data) {
+  //   console.log(uid);
+  //   firebaseDatabase.ref("orders/" + uid + "/" + orderId).set(data);
+  // }
+  updateUserStat(uid, orderId, data) {
+    firebaseDatabase.ref("orders/" + uid + "/" + orderId).set(data);
+  }
+
+  writeUserOrder(uid, data) {
     firebaseDatabase.ref("orders/" + uid).set(data);
   }
   writeProfile(uid, data) {
     firebaseDatabase.ref("profile/" + uid).set(data);
   }
+
+  writeOrderToSeller(newOrderData) {
+    firebaseDatabase
+      .ref("shops/" + newOrderData.shopid + "/order/" + newOrderData.id)
+      .set(newOrderData);
+  }
+
   syncShops(getUpdated) {
     const starCountRef = firebaseDatabase.ref("shops");
     starCountRef.on("value", (snapshot) => {
