@@ -8,12 +8,13 @@ import "./style.css";
 import Orderstatuscomponent from "./orderstatuscomponent";
 
 const SellerOrderList = ({
+  id,
   sellerOrder,
   deleteOrder,
   updatedSellerOrderStatus,
 }) => {
   const status = sellerOrder.OrderStatus;
-  console.log(status);
+  console.log(id, "key");
 
   const statusBar = (status) => {
     console.log(status);
@@ -166,6 +167,7 @@ const SellerOrderList = ({
             status={status}
             updatedSellerOrderStatus={updatedSellerOrderStatus}
             sellerOrder={sellerOrder}
+            id={id}
           />
         </span>
       </div>

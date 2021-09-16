@@ -8,11 +8,12 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
     <div class="flex flex-col w-11/12 h-full">
       {Object.keys(sellerOrders)
         .reverse()
-        .map((key) => (
+        .map((id) => (
           <div class="border-2 border-gray-100 mt-10 rounded-lg w-full h-72 max-w-5xl min-w-custom shadow-sm py-4 px-6">
             <SellerOrderList
-              key={key}
-              sellerOrder={sellerOrders[key]}
+              key={id}
+              id={id}
+              sellerOrder={sellerOrders[id]}
               updatedSellerOrderStatus={updatedSellerOrderStatus}
             />
           </div>
