@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 
-const useOutsideClick = (divComponent, id, callback) => {
+const useOutsideClick = (divComponent, callback) => {
   const handleClick = (e) => {
-    console.log(e.target.id, "target id");
-
     if (
-      divComponent.current.id &&
+      divComponent?.current?.id &&
       !divComponent.current.contains(e.target) &&
       e.target.type != "button"
     ) {

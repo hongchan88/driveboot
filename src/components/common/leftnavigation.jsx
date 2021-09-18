@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./common.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { LockClosedIcon } from "@heroicons/react/solid";
+import { LockClosedIcon, SwitchHorizontalIcon } from "@heroicons/react/solid";
 import GoogleButton from "react-google-button";
 const Leftnavigation = ({
   authProvider,
@@ -72,7 +72,7 @@ const Leftnavigation = ({
           className="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           <span className=" flex items-center ">
-            <LockClosedIcon
+            <SwitchHorizontalIcon
               className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
               aria-hidden="true"
             />

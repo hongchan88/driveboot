@@ -14,3 +14,29 @@
 .button:hover .openclose {
   display: inline;
 }
+
+.overlay {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  opacity: 0;
+}
+
+.container {
+  position: relative;
+}
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+}
+
+.addProductFormContainer {
+  position: relative;
+  left: 25%;
+}

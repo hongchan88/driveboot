@@ -12,8 +12,8 @@ Customer web
 
 [x] submit form  
 [x] get data from profile  
-[x] validation error  
-[x] validation error toast msg
+[x] order form validation error  
+[x] order form validation error toast msg
 [x] submit success toast
 
 [x] order history page  
@@ -22,6 +22,7 @@ Customer web
 [x] order stage process bar
 [x] order newest top
 [x] order is empty page
+[x] buyer can send notification to seller when order is ready to pick up
 
 [x] profile
 [x] profile edit + data store in firebase  
@@ -47,8 +48,21 @@ CSS
 
 Shop owner
 [] add shop
-[] trading hour / open close date
+[x] trading hour / open close date
 [x] pickup / info edit
 [x] add items/ delte items name/brand/price
 
-[] update order status ( process , ready , picked up)
+[x] update order status ( process , ready , picked up)
+
+[x] change picture of info panel
+[x] change picture of pick up location img
+[x] add product img
+
+Manage Order from seller
+
+[p] delete button to achive cancel/picked up
+
+[x] customer cancel status ( when customer deleted order from their end)
+[x] profile picture of customer on manage order -> contact email
+
+[p] pagination order page for buyer and seller

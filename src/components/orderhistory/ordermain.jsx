@@ -2,14 +2,19 @@ import React, { useEffect } from "react";
 import Order from "./order";
 import styles from "./ordermain.module.css";
 
-const Ordermain = ({ order, deleteOrder }) => {
+const Ordermain = ({ order, deleteOrder, updatedOrderStatus }) => {
   return order ? (
     <div class="flex flex-col w-11/12 h-full">
       {Object.keys(order)
         .reverse()
         .map((key) => (
           <div class="border-2 border-gray-100 mt-10 rounded-lg w-full h-72 max-w-5xl min-w-custom shadow-sm py-4 px-6">
-            <Order key={key} order={order[key]} deleteOrder={deleteOrder} />
+            <Order
+              key={key}
+              order={order[key]}
+              deleteOrder={deleteOrder}
+              updatedOrderStatus={updatedOrderStatus}
+            />
           </div>
         ))}
     </div>

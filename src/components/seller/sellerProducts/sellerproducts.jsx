@@ -4,6 +4,9 @@ import ResultNone from "../../search/resultNone";
 
 import SellerSearchList from "./sellersearchlist";
 import cogoToast from "cogo-toast";
+import { useState } from "react/cjs/react.development";
+import ClipLoader from "react-spinners/ClipLoader";
+import styles from "../myshop/addshopform.module.css";
 
 const SellerProducts = ({
   filteredSearch,
@@ -14,14 +17,32 @@ const SellerProducts = ({
   deleteProduct,
   addProduct,
   setFiltered,
+  imageChange,
+  productImgUpload,
 }) => {
   const { product } = shop;
   const searchRef = useRef();
   const optionRef = useRef();
+  const productImgRef = useRef();
   const { handleSubmit, register, reset } = useForm();
+  const [productImg, setProductImg] = useState();
+  const [error, setError] = useState();
+  const [isLoading, setisLoading] = useState(false);
 
-  console.log(product, "product");
-  console.log(filtered, "product");
+  console.log(isLoading);
+  const onChangeImg = async (e) => {
+    setisLoading(true);
+    const url = await productImgUpload(e);
+
+    setProductImg(url);
+    setisLoading(false);
+    // console.log("hello");
+    // productImgUpload(e).then((url) => {
+    //   console.log(url);
+    // });
+    // console.log(productImg);
+  };
+
   useEffect(() => {
     setFiltered(null);
   }, []);
@@ -37,12 +58,25 @@ const SellerProducts = ({
     } else {
       newId = 1;
     }
+    const emptyValidation = Object.keys(data).filter((key) => data[key] == "");
 
-    const updated = { ...data, id: parseInt(newId) };
-    addProduct(updated);
-    reset();
-    cogoToast.success("Successfully added your product!");
-    scrollToSearchBar();
+    if (emptyValidation.length != 0) {
+      setError(emptyValidation);
+      cogoToast.error("Required fields are empty");
+    } else if (!productImg) {
+      setError(null);
+      cogoToast.error("Please add product photo");
+    } else {
+      const updated = { ...data, id: parseInt(newId), productImg: productImg };
+      addProduct(updated);
+      reset();
+      setError(null);
+      setProductImg(null);
+      scrollToSearchBar();
+      cogoToast.success("Successfully submitted your order!");
+    }
+
+    //validator if img not exist or name,brand...
   };
 
   const scrollToSearchBar = () => {
@@ -85,6 +119,9 @@ const SellerProducts = ({
                         placeholder="eg Chilli paste"
                       />
                     </div>
+                    {error?.includes("name") ? (
+                      <small class="text-red-400">product name requried</small>
+                    ) : null}
                   </div>
                   <div className="col-span-3 sm:col-span-2">
                     <label
@@ -103,6 +140,9 @@ const SellerProducts = ({
                         placeholder="eg Nongshim"
                       />
                     </div>
+                    {error?.includes("brand") ? (
+                      <small class="text-red-400">brand name requried</small>
+                    ) : null}
                   </div>
                   <div className="col-span-3 sm:col-span-2">
                     <label
@@ -121,6 +161,9 @@ const SellerProducts = ({
                         placeholder="eg 500g"
                       />
                     </div>
+                    {error?.includes("size") ? (
+                      <small class="text-red-400">product size requried</small>
+                    ) : null}
                   </div>
                   <div className="col-span-3 sm:col-span-2">
                     <label
@@ -139,6 +182,9 @@ const SellerProducts = ({
                         placeholder="eg 500g"
                       />
                     </div>
+                    {error?.includes("price") ? (
+                      <small class="text-red-400">price requried</small>
+                    ) : null}
                   </div>
                 </div>
 
@@ -159,6 +205,9 @@ const SellerProducts = ({
                       placeholder="This is..."
                     />
                   </div>
+                  {error?.includes("desc") ? (
+                    <small class="text-red-400">description requried</small>
+                  ) : null}
                 </div>
 
                 <div>
@@ -166,31 +215,70 @@ const SellerProducts = ({
                     Photo
                   </label>
                   <div className="mt-1 flex items-center">
-                    <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                      <svg
-                        className="h-full w-full text-gray-300"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
+                    <span className="inline-block h-2/3 w-2/3 overflow-hidden bg-gray-100">
+                      {productImg ? (
+                        <img
+                          className="h-full w-full"
+                          src={productImg}
+                          alt=""
+                        />
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-full w-full"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
                     </span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      ref={productImgRef}
+                      onChange={onChangeImg}
+                    />
                     <button
+                      onClick={(e) => imageChange(e, productImgRef)}
+                      name="productImg"
                       type="button"
-                      className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="ml-5 w-1/3 h-16 flex justify-center items-center bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                      Change
+                      {isLoading ? (
+                        <span>
+                          <ClipLoader color="gray" loading={true} size="30" />
+                        </span>
+                      ) : productImg ? (
+                        "Change photo"
+                      ) : (
+                        "Upload photo"
+                      )}
                     </button>
                   </div>
                 </div>
               </div>
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                <button
-                  type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Add Product
-                </button>
+                {!isLoading ? (
+                  <button
+                    type="submit"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Add Product
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    type="submit"
+                    className="inline-flex cursor-not-allowed justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600"
+                  >
+                    Add Product
+                  </button>
+                )}
               </div>
             </div>
           </form>

@@ -34,6 +34,14 @@ const Maincontent = ({
   const [filtered, setFiltered] = useState(null);
   const [searchOption, setSearchOption] = useState("name");
 
+  const updatedOrderStatus = (orderData) => {
+    const updated = { ...orderData };
+    updated["arrived"] = true;
+    const orderId = updated.id;
+    firebaseSellerRepo.updateOrderStatus(user.uid, orderId, updated);
+    firebaseBuyerRepo.updateUserStat(user.uid, orderId, updated);
+  };
+
   const updatedSellerOrderStatus = (orderData, updateStatus) => {
     const updated = { ...orderData };
     console.log(updateStatus["id"], "update status");
@@ -185,11 +193,17 @@ const Maincontent = ({
     firebaseBuyerRepo.writeOrderToSeller(newOrderData);
   };
 
-  const deleteOrder = (deleteOrderId) => {
+  const deleteOrder = (deleteOrderId, shopId) => {
     setOrder((prev) => {
       const updated = { ...prev };
+      updated[deleteOrderId].OrderStatus = 4;
+      firebaseSellerRepo.updateOrderStatus(
+        shopId,
+        deleteOrderId,
+        updated[deleteOrderId]
+      );
       delete updated[deleteOrderId];
-      firebaseBuyerRepo.writeUserData(user.uid, updated);
+      firebaseBuyerRepo.writeUserOrder(user.uid, updated);
       return updated;
     });
   };
@@ -253,7 +267,12 @@ const Maincontent = ({
           );
         case "/order":
           return (
-            <Ordermain order={order} user={user} deleteOrder={deleteOrder} />
+            <Ordermain
+              order={order}
+              user={user}
+              deleteOrder={deleteOrder}
+              updatedOrderStatus={updatedOrderStatus}
+            />
           );
 
         case "/profile":

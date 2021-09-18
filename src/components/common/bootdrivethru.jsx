@@ -31,6 +31,7 @@ const Bootdrivethru = ({
     setProfile(profile);
   }, [profile]);
 
+  console.log(getprofile);
   const onChange = (e) => {
     e.preventDefault();
 
@@ -54,9 +55,10 @@ const Bootdrivethru = ({
       cart,
       shopname: shops[shopid].name,
       shopid,
-      OrderStatus: "orderplaced",
+      OrderStatus: "0",
+      buyerProfileImg: profile.profileimage,
     };
-    console.log(newOrder);
+
     const emptyValidation = Object.keys(newOrder).filter(
       (key) => newOrder[key] == ""
     );
@@ -65,9 +67,10 @@ const Bootdrivethru = ({
       cogoToast.error("Please add products in the cart");
     } else if (emptyValidation.length != 0) {
       setError(emptyValidation);
+      console.log(setError);
       cogoToast.error("Required fields are empty");
     } else {
-      addOrder(newOrder);
+      addOrder({ ...newOrder, arrived: false });
       setAftersubmit(true);
       cogoToast.success("Successfully submitted your order!");
     }

@@ -1,11 +1,15 @@
 import React from "react";
 
 import SellerOrderList from "./sellerorderlist";
+import Dropselect from "./dropselect";
 
 const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
   console.log(sellerOrders, "updated");
   return sellerOrders ? (
     <div class="flex flex-col w-11/12 h-full">
+      <div className="flex justify-end">
+        <Dropselect />
+      </div>
       {Object.keys(sellerOrders)
         .reverse()
         .map((id) => (

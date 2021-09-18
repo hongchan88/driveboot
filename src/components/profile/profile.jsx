@@ -104,7 +104,7 @@ const Profile = ({ user, updateProfile, profile }) => {
                                     ? "img/grocery.jpg"
                                     : imageUrl
                                 }
-                                class="cursor-pointer w-32 h-32"
+                                class="cursor-pointer w-32 h-32 hover:opacity-75"
                               />
                               <div className={styles.overlay}>
                                 <svg

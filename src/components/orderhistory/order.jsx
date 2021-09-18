@@ -6,8 +6,61 @@ import "reactjs-popup/dist/index.css";
 import Orderproducts from "./orderproducts";
 import "./style.css";
 import Pickuplocation from "../shopdetail/pickuplocation";
+import { Link } from "react-router-dom";
+import PopupAsk from "./popupAsk";
 
-const Order = ({ order, deleteOrder }) => {
+const Order = ({ order, deleteOrder, updatedOrderStatus }) => {
+  const status = order?.OrderStatus;
+  const arrived = order?.arrived;
+
+  const custArrived = () => {
+    updatedOrderStatus(order);
+  };
+
+  const statusDesc = (status) => {
+    switch (status) {
+      case "0":
+        return "Order is placed! ";
+      case "1":
+        return "Seller confirmed your order . Order is being processed";
+      case "2":
+        return (
+          <>
+            {!arrived ? (
+              <>
+                <span> Ready to pick up!</span>
+                <PopupAsk
+                  askQ={
+                    "This will send a notification to the seller that you have arrived. Are you at the pick up point?"
+                  }
+                  custArrived={custArrived}
+                />
+                <span> when you're arrived at the pick up point</span>
+              </>
+            ) : (
+              <span>
+                Notification sent to seller. You will be in contact shortly
+              </span>
+            )}
+          </>
+        );
+      case "3":
+        return "finished pick up";
+    }
+  };
+
+  const statusBar = (status) => {
+    switch (status) {
+      case "0":
+        return "1/5";
+      case "1":
+        return "2/5";
+      case "2":
+        return "3/5";
+      case "3":
+        return "5/5";
+    }
+  };
   return (
     <div class="flex flex-col h-full">
       <div class="relative">
@@ -45,7 +98,7 @@ const Order = ({ order, deleteOrder }) => {
               <div class="flex justify-evenly">
                 <button
                   class="text-xl mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => deleteOrder(order.id)}
+                  onClick={() => deleteOrder(order.id, order.shopid)}
                 >
                   Confirm
                 </button>
@@ -73,7 +126,7 @@ const Order = ({ order, deleteOrder }) => {
               trigger={<p class="test-sm cursor-pointer"> View product </p>}
               modal
             >
-              <table class="w-full text-sm lg:text-base" cellspacing="0">
+              <table class="w-full text-sm lg:text-base" cellSpacing="0">
                 <thead>
                   <tr class="h-12 uppercase">
                     <th class="hidden md:table-cell"></th>
@@ -100,18 +153,10 @@ const Order = ({ order, deleteOrder }) => {
             </Popup>
           </div>
           <div>
-            <Popup
-              trigger={
-                <p class="text-sm cursor-pointer">
-                  {order.shopname} pick up location
-                </p>
-              }
-              modal
-            >
-              <Pickuplocation name={order.shopname} />
-            </Popup>
+            <Link to={`/shop/${order.shopid}`}>
+              <p class="text-sm cursor-pointer">{order.shopname} Shop page</p>
+            </Link>
           </div>
-          <div></div>
         </section>
         <section class="flex justify-end w-1/2">
           <div class="grid grid-cols-2 w-full ">
@@ -138,7 +183,7 @@ const Order = ({ order, deleteOrder }) => {
 
       <div className="border-t border-gray-200 w-full mt-12"></div>
       <div class="flex flex-col justify-center text-lg h-3/6">
-        <span class="font-bold text-lg">Order is ready to pick up</span>
+        <span class="font-bold text-lg">{statusDesc(status)}</span>
       </div>
       <section class="flex h-1/2 items-center">
         <div class="grid grid-cols-6 w-full">
@@ -148,7 +193,9 @@ const Order = ({ order, deleteOrder }) => {
 
               <div
                 id="bar"
-                class="transition-all ease-out duration-1000 h-full bg-green-500 relative w-3/5"
+                class={`transition-all ease-out duration-1000 h-full bg-green-500 relative w-${statusBar(
+                  status
+                )}`}
               ></div>
             </div>
           </div>

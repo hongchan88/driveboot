@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { EditText, EditTextarea } from "react-edit-text";
 import "react-edit-text/dist/index.css";
@@ -7,6 +7,11 @@ import Shops from "../../shops/shops";
 import styles from "./addshopform.module.css";
 import SellerSearch from "../sellerProducts/sellerproducts";
 import SellerProducts from "../sellerProducts/sellerproducts";
+import ClipLoader from "react-spinners/ClipLoader";
+import Imageupload from "../../service/imageupload";
+import cogoToast from "cogo-toast";
+
+const imageupload = new Imageupload();
 
 const Addshopform = ({
   shop,
@@ -23,7 +28,62 @@ const Addshopform = ({
   addProduct,
   setFiltered,
 }) => {
-  console.log(shop?.id, "new");
+  const [isloading, setisLoading] = useState(false);
+  const [imageUrl, setImage] = useState(null);
+
+  const infoRef = useRef();
+  const pickupRef = useRef();
+
+  const productImgUpload = async (e) => {
+    e.preventDefault();
+
+    const file = e.target.files[0];
+
+    if (file) {
+      const imgUrl = await imageupload.upload(file);
+
+      console.log(imgUrl.url);
+      cogoToast.success("Success uploaded the image!");
+      return imgUrl.url;
+    }
+  };
+
+  const imageNewUpload = async (e) => {
+    e.preventDefault();
+
+    setisLoading(true);
+    const file = e.target.files[0];
+    console.log(e);
+    console.log(file);
+    if (file) {
+      const imgUrl = await imageupload.upload(file);
+
+      console.log(imgUrl.url);
+      cogoToast.success("Success saved the image!");
+
+      const updated = {
+        ...shop,
+        [e.target.name]: imgUrl.url,
+      };
+      editShop(id, updated);
+    }
+    setisLoading(false);
+  };
+
+  const imageChange = (e, productImgRef) => {
+    switch (e.target.name) {
+      case "infoImg":
+        infoRef.current.click();
+        break;
+      case "pickupImg":
+        pickupRef.current.click();
+        break;
+      case "productImg":
+        productImgRef.current.click();
+
+        break;
+    }
+  };
 
   const onChange = ({ name, value }) => {
     const updated = {
@@ -96,10 +156,50 @@ const Addshopform = ({
               <div class="mt-8 lg:mt-0 lg:w-1/2">
                 <div class="flex items-center justify-center lg:justify-end">
                   <div class="max-w-lg">
-                    <img
-                      class="object-cover object-center w-full h-64 rounded-md shadow"
-                      src="../img/header.jpg"
-                      alt=""
+                    <div className={styles.container}>
+                      <div className={styles.loading}>
+                        <ClipLoader
+                          color="gray"
+                          loading={isloading}
+                          size="50"
+                        />
+                      </div>
+
+                      <img
+                        class="object-cover object-center w-full h-64 rounded-md shadow cursor-pointer hover:opacity-75"
+                        src={
+                          shop?.infoImg
+                            ? shop.infoImg
+                            : "https://res.cloudinary.com/dwbsxpk82/image/upload/v1631881307/default/fikri-rasyid-ezeC8-clZSs-unsplash_dynpg4.jpg"
+                        }
+                        onClick={isloading ? null : imageChange}
+                        alt=""
+                        name="infoImg"
+                      />
+                      {!isloading ? (
+                        <div className={styles.overlay}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 right-0 cursor-pointer"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                            <path
+                              fill-rule="evenodd"
+                              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      ) : null}
+                    </div>
+                    <input
+                      type="file"
+                      class="hidden"
+                      name="infoImg"
+                      ref={infoRef}
+                      onChange={isloading ? null : imageNewUpload}
                     />
                   </div>
                 </div>
@@ -131,17 +231,57 @@ const Addshopform = ({
               <div class="mt-8 lg:mt-0 lg:w-1/2">
                 <div class="flex items-center justify-center lg:justify-end">
                   <div class="max-w-lg">
-                    <img
-                      class="object-fit object-center w-full h-64 rounded-md shadow"
-                      src="../img/pickup.png"
-                      alt=""
+                    <div className={styles.container}>
+                      <div className={styles.loading}>
+                        <ClipLoader
+                          color="gray"
+                          loading={isloading}
+                          size="50"
+                        />
+                      </div>
+
+                      <img
+                        class="object-cover object-center w-full h-64 rounded-md shadow cursor-pointer hover:opacity-75"
+                        src={
+                          shop?.pickupImg
+                            ? shop.pickupImg
+                            : "http://res.cloudinary.com/dwbsxpk82/image/upload/v1631882811/scott-webb-nJZbmL6pvDY-unsplash_y1c83w.jpg"
+                        }
+                        onClick={isloading ? null : imageChange}
+                        alt=""
+                        name="pickupImg"
+                      />
+                      {!isloading ? (
+                        <div className={styles.overlay}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 right-0 cursor-pointer"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                            <path
+                              fill-rule="evenodd"
+                              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      ) : null}
+                    </div>
+                    <input
+                      type="file"
+                      class="hidden"
+                      name="pickupImg"
+                      ref={pickupRef}
+                      onChange={isloading ? null : imageNewUpload}
                     />
                   </div>
                 </div>
               </div>
             </div>
             <div class="flex items-center w-2/3">
-              <Link to={{ pathname: `${shop?.google}` }} target="_blank">
+              <Link to={{ pathname: `${shop?.location}` }} target="_blank">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-6 w-6"
@@ -165,9 +305,13 @@ const Addshopform = ({
               </Link>
               <EditText
                 onSave={onChange}
-                name="google"
+                name="location"
                 defaultValue={
-                  shop.google ? shop.google : "Google Map URL eg http//.."
+                  shop.location
+                    ? shop.location != ""
+                      ? shop.location
+                      : false
+                    : "Google Map URL include https://.."
                 }
                 style={{ border: "1px solid #ccc" }}
               />
@@ -480,6 +624,8 @@ const Addshopform = ({
                     deleteProduct={deleteProduct}
                     addProduct={addProduct}
                     setFiltered={setFiltered}
+                    imageChange={imageChange}
+                    productImgUpload={productImgUpload}
                   />
                 </div>
               </div>

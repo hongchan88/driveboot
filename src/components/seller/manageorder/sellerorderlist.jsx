@@ -6,6 +6,8 @@ import "reactjs-popup/dist/index.css";
 
 import "./style.css";
 import Orderstatuscomponent from "./orderstatuscomponent";
+import Order from "../../orderhistory/order";
+import Orderproducts from "../../orderhistory/orderproducts";
 
 const SellerOrderList = ({
   id,
@@ -14,18 +16,17 @@ const SellerOrderList = ({
   updatedSellerOrderStatus,
 }) => {
   const status = sellerOrder.OrderStatus;
-  console.log(id, "key");
+  console.log(sellerOrder.shopid, "shopid");
 
   const statusBar = (status) => {
-    console.log(status);
     switch (status) {
-      case 0:
+      case "0":
         return "1/5";
-      case 1:
+      case "1":
         return "2/5";
-      case 2:
+      case "2":
         return "3/5";
-      case 3:
+      case "3":
         return "5/5";
     }
   };
@@ -92,10 +93,12 @@ const SellerOrderList = ({
           </div>
           <div>
             <Popup
-              trigger={<p class="test-sm cursor-pointer"> View product </p>}
+              trigger={
+                <p class="test-sm cursor-pointer"> View ordered product </p>
+              }
               modal
             >
-              <table class="w-full text-sm lg:text-base" cellspacing="0">
+              <table class="w-full text-sm lg:text-base" cellSpacing="0">
                 <thead>
                   <tr class="h-12 uppercase">
                     <th class="hidden md:table-cell"></th>
@@ -111,9 +114,11 @@ const SellerOrderList = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {Object.keys(order.cart).map((key) => {
-                    return <Orderproducts key={key} items={order.cart[key]} />;
-                  })} */}
+                  {Object.keys(sellerOrder.cart).map((key) => {
+                    return (
+                      <Orderproducts key={key} items={sellerOrder.cart[key]} />
+                    );
+                  })}
                 </tbody>
               </table>
               <div class="flex w-full justify-center">
@@ -123,19 +128,26 @@ const SellerOrderList = ({
               </div>
             </Popup>
           </div>
-          <div>
-            <Popup
-              trigger={
-                <p class="text-sm cursor-pointer">
-                  {sellerOrder.shopname} pick up location
-                </p>
-              }
-              modal
-            >
-              {/* <Pickuplocation name={sellerOrder.shopname} /> */}
-            </Popup>
+          <div className="container flex px-5 py-5 ">
+            <div className="flex justify-center items-center">
+              <img
+                class="inline object-cover w-16 h-16 mr-2 rounded-full"
+                src={sellerOrder?.buyerProfileImg}
+                alt="Profile image"
+              />
+            </div>
+            <div className="flex justify-center items-center">
+              <ul>
+                <li>{sellerOrder?.firstname}</li>
+                <li>{sellerOrder?.email}</li>
+                <li>
+                  {sellerOrder?.arrived
+                    ? "Arrived at pick up point"
+                    : "Customer not yet arrived"}
+                </li>
+              </ul>
+            </div>
           </div>
-          <div></div>
         </section>
         <section class="flex justify-end w-1/2">
           <div class="grid grid-cols-2 w-full ">
@@ -171,34 +183,36 @@ const SellerOrderList = ({
           />
         </span>
       </div>
-      <section class="flex h-1/2 items-center">
-        <div class="grid grid-cols-6 w-full">
-          <div class="col-span-6">
-            <div class="h-3 relative w-full rounded-full overflow-hidden">
-              <div class="w-full h-full bg-gray-200 absolute"></div>
+      {status == "4" ? null : (
+        <section class="flex h-1/2 items-center">
+          <div class="grid grid-cols-6 w-full">
+            <div class="col-span-6">
+              <div class="h-3 relative w-full rounded-full overflow-hidden">
+                <div class="w-full h-full bg-gray-200 absolute"></div>
 
-              <div
-                id="bar"
-                class={`transition-all ease-out duration-1000 h-full bg-green-500 relative w-${statusBar(
-                  status
-                )}`}
-              ></div>
+                <div
+                  id="bar"
+                  class={`transition-all ease-out duration-1000 h-full bg-green-500 relative w-${statusBar(
+                    status
+                  )}`}
+                ></div>
+              </div>
+            </div>
+            <div class="col-start-1 col-end-1 text-sm">
+              <span>Order Placed</span>
+            </div>
+            <div class="col-start-3 col-end-3 text-sm">
+              <span class="flex justify-start">Process</span>
+            </div>
+            <div class="col-start-4 col-span-1 text-sm ">
+              <span class="flex justify-center">Ready</span>
+            </div>
+            <div class="col-start-6 col-end-6 text-sm ">
+              <span class="flex justify-end">Picked up</span>
             </div>
           </div>
-          <div class="col-start-1 col-end-1 text-sm">
-            <span>Order Placed</span>
-          </div>
-          <div class="col-start-3 col-end-3 text-sm">
-            <span class="flex justify-start">Process</span>
-          </div>
-          <div class="col-start-4 col-span-1 text-sm ">
-            <span class="flex justify-center">Ready</span>
-          </div>
-          <div class="col-start-6 col-end-6 text-sm ">
-            <span class="flex justify-end">Picked up</span>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };
