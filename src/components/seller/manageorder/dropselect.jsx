@@ -1,88 +1,98 @@
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import React, { useEffect, useRef } from "react";
+import { Fragment, useState } from "react";
+import { Listbox, Transition } from "@headlessui/react";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import useOutsideClick from "./useOutsideClick";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-const Dropselect = (props) => (
-  <Menu as="div" className="relative inline-block text-left">
-    <div>
-      <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-        Options
-        <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-      </Menu.Button>
-    </div>
+const filter_status = [
+  { name: "All", id: "all" },
+  { name: "Order Placed", id: "0" },
+  { name: "Processing", id: "1" },
+  { name: "Ready to pick up", id: "2" },
+  { name: "Picked up", id: "3" },
+  { name: "Cancelled", id: "4" },
+];
+const Dropselect = ({ filterManageOrder }) => {
+  const [selected, setSelected] = useState({ name: "All", id: "all" });
 
-    <Transition
-      as={Fragment}
-      enter="transition ease-out duration-100"
-      enterFrom="transform opacity-0 scale-95"
-      enterTo="transform opacity-100 scale-100"
-      leave="transition ease-in duration-75"
-      leaveFrom="transform opacity-100 scale-100"
-      leaveTo="transform opacity-0 scale-95"
-    >
-      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-        <div className="py-1">
-          <Menu.Item>
-            {({ active }) => (
-              <button
-                onClick={() => console.log("clicked")}
-                className={classNames(
-                  active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                  "block px-4 py-2 text-sm"
-                )}
-              >
-                Order placed
-              </button>
-            )}
-          </Menu.Item>
-          <Menu.Item>
-            {({ active }) => (
-              <a
-                href="#"
-                className={classNames(
-                  active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                  "block px-4 py-2 text-sm"
-                )}
-              >
-                Support
-              </a>
-            )}
-          </Menu.Item>
-          <Menu.Item>
-            {({ active }) => (
-              <a
-                href="#"
-                className={classNames(
-                  active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                  "block px-4 py-2 text-sm"
-                )}
-              >
-                License
-              </a>
-            )}
-          </Menu.Item>
-          <form method="POST" action="#">
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  type="submit"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block w-full text-left px-4 py-2 text-sm"
-                  )}
+  const divComponent = useRef();
+  const ButtonRef = useRef();
+
+  useOutsideClick(divComponent, () => {
+    if (ButtonRef.current.ariaExpanded != "false") {
+      ButtonRef.current.click();
+    }
+  });
+
+  const updateStat = (e) => {
+    console.log(e);
+    setSelected(e);
+    filterManageOrder(e.id);
+  };
+
+  return (
+    <div className="w-72" ref={divComponent} id="filter">
+      <Listbox value={selected} onChange={(e) => updateStat(e)}>
+        <div className="relative mt-1 z-10">
+          <Listbox.Button
+            ref={ButtonRef}
+            id="filter"
+            className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+          >
+            <span className="block truncate">{selected.name}</span>
+            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <SelectorIcon
+                className="w-5 h-5 text-gray-400"
+                aria-hidden="true"
+              />
+            </span>
+          </Listbox.Button>
+
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {filter_status.map((status, personIdx) => (
+                <Listbox.Option
+                  key={personIdx}
+                  className={({ active }) =>
+                    `${active ? "text-amber-900 bg-amber-100" : "text-gray-900"}
+              cursor-default select-none relative py-2 pl-10 pr-4`
+                  }
+                  value={status}
                 >
-                  Sign out
-                </button>
-              )}
-            </Menu.Item>
-          </form>
+                  {({ selected, active }) => (
+                    <>
+                      <span
+                        className={`${
+                          selected ? "font-medium" : "font-normal"
+                        } block truncate`}
+                      >
+                        {status.name}
+                      </span>
+                      {selected ? (
+                        <span
+                          className={`${
+                            active ? "text-amber-600" : "text-amber-600"
+                          }
+                    absolute inset-y-0 left-0 flex items-center pl-3`}
+                        >
+                          <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
         </div>
-      </Menu.Items>
-    </Transition>
-  </Menu>
-);
+      </Listbox>
+    </div>
+  );
+};
 
 export default Dropselect;

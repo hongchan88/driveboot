@@ -16,7 +16,7 @@ const SellerOrderList = ({
   updatedSellerOrderStatus,
 }) => {
   const status = sellerOrder.OrderStatus;
-  console.log(sellerOrder.shopid, "shopid");
+  console.log(sellerOrder, "order");
 
   const statusBar = (status) => {
     switch (status) {
