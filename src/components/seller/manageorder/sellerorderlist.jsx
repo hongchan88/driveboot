@@ -33,59 +33,6 @@ const SellerOrderList = ({
 
   return (
     <div class="flex flex-col h-full">
-      <div class="relative">
-        <Popup
-          className="my-popup"
-          trigger={
-            <button class="absolute right-0 top-0 transform hover:scale-110">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 "
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-          }
-          modal
-        >
-          {(close) => (
-            <div className="modal">
-              <div class="absolute right-2 top-0">
-                <button className="close" onClick={close}>
-                  &times;
-                </button>
-              </div>
-
-              <div class="text-2xl flex justify-center">
-                Are you sure to cancel this order?
-              </div>
-              <div class="flex justify-evenly">
-                <button
-                  class="text-xl mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => deleteOrder(sellerOrder.id)}
-                >
-                  Confirm
-                </button>
-                <button
-                  class="text-xl mt-10 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => {
-                    console.log("modal closed ");
-                    close();
-                  }}
-                >
-                  No
-                </button>
-              </div>
-            </div>
-          )}
-        </Popup>
-      </div>
       <section class="flex justify-between h-1/2 ">
         <section class="flex flex-col">
           <div>
@@ -154,19 +101,22 @@ const SellerOrderList = ({
             <div>
               <p class="font-bold">Payment</p>
 
-              <p class="text-sm">{sellerOrder.payment}</p>
+              <p>{sellerOrder.payment}</p>
             </div>
             <div>
               <p class="font-bold">Car Number</p>
               <p>{sellerOrder.plate}</p>
             </div>
             <div>
-              <p class="font-bold">Pick up Date</p>
-              <p>{sellerOrder.date}</p>
+              <p class="font-bold">Pick up Date/Time</p>
+              <p>
+                {sellerOrder.date} / {sellerOrder.time}
+              </p>
             </div>
+
             <div>
-              <p class="font-bold">Pick up Time</p>
-              <p>{sellerOrder.time}</p>
+              <p class="font-bold">Order created</p>
+              <p>{sellerOrder.createdTime}</p>
             </div>
           </div>
         </section>

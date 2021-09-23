@@ -34,6 +34,10 @@ const Maincontent = ({
   const [filtered, setFiltered] = useState(null);
   const [searchOption, setSearchOption] = useState("name");
 
+  console.log(user);
+  console.log(path);
+  console.log(shops);
+
   const updatedOrderStatus = (orderData) => {
     const updated = { ...orderData };
     updated["arrived"] = true;
@@ -157,10 +161,10 @@ const Maincontent = ({
   useEffect(() => {
     const synoff = firebaseBuyerRepo.syncShops((data) => {
       setShops(data);
-      console.log("shop updated");
+      console.log(shops, "shop updated");
     });
     return () => synoff();
-  }, []);
+  }, [user]);
 
   // useEffect(() => {
   //   firebaseRepository.getShops().then((data) => {
@@ -212,9 +216,9 @@ const Maincontent = ({
     const updated = {
       shopImg: "img/grocery",
       id: uid,
-      name: "Asiana Airlines",
+      name: "New Shop name",
       location: "",
-      desc: "hellgg",
+      desc: "Introduce your shop",
       opencloseTime: {
         monday: { open: "08:00", close: "18:00" },
         tuesday: { open: "08:00", close: "18:00" },
@@ -223,6 +227,15 @@ const Maincontent = ({
         friday: { open: "08:00", close: "18:00" },
         saturday: { open: "08:00", close: "18:00" },
         sunday: { open: "08:00", close: "18:00" },
+      },
+      opencloseDate: {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
       },
     };
 

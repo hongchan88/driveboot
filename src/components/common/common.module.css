@@ -20,3 +20,7 @@
 .globalfooter {
   min-height: 10vh;
 }
+
+.productTd {
+  min-width: 9em;
+}

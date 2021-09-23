@@ -17,6 +17,8 @@ const Order = ({ order, deleteOrder, updatedOrderStatus }) => {
     updatedOrderStatus(order);
   };
 
+  console.log(order);
+
   const statusDesc = (status) => {
     switch (status) {
       case "0":
@@ -97,13 +99,13 @@ const Order = ({ order, deleteOrder, updatedOrderStatus }) => {
               </div>
               <div class="flex justify-evenly">
                 <button
-                  class="text-xl mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  class="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={() => deleteOrder(order.id, order.shopid)}
                 >
                   Confirm
                 </button>
                 <button
-                  class="text-xl mt-10 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  class="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                   onClick={() => {
                     console.log("modal closed ");
                     close();
@@ -119,7 +121,7 @@ const Order = ({ order, deleteOrder, updatedOrderStatus }) => {
       <section class="flex justify-between h-1/2 ">
         <section class="flex flex-col">
           <div>
-            <p class="font-bold text-lg">Order #{order.id}</p>
+            <p class="font-bold text-lg">Order #{order && order.id}</p>
           </div>
           <div>
             <Popup

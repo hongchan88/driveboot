@@ -2,7 +2,7 @@ import React from "react";
 import Cartitems from "./cartitems";
 
 const Cart = ({ cart, removeItem, addQty }) => {
-  console.log(Object.keys(cart).length);
+  console.log(cart);
   return (
     <div class="mt-24">
       {Object.keys(cart).length != 0 ? (

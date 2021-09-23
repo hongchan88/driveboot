@@ -29,6 +29,7 @@ function App({ authProvider }) {
 
   useEffect(() => {
     authProvider.onAuthChange((user) => {
+      console.log(user);
       setUser(user);
     });
   });

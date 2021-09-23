@@ -225,7 +225,7 @@ const SellerProducts = ({
                       ) : (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-full w-full"
+                          className="h-1/2 w-1/2"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
@@ -247,7 +247,7 @@ const SellerProducts = ({
                       onClick={(e) => imageChange(e, productImgRef)}
                       name="productImg"
                       type="button"
-                      className="ml-5 w-1/3 h-16 flex justify-center items-center bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="ml-5 w-1/3 h-10 flex justify-center items-center bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       {isLoading ? (
                         <span>

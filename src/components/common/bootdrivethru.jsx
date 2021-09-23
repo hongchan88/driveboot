@@ -4,6 +4,7 @@ import Cart from "./cart";
 import Search from "../search/search";
 import { set, useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
+import moment from "moment-timezone";
 
 const Bootdrivethru = ({
   filteredSearch,
@@ -57,6 +58,7 @@ const Bootdrivethru = ({
       shopid,
       OrderStatus: "0",
       buyerProfileImg: profile.profileimage,
+      createdTime: moment().tz("Australia/NSW").format("YYYY-MM-DD HH:mm"),
     };
 
     const emptyValidation = Object.keys(newOrder).filter(

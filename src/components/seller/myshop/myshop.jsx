@@ -8,7 +8,48 @@ const Myshop = ({ shop, user, addShop }) => {
     <div class="flex flex-col">
       <Link to={`/myshop/${user.uid}`}>
         {shop ? (
-          <h1>edit your shop</h1>
+          <div class="p-10">
+            <div class="max-w-xs rounded overflow-hidden shadow-lg">
+              <div class="px-6 py-4">
+                <img
+                  src={
+                    shop.infoImg
+                      ? shop.infoImg
+                      : "https://res.cloudinary.com/dwbsxpk82/image/upload/v1631881307/default/fikri-rasyid-ezeC8-clZSs-unsplash_dynpg4.jpg"
+                  }
+                />
+                <div class="font-bold text-xl mb-2">{shop.name}</div>
+                <p class="text-gray-700 text-base">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Voluptatibus quia, nulla! Maiores et perferendis eaque,
+                  exercitationem praesentium nihil.
+                </p>
+              </div>
+              <div class="px-6 pt-4 pb-2">
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  {shop.product
+                    ? `Published products (${shop.product.length - 1})`
+                    : "Published products(0)"}
+                </span>
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  {shop.order
+                    ? `Total orders (${Object.keys(shop.order)?.length})`
+                    : "Total orders(0)"}
+                </span>
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                  {shop.order
+                    ? `Order placed (
+                  ${
+                    Object.keys(shop?.order).filter(
+                      (key) => shop?.order[key]["OrderStatus"] == 0
+                    ).length
+                  }
+                  )`
+                    : "Order placed(0)"}
+                </span>
+              </div>
+            </div>
+          </div>
         ) : (
           <button onClick={() => addShop(user.uid)}>
             Create your own shop

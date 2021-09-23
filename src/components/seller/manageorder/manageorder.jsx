@@ -50,7 +50,7 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
 
   return data ? (
     <div class="flex flex-col w-11/12 h-full">
-      <div className="flex justify-end">
+      <div className="flex max-w-5xl min-w-custom justify-end ">
         <Dropselect filterManageOrder={filterManageOrder} />
       </div>
       {data.map((id) => (
@@ -63,7 +63,7 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
           />
         </div>
       ))}
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center max-w-5xl min-w-custom mt-5">
         <Pagination
           className="pagination-bar"
           currentPage={currentPage}

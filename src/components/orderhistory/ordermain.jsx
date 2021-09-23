@@ -11,6 +11,8 @@ const Ordermain = ({ order, deleteOrder, updatedOrderStatus }) => {
 
   const [currentPage, setcurrentPage] = useState(1);
 
+  console.log(order);
+
   const filterManageOrder = (option) => {
     switch (option) {
       case "all":
@@ -48,9 +50,9 @@ const Ordermain = ({ order, deleteOrder, updatedOrderStatus }) => {
     }
   }, [optionFilter, currentPage]);
 
-  return data ? (
+  return order && data ? (
     <div class="flex flex-col w-11/12 h-full">
-      <div className="flex justify-end">
+      <div className="flex justify-end max-w-5xl min-w-custom">
         <Buyerdropselect filterManageOrder={filterManageOrder} />
       </div>
       {data.map((key) => (
@@ -63,7 +65,7 @@ const Ordermain = ({ order, deleteOrder, updatedOrderStatus }) => {
           />
         </div>
       ))}
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center max-w-5xl min-w-custom mt-5">
         <Pagination
           className="pagination-bar"
           currentPage={currentPage}

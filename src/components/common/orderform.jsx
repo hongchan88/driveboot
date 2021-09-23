@@ -19,7 +19,15 @@ const Orderform = ({
   const [cart, setCart] = useState({});
   const [searchOption, setSearchOption] = useState("name");
 
-  const addonCart = (itemId, itemName, itemPrice, e) => {
+  const addonCart = (
+    itemId,
+    itemName,
+    itemPrice,
+    itemImg,
+    itemBrand,
+    itemSize,
+    e
+  ) => {
     e.preventDefault();
     if (cart[itemId]) {
       addQtyfromClick(itemId);
@@ -30,9 +38,11 @@ const Orderform = ({
         price: itemPrice,
         id: itemId,
         qty: 1,
+        itemImg,
+        itemBrand,
+        itemSize,
       };
       setCart(updated);
-      console.log(cart);
     }
   };
 

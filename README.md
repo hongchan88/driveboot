@@ -23,6 +23,7 @@ Customer web
 [x] order newest top
 [x] order is empty page
 [x] buyer can send notification to seller when order is ready to pick up
+[] view product -> show product image
 
 [x] profile
 [x] profile edit + data store in firebase  
@@ -60,9 +61,16 @@ Shop owner
 
 Manage Order from seller
 
-[p] delete button to achive cancel/picked up
-
 [x] customer cancel status ( when customer deleted order from their end)
 [x] profile picture of customer on manage order -> contact email
 
-[p] pagination order page for buyer and seller
+[x] pagination order page for buyer and seller
+
+[x] upload product -> firebase upload url
+
+[x] ordered time / date
+
+[] file restructure
+
+Account login for demo version
+[]

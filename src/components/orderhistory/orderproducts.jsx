@@ -1,22 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const Orderproducts = ({ items }) => {
+  console.log(items);
   return (
     <tr>
       <td class="hidden pb-4 md:table-cell">
-        <a href="#">
-          <img
-            src="https://limg.app/i/Calm-Cormorant-Catholic-Pinball-Blaster-yM4oub.jpeg"
-            class="w-20 rounded"
-            alt="Thumbnail"
-          />
-        </a>
+        <img src={items.itemImg} class="w-20 rounded" alt="Thumbnail" />
       </td>
       <td>
-        <a href="#">
-          <p class="mb-2 md:ml-4">{items.name}</p>
-          <form></form>
-        </a>
+        <div class="mb-2 md:ml-4">
+          <p class="font-bold">{items.name}</p>
+          <p>{items.itemBrand}</p>
+          <p>{items.itemSize}</p>
+        </div>
       </td>
       <td class="justify-center md:justify-end md:flex mt-6">
         <div class="w-20 h-10">

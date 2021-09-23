@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import Popup from "reactjs-popup";
+import styles from "./common.module.css";
 
 const Cartitems = ({ items, removeItem, addQty }) => {
   const [qty, setQty] = useState(1);
@@ -15,23 +17,32 @@ const Cartitems = ({ items, removeItem, addQty }) => {
   return (
     <tr>
       <td class="hidden pb-4 md:table-cell">
-        <a href="#">
-          <img
-            src="https://limg.app/i/Calm-Cormorant-Catholic-Pinball-Blaster-yM4oub.jpeg"
-            class="w-20 rounded"
-            alt="Thumbnail"
-          />
-        </a>
+        <Popup
+          trigger={
+            <img
+              src={items.itemImg}
+              class="w-20 rounded cursor-pointer"
+              alt="Thumbnail"
+            />
+          }
+          modal
+        >
+          <div className="flex justify-center">
+            <img class="" src={items.itemImg} alt="Product image" />
+          </div>
+        </Popup>
       </td>
-      <td>
-        <a href="#">
-          <p class="mb-2 md:ml-4">{items.name}</p>
-          <form>
-            <button type="submit" class="text-gray-700 md:ml-4">
-              <small onClick={(e) => removeItem(items, e)}>(Remove item)</small>
-            </button>
-          </form>
-        </a>
+      <td className={styles.productTd}>
+        <div class="mb-2 md:ml-4">
+          <p className="font-bold">{items.name}</p>
+          <p>{items.itemBrand}</p>
+          <p>{items.itemSize}</p>
+        </div>
+        <form>
+          <button type="submit" class="text-gray-700 md:ml-4">
+            <small onClick={(e) => removeItem(items, e)}>(Remove item)</small>
+          </button>
+        </form>
       </td>
       <td class="justify-center md:justify-end md:flex mt-6">
         <div class="w-20 h-10">
