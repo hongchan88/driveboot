@@ -47,17 +47,19 @@ const Bootdrivethru = ({
     setError(null);
     const newOrder = {
       ...data,
-      firstname: getprofile.firstname,
-      lastname: getprofile.lastname,
-      plate: getprofile.plate,
-      email: getprofile.email,
+      firstname: getprofile?.firstname || "",
+      lastname: getprofile?.lastname || "",
+      plate: getprofile?.plate || "",
+      email: getprofile?.email || "",
       id: Date.now(),
       totalprice,
       cart,
       shopname: shops[shopid].name,
       shopid,
       OrderStatus: "0",
-      buyerProfileImg: profile.profileimage,
+      buyerProfileImg:
+        profile?.profileimage ||
+        "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632378336/boy_xkri9o.png",
       createdTime: moment().tz("Australia/NSW").format("YYYY-MM-DD HH:mm"),
     };
 

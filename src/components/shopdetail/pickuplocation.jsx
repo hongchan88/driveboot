@@ -7,34 +7,35 @@ const Pickuplocation = ({ name, pickupdesc, location, pickupImg }) => {
       <div class="container px-6 py-8 mx-auto">
         <div class="items-center lg:flex">
           <div class="lg:w-1/2">
-            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
-              Pick up location for {name}
-            </h2>
-            {location ? (
-              <Link to={{ pathname: `${location}` }} target="_blank">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 transform hover:scale-125"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              </Link>
-            ) : null}
-
+            <div className="flex">
+              <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                Pick up location
+              </h2>
+              {location ? (
+                <Link to={{ pathname: `${location}` }} target="_blank">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 transform hover:scale-125"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </Link>
+              ) : null}
+            </div>
             <p class="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-md">
               {pickupdesc}
             </p>

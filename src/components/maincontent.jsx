@@ -214,7 +214,8 @@ const Maincontent = ({
 
   const addShop = (uid) => {
     const updated = {
-      shopImg: "img/grocery",
+      infoImg:
+        "https://res.cloudinary.com/dwbsxpk82/image/upload/v1631881307/default/fikri-rasyid-ezeC8-clZSs-unsplash_dynpg4.jpg",
       id: uid,
       name: "New Shop name",
       location: "",

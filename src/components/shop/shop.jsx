@@ -8,24 +8,20 @@ const Shop = ({ shop }) => {
       <Link to={`/shop/${shop.id}`}>
         <div class="p-10">
           <div class="max-w-xs rounded overflow-hidden shadow-lg">
-            <div class="px-6 py-4">
-              <img src="img/header.jpg" />
+            <div class="flex flex-col items-center justify-center px-6 py-4">
+              <img className="object-cover w-56 h-56" src={shop.infoImg} />
+
               <div class="font-bold text-xl mb-2">{shop.name}</div>
-              <p class="text-gray-700 text-base">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                exercitationem praesentium nihil.
-              </p>
             </div>
             <div class="px-6 pt-4 pb-2">
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #photography
+                #KoreanFood
               </span>
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #travel
+                #Asian grocery
               </span>
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #winter
+                #Fast delivery
               </span>
             </div>
           </div>
