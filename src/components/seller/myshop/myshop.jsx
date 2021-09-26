@@ -19,11 +19,7 @@ const Myshop = ({ shop, user, addShop }) => {
                   }
                 />
                 <div class="font-bold text-xl mb-2">{shop.name}</div>
-                <p class="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                  exercitationem praesentium nihil.
-                </p>
+                <p class="text-gray-700 text-base">{shop?.desc}</p>
               </div>
               <div class="px-6 pt-4 pb-2">
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
@@ -51,9 +47,18 @@ const Myshop = ({ shop, user, addShop }) => {
             </div>
           </div>
         ) : (
-          <button onClick={() => addShop(user.uid)}>
-            Create your own shop
-          </button>
+          <div onClick={() => addShop(user.uid)} class="p-10">
+            <div class="max-w-xs rounded overflow-hidden shadow-lg">
+              <div class="px-6 py-4">
+                <img
+                  src={
+                    "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632635607/default/store_jjuwzq.png"
+                  }
+                />
+                <div class="font-bold text-xl mb-2">Create your own store</div>
+              </div>
+            </div>
+          </div>
         )}
       </Link>
     </div>

@@ -93,6 +93,16 @@ function App({ authProvider }) {
               />
             </Route>
           </Switch>
+          <Route exact path={["/myshop", "/manageorder", "/myshop/:id"]}>
+            <Maincontent
+              path={"/"}
+              user={user}
+              authProvider={authProvider}
+              setLoggedInUser={setLoggedInUser}
+              isBuyer={isBuyer}
+              changeBuyerOrSeller={changeBuyerOrSeller}
+            />
+          </Route>
         </BrowserRouter>
       ) : (
         <BrowserRouter>

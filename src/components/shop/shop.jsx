@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const Shop = ({ shop }) => {
   return (
     <li>
-      <Link to={`/shop/${shop.id}`}>
-        <div class="p-10">
+      <div class="p-10">
+        <Link to={`/shop/${shop.id}`}>
           <div class="max-w-xs rounded overflow-hidden shadow-lg">
             <div class="flex flex-col items-center justify-center px-6 py-4">
               <img className="object-cover w-56 h-56" src={shop.infoImg} />
@@ -25,8 +25,8 @@ const Shop = ({ shop }) => {
               </span>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </li>
   );
 };

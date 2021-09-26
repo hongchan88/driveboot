@@ -84,4 +84,5 @@ new buyer fixed issue
 seller account fixed issue
 
 [x] my shop page edit css width
-[] direct url to /myshop /manageorder
+[x] direct url to /myshop /manageorder -> app.jsx added path for "/myshop", "/manageorder", "/myshop/:id"
+[] hashtag register for seller and show shop list card
