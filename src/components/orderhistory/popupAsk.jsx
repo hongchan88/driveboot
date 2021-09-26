@@ -22,16 +22,16 @@ const PopupAsk = ({ askQ, custArrived }) => {
             <div class="text-2xl flex justify-center">{askQ}</div>
             <div class="flex justify-evenly">
               <button
+                class="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => {
                   close();
                   custArrived();
                 }}
-                class="text-xl mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
-                Yes !
+                Confirm
               </button>
               <button
-                class="text-xl mt-10 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                class="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 onClick={() => {
                   console.log("modal closed ");
                   close();

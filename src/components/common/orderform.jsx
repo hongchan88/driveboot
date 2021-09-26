@@ -11,6 +11,7 @@ const Orderform = ({
   filtered,
   optionSearch,
   setFiltered,
+  user,
 }) => {
   // const [filtered, setFiltered] = useState();
   const [hideOrall, setHideorAll] = useState("");
@@ -98,6 +99,7 @@ const Orderform = ({
       filteredSearch={filteredSearch}
       optionSearch={optionSearch}
       setFiltered={setFiltered}
+      user={user}
     />
   );
 };

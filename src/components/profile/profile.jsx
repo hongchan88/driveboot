@@ -21,7 +21,13 @@ const Profile = ({ user, updateProfile, profile }) => {
   }, [profile]);
 
   useEffect(() => {
-    setImage(profile?.profileimage);
+    if (profile?.profileimage) {
+      setImage(profile?.profileimage);
+    } else {
+      setImage(
+        "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632378336/boy_xkri9o.png"
+      );
+    }
   }, []);
 
   const onSubmit = (data, event) => {
@@ -31,9 +37,7 @@ const Profile = ({ user, updateProfile, profile }) => {
     const newData = {
       ...Saveprofile,
       id: user.uid,
-      profileimage:
-        imageUrl ||
-        "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632378336/boy_xkri9o.png",
+      profileimage: imageUrl,
     };
     updateProfile(newData);
     cogoToast.success("Success saved!");

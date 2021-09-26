@@ -74,3 +74,14 @@ Manage Order from seller
 
 Account login for demo version
 []
+
+new buyer fixed issue
+
+[x] pagination useEffect -> add "order" for re calculation page number -> while wait to calculate pagination it needs to have when order[key] is available to avoid error page
+
+[x] updateArriveStatus fixed issue (not updating backend properly)
+
+seller account fixed issue
+
+[x] my shop page edit css width
+[] direct url to /myshop /manageorder

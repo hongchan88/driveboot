@@ -38,6 +38,7 @@ const Shopdetail = ({
             filtered={filtered}
             optionSearch={optionSearch}
             setFiltered={setFiltered}
+            user={user}
           />
         </section>
       ) : (

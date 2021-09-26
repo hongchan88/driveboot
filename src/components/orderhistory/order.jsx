@@ -9,15 +9,13 @@ import Pickuplocation from "../shopdetail/pickuplocation";
 import { Link } from "react-router-dom";
 import PopupAsk from "./popupAsk";
 
-const Order = ({ order, deleteOrder, updatedOrderStatus }) => {
+const Order = ({ order, deleteOrder, updateArriveStatus }) => {
   const status = order?.OrderStatus;
   const arrived = order?.arrived;
 
   const custArrived = () => {
-    updatedOrderStatus(order);
+    updateArriveStatus(order);
   };
-
-  console.log(order);
 
   const statusDesc = (status) => {
     switch (status) {
@@ -144,7 +142,7 @@ const Order = ({ order, deleteOrder, updatedOrderStatus }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.keys(order.cart).map((key) => {
+                  {Object.keys(order?.cart).map((key) => {
                     return <Orderproducts key={key} items={order.cart[key]} />;
                   })}
                 </tbody>

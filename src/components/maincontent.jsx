@@ -34,37 +34,35 @@ const Maincontent = ({
   const [filtered, setFiltered] = useState(null);
   const [searchOption, setSearchOption] = useState("name");
 
-  console.log(user);
-  console.log(path);
-  console.log(shops);
-
-  const updatedOrderStatus = (orderData) => {
+  const updateArriveStatus = (orderData) => {
     const updated = { ...orderData };
     updated["arrived"] = true;
     const orderId = updated.id;
-    firebaseSellerRepo.updateOrderStatus(user.uid, orderId, updated);
+    console.log(updated, "arrived");
+    firebaseSellerRepo.updateOrderStatus(orderData.shopid, orderId, updated);
     firebaseBuyerRepo.updateUserStat(user.uid, orderId, updated);
   };
 
   const updatedSellerOrderStatus = (orderData, updateStatus) => {
     const updated = { ...orderData };
-    console.log(updateStatus["id"], "update status");
+    console.log(orderData, "update status");
 
     updated["OrderStatus"] = updateStatus["id"];
     const orderId = updated.id;
 
     firebaseSellerRepo.updateOrderStatus(user.uid, orderId, updated);
-    firebaseBuyerRepo.updateUserStat(user.uid, orderId, updated);
+    firebaseBuyerRepo.updateUserStat(orderData.buyerId, orderId, updated);
   };
 
   useEffect(() => {
-    if (isBuyer && user) {
+    if (!isBuyer && user) {
       const synoff = firebaseSellerRepo.syncOrders(user.uid, (data) => {
         setSellerOrder(data);
+        console.log(sellerOrders, "sellerorder updated");
       });
       return () => synoff();
     }
-  }, [user]);
+  }, [isBuyer, user]);
 
   const deleteProduct = (productId, e, filterOn) => {
     e.preventDefault();
@@ -165,12 +163,6 @@ const Maincontent = ({
     });
     return () => synoff();
   }, [user]);
-
-  // useEffect(() => {
-  //   firebaseRepository.getShops().then((data) => {
-  //     setShops(data);
-  //   });
-  // }, []);
 
   const addOrder = (newOrder) => {
     orderToSeller(newOrder);
@@ -285,7 +277,7 @@ const Maincontent = ({
               order={order}
               user={user}
               deleteOrder={deleteOrder}
-              updatedOrderStatus={updatedOrderStatus}
+              updateArriveStatus={updateArriveStatus}
             />
           );
 

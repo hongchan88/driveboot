@@ -4,7 +4,7 @@ import Buyerdropselect from "./buyerOrderselect";
 import Order from "./order";
 import styles from "./ordermain.module.css";
 let PageSize = 3;
-const Ordermain = ({ order, deleteOrder, updatedOrderStatus }) => {
+const Ordermain = ({ order, deleteOrder, updateArriveStatus }) => {
   const [optionFilter, setOptionFilter] = useState("all");
   const [data, setData] = useState();
   const [filteredData, setFilteredData] = useState();
@@ -48,7 +48,10 @@ const Ordermain = ({ order, deleteOrder, updatedOrderStatus }) => {
 
       setData(currentTableData);
     }
-  }, [optionFilter, currentPage]);
+  }, [order, optionFilter, currentPage]);
+
+  console.log(data);
+  console.log(order);
 
   return order && data ? (
     <div class="flex flex-col w-11/12 h-full">
@@ -57,12 +60,14 @@ const Ordermain = ({ order, deleteOrder, updatedOrderStatus }) => {
       </div>
       {data.map((key) => (
         <div class="border-2 border-gray-100 mt-10 rounded-lg w-full h-72 max-w-5xl min-w-custom shadow-sm py-4 px-6">
-          <Order
-            key={key}
-            order={order[key]}
-            deleteOrder={deleteOrder}
-            updatedOrderStatus={updatedOrderStatus}
-          />
+          {order[key] && (
+            <Order
+              key={key}
+              order={order[key]}
+              deleteOrder={deleteOrder}
+              updateArriveStatus={updateArriveStatus}
+            />
+          )}
         </div>
       ))}
       <div className="flex justify-center max-w-5xl min-w-custom mt-5">

@@ -103,6 +103,7 @@ function App({ authProvider }) {
                 user={user}
                 authProvider={authProvider}
                 isBuyer={isBuyer}
+                setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
               />
             </Route>
@@ -112,6 +113,7 @@ function App({ authProvider }) {
                 user={user}
                 authProvider={authProvider}
                 isBuyer={isBuyer}
+                setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
               />
             </Route>
@@ -121,6 +123,7 @@ function App({ authProvider }) {
                 user={user}
                 authProvider={authProvider}
                 isBuyer={isBuyer}
+                setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
               />
             </Route>
@@ -130,6 +133,7 @@ function App({ authProvider }) {
                 user={user}
                 authProvider={authProvider}
                 isBuyer={isBuyer}
+                setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
               />
             </Route>

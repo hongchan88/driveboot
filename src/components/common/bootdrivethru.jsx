@@ -22,6 +22,7 @@ const Bootdrivethru = ({
   shopid,
   profile,
   setFiltered,
+  user,
 }) => {
   const { register, handleSubmit, reset, setValue, getValues } = useForm();
 
@@ -61,6 +62,7 @@ const Bootdrivethru = ({
         profile?.profileimage ||
         "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632378336/boy_xkri9o.png",
       createdTime: moment().tz("Australia/NSW").format("YYYY-MM-DD HH:mm"),
+      buyerId: user.uid,
     };
 
     const emptyValidation = Object.keys(newOrder).filter(
