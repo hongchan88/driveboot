@@ -32,7 +32,6 @@ const Leftnavigation = ({
       if (!user) {
         setLoggedInUser(result);
       }
-      cogoToast.success("Success logged in!");
     });
   };
   const logOut = () => {
@@ -43,19 +42,6 @@ const Leftnavigation = ({
     history.push("/");
     changeBuyerOrSeller();
   };
-  // const createUserEmail = () => {
-  //   authProvider
-  //     .createUser("hongchan88@hotmail.com", "ghdcksdl1")
-  //     .then((result) => {
-  //       if (!user) {
-  //         setLoggedInUser(result);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //     });
-  // };
 
   const onSubmit = (data) => {
     authProvider
@@ -66,7 +52,6 @@ const Leftnavigation = ({
         }
         setError();
         reset();
-        cogoToast.success("Success logged in!");
       })
       .catch((error) => {
         cogoToast.error("Failed logged in");
@@ -88,20 +73,36 @@ const Leftnavigation = ({
                     alt="buyer icon"
                   />
                 </div>
-                <p>Buyer Account</p>
+                <p className="font-bold font-mono">Buyer Account</p>
               </div>
             </li>
             <li>
-              <Link to="/">Welcome</Link>
+              <Link to="/">
+                <button className="w-full bg-white-500 hover:bg-gray-100 text-black font-mono font-thin py-2 px-4 rounded">
+                  Welcome
+                </button>
+              </Link>
             </li>
             <li>
-              <Link to="/shop">Shop</Link>
+              <Link to="/shop">
+                <button className="w-full bg-white-500 hover:bg-gray-100 text-black font-mono font-thin py-2 px-4 rounded">
+                  Shop
+                </button>
+              </Link>
             </li>
             <li>
-              <Link to="/order">Order history</Link>
+              <Link to="/order">
+                <button className="w-full bg-white-500 hover:bg-gray-100 text-black font-mono font-thin py-2 px-4 rounded">
+                  Orders
+                </button>
+              </Link>
             </li>
             <li>
-              <Link to="/profile">My account</Link>
+              <Link to="/profile">
+                <button className="w-full bg-white-500 hover:bg-gray-100 text-black font-mono font-thin py-2 px-4 rounded">
+                  Profile
+                </button>
+              </Link>
             </li>
           </ul>
         ) : (
@@ -115,17 +116,29 @@ const Leftnavigation = ({
                     alt="buyer icon"
                   />
                 </div>
-                <p>Seller Account</p>
+                <p className="font-bold font-mono">Seller Account</p>
               </div>
             </li>
             <li>
-              <Link to="/">Welcome</Link>
+              <Link to="/">
+                <button className="w-full bg-white-500 hover:bg-gray-100 text-black font-mono font-thin py-2 px-4 rounded">
+                  Welcome
+                </button>
+              </Link>
             </li>
             <li>
-              <Link to="/myshop">My Shop</Link>
+              <Link to="/myshop">
+                <button className="w-full bg-white-500 hover:bg-gray-100 text-black font-mono font-thin py-2 px-4 rounded">
+                  My shop
+                </button>
+              </Link>
             </li>
             <li>
-              <Link to="/manageorder">Manage Order</Link>
+              <Link to="/manageorder">
+                <button className="w-full bg-white-500 hover:bg-gray-100 text-black font-mono font-thin py-2 px-4 rounded">
+                  Manage orders
+                </button>
+              </Link>
             </li>
           </ul>
         )}

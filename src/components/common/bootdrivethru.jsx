@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import Cart from "./cart";
 import Search from "../search/search";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
 import moment from "moment-timezone";
 
@@ -24,7 +24,7 @@ const Bootdrivethru = ({
   setFiltered,
   user,
 }) => {
-  const { register, handleSubmit, reset, setValue, getValues } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const [getprofile, setProfile] = useState();
   const [error, setError] = useState();

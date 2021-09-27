@@ -14,7 +14,7 @@ const Orderform = ({
   user,
 }) => {
   // const [filtered, setFiltered] = useState();
-  const [hideOrall, setHideorAll] = useState("");
+
   const [totalPrice, setTotal] = useState(0);
 
   const [cart, setCart] = useState({});
@@ -72,7 +72,7 @@ const Orderform = ({
     Object.keys(cart).map((key) => {
       totalPrice += cart[key].qty * cart[key].price;
     });
-    setTotal(totalPrice);
+    setTotal(totalPrice.toFixed(2));
   }, [cart]);
 
   // const optionSearch = (optionValue) => {

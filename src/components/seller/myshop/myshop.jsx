@@ -20,7 +20,9 @@ const Myshop = ({ shop, user, addShop }) => {
                 />
                 <div class="font-bold text-xl mb-2">{shop.name}</div>
                 <p class="text-gray-700 text-base overflow-hidden h-28">
-                  {shop?.desc}
+                  {shop?.desc.length > 120
+                    ? `${shop?.desc.substring(0, 120)} ... Read More`
+                    : shop?.desc}
                 </p>
               </div>
               <div class="px-6 pt-4 pb-2">

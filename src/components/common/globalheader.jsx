@@ -1,20 +1,22 @@
 import React from "react";
-import Popup from "reactjs-popup";
-import style from "./common.module.css";
-import { Link, useHistory } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
 
 const Globalheader = ({ authProvider }) => {
-  console.log(authProvider);
-  const history = useHistory();
-
   return (
     <section class="flex font-mono justify-between px-10 py-10 ">
-      <div class="flex">
-        <p class="font-bold">Boot Drive Thru</p>
+      <div>
+        <a href="/">
+          <p class="font-bold text-white text-xl">Boot Drive Thru</p>
+        </a>
       </div>
-      <div class="flex">
-        <p>Git hub</p>
-        <p>Git hub</p>
+      <div>
+        <a href="https://github.com/hongchan88/driveboot">
+          <img
+            src="https://res.cloudinary.com/dwbsxpk82/image/upload/v1632729209/default/qzencuuerwlho1iudven.png"
+            alt=""
+          />
+        </a>
       </div>
     </section>
   );

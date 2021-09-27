@@ -34,6 +34,7 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
       };
 
       setData(currentTableData);
+      console.log(data);
     }
   }, [optionFilter, currentPage, sellerOrders]);
 

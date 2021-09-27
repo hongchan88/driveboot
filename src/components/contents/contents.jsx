@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-
 import Shops from "../shops/shops";
 
 const Contents = ({ shops }) => {

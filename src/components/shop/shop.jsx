@@ -3,7 +3,7 @@ import styles from "./shop.module.css";
 import { Link } from "react-router-dom";
 
 const Shop = ({ shop }) => {
-  console.log(shop);
+  console.log(shop.desc.length);
   return (
     <li>
       <div class="p-10">
@@ -15,7 +15,11 @@ const Shop = ({ shop }) => {
               </div>
 
               <div class="font-bold text-xl text-center mb-2">{shop?.name}</div>
-              <div class="text-sm mb-2 h-20 overflow-hidden">{shop?.desc}</div>
+              <div class="text-sm mb-2 h-20 overflow-hidden">
+                {shop?.desc.length > 200
+                  ? `${shop?.desc.substring(0, 150)} ... Read More`
+                  : shop?.desc}
+              </div>
             </div>
             <div class="px-6 pt-4 pb-2 h-28">
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">

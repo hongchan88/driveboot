@@ -12,6 +12,7 @@ import HeaderFooter from "./components/common/headerFooter";
 import Welcome from "./components/welcome";
 import Shopdetail from "./components/shopdetail/shopdetail";
 import { useEffect, useState } from "react";
+import cogoToast from "cogo-toast";
 
 function App({ authProvider }) {
   const [user, setUser] = useState();
@@ -29,10 +30,10 @@ function App({ authProvider }) {
 
   useEffect(() => {
     authProvider.onAuthChange((user) => {
-      console.log(user);
       setUser(user);
+      cogoToast.success("Successfully logged in");
     });
-  });
+  }, []);
 
   return (
     <HeaderFooter
