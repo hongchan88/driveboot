@@ -3,6 +3,7 @@ import styles from "./shop.module.css";
 import { Link } from "react-router-dom";
 
 const Shop = ({ shop }) => {
+  console.log(shop);
   return (
     <li>
       <div class="p-10">
@@ -15,13 +16,13 @@ const Shop = ({ shop }) => {
             </div>
             <div class="px-6 pt-4 pb-2">
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #KoreanFood
+                #{shop?.hashtag1}
               </span>
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #Asian grocery
+                #{shop?.hashtag2}
               </span>
               <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #Fast delivery
+                #{shop?.hashtag3}
               </span>
             </div>
           </div>

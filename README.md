@@ -73,7 +73,8 @@ Manage Order from seller
 [] file restructure
 
 Account login for demo version
-[]
+[] hello@boot.drive.thru // hello1234
+[] setup login popup and login
 
 new buyer fixed issue
 
@@ -85,4 +86,4 @@ seller account fixed issue
 
 [x] my shop page edit css width
 [x] direct url to /myshop /manageorder -> app.jsx added path for "/myshop", "/manageorder", "/myshop/:id"
-[] hashtag register for seller and show shop list card
+[x] hashtag register for seller and show shop list card

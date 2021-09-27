@@ -151,6 +151,35 @@ const Addshopform = ({
                     style={{ border: "1px solid #ccc" }}
                   />
                 </div>
+                <span className="text-xl font-bold">
+                  Add tags to your store
+                </span>
+                <div class="flex mt-4 text-gray-500 dark:text-gray-400 ">
+                  <EditTextarea
+                    onSave={onChange}
+                    name="hashtag1"
+                    defaultValue={shop?.hashtag1}
+                    placeholder="tag"
+                    rows={1}
+                    style={{ border: "1px solid #ccc" }}
+                  />
+                  <EditTextarea
+                    onSave={onChange}
+                    name="hashtag2"
+                    placeholder="tag"
+                    defaultValue={shop?.hashtag2}
+                    rows={1}
+                    style={{ border: "1px solid #ccc" }}
+                  />
+                  <EditTextarea
+                    onSave={onChange}
+                    name="hashtag3"
+                    placeholder="tag"
+                    defaultValue={shop?.hashtag3}
+                    rows={1}
+                    style={{ border: "1px solid #ccc" }}
+                  />
+                </div>
               </div>
 
               <div class="mt-8 lg:mt-0 w-full">
