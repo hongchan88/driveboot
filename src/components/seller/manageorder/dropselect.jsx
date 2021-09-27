@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import React, { Fragment, useRef, useState } from "react";
 import useOutsideClick from "./useOutsideClick";
 
 const filter_status = [

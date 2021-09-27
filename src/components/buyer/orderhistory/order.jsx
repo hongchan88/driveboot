@@ -1,13 +1,10 @@
 import React from "react";
-import Shopdetail from "../shopdetail/shopdetail";
-import styles from "./ordermain.module.css";
+import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Orderproducts from "./orderproducts";
-import "./style.css";
-import Pickuplocation from "../shopdetail/pickuplocation";
-import { Link } from "react-router-dom";
 import PopupAsk from "./popupAsk";
+import "./style.css";
 
 const Order = ({ order, deleteOrder, updateArriveStatus }) => {
   const status = order?.OrderStatus;

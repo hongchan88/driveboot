@@ -1,5 +1,5 @@
 import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Pickuplocation from "./pickuplocation";
 
 const Shopinfopanel = ({ shops, id }) => {

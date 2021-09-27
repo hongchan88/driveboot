@@ -1,16 +1,9 @@
 import Maincontent from "./components/maincontent";
 
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import HeaderFooter from "./components/common/headerFooter";
-import Welcome from "./components/welcome";
-import Shopdetail from "./components/shopdetail/shopdetail";
+
 import { useEffect, useState } from "react";
 import cogoToast from "cogo-toast";
 

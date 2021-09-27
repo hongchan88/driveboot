@@ -1,13 +1,9 @@
 import React from "react";
-
-import styles from "./sellerorderlist.module.css";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-
-import "./style.css";
+import Orderproducts from "../../buyer/orderhistory/orderproducts";
 import Orderstatuscomponent from "./orderstatuscomponent";
-import Order from "../../orderhistory/order";
-import Orderproducts from "../../orderhistory/orderproducts";
+import "./style.css";
 
 const SellerOrderList = ({
   id,

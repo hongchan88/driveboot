@@ -1,7 +1,7 @@
 import React from "react";
-import Globalheader from "./globalheader";
-import Globalfooter from "./globalfooter";
 import styles from "./common.module.css";
+import Globalfooter from "./globalfooter";
+import Globalheader from "./globalheader";
 const HeaderFooter = ({ authProvider, children, setLoggedInUser }) => {
   return (
     <div className={styles.container}>

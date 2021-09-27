@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
 import cogoToast from "cogo-toast";
+import React from "react";
 import Popup from "reactjs-popup";
 
 const SellerSearchList = ({ product, deleteProduct, filterOn }) => {

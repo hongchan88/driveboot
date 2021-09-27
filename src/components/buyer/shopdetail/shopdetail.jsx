@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import Orderform from "../common/orderform";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import Pickuplocation from "./pickuplocation";
-
+import buyerRepo from "../../service/buyer_repository";
+import Orderform from "../orderform/orderform";
 import Shopinfopanel from "./shopinfopanel";
 
-import buyerRepo from "../service/buyer_repository";
 const firebaseRepository = new buyerRepo();
 const Shopdetail = ({
   addOrder,

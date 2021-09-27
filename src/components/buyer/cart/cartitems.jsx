@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Popup from "reactjs-popup";
-import styles from "./common.module.css";
+import styles from "./cart.module.css";
 
 const Cartitems = ({ items, removeItem, addQty }) => {
   const [qty, setQty] = useState(1);

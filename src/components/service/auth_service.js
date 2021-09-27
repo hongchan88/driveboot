@@ -1,4 +1,3 @@
-import firebase from "firebase";
 import { firebaseAuth, googleProvider } from "./firebase";
 
 class AuthService {

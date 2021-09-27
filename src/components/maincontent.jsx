@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Contents from "./contents/contents";
+import Welcome from "./buyer/buyerwelcome/welcome";
+import Ordermain from "./buyer/orderhistory/ordermain";
+import Profile from "./buyer/profile/profile";
+import Shopdetail from "./buyer/shopdetail/shopdetail";
+import Shops from "./buyer/shops/shops";
 import Leftnavigation from "./common/leftnavigation";
 import styles from "./maincontent.module.css";
-import Welcome from "./welcome";
-import Shopdetail from "./shopdetail/shopdetail";
-import Ordermain from "./orderhistory/ordermain";
-
-import { set } from "react-hook-form";
-import Profile from "./profile/profile";
-import SellerWelcome from "./seller/sellerwelcome/sellerwelcome";
-import Myshop from "./seller/myshop/myshop";
 import Manageorder from "./seller/manageorder/manageorder";
+import Createshopform from "./seller/myshop/createshopform";
+import Myshop from "./seller/myshop/myshop";
+import SellerWelcome from "./seller/sellerwelcome/sellerwelcome";
 import buyerRepo from "./service/buyer_repository";
 import sellerRepo from "./service/seller_repository";
-import Createshopform from "./seller/myshop/createshopform";
 
 const firebaseBuyerRepo = new buyerRepo();
 const firebaseSellerRepo = new sellerRepo();
@@ -254,7 +252,7 @@ const Maincontent = ({
     } else if (user && isBuyer) {
       switch (path) {
         case "/shop":
-          return <Contents shops={shops} user={user} />;
+          return <Shops shops={shops} user={user} />;
 
         case "/":
           return <Welcome user={user} />;

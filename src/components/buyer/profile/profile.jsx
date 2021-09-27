@@ -1,10 +1,10 @@
+import cogoToast from "cogo-toast";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import cogoToast from "cogo-toast";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import Imageupload from "../../service/imageupload";
 import styles from "./profile.module.css";
-import Imageupload from "../service/imageupload";
+
 const imageupload = new Imageupload();
 const Profile = ({ user, updateProfile, profile }) => {
   const { register, handleSubmit, reset, setValue } = useForm();

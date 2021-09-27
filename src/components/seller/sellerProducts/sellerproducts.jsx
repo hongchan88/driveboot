@@ -1,12 +1,10 @@
+import cogoToast from "cogo-toast";
 import React, { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-import ResultNone from "../../search/resultNone";
-
-import SellerSearchList from "./sellersearchlist";
-import cogoToast from "cogo-toast";
-import { useState } from "react/cjs/react.development";
 import ClipLoader from "react-spinners/ClipLoader";
-import styles from "../myshop/addshopform.module.css";
+import { useState } from "react/cjs/react.development";
+import ResultNone from "../../buyer/search/resultNone";
+import SellerSearchList from "./sellersearchlist";
 
 const SellerProducts = ({
   filteredSearch,

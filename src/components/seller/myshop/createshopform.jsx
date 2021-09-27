@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Shopinfopanel from "../../shopdetail/shopinfopanel";
 import Addshopform from "./addshopform";
 
 const Createshopform = ({

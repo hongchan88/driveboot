@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Pagination from "../seller/manageorder/pagination";
+import Pagination from "../../seller/manageorder/pagination";
 import Buyerdropselect from "./buyerOrderselect";
 import Order from "./order";
-import styles from "./ordermain.module.css";
+
 let PageSize = 3;
 const Ordermain = ({ order, deleteOrder, updateArriveStatus }) => {
   const [optionFilter, setOptionFilter] = useState("all");

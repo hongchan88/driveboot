@@ -1,10 +1,8 @@
-import React, { useMemo } from "react";
-
-import SellerOrderList from "./sellerorderlist";
-import Dropselect from "./dropselect";
+import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
-import ReactPaginate from "react-paginate";
+import Dropselect from "./dropselect";
 import Pagination from "./pagination";
+import SellerOrderList from "./sellerorderlist";
 
 let PageSize = 3;
 

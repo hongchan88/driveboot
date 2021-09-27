@@ -1,9 +1,7 @@
 import React from "react";
-import styles from "./shop.module.css";
 import { Link } from "react-router-dom";
 
 const Shop = ({ shop }) => {
-  console.log(shop.desc.length);
   return (
     <li>
       <div class="p-10">

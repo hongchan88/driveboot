@@ -1,7 +1,7 @@
-import React from "react";
 import classnames from "classnames";
-import { usePagination, DOTS } from "./usePagination";
+import React from "react";
 import "./pagination.scss";
+import { DOTS, usePagination } from "./usePagination";
 const Pagination = (props) => {
   const {
     onPageChange,

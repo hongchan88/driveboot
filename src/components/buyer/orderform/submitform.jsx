@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-
-import Cart from "./cart";
-import Search from "../search/search";
-import { useForm } from "react-hook-form";
 import cogoToast from "cogo-toast";
 import moment from "moment-timezone";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Cart from "../cart/cart";
+import Search from "../search/search";
 
-const Bootdrivethru = ({
+const SubmitForm = ({
   filteredSearch,
   optionSearch,
   product,
@@ -326,4 +325,4 @@ const Bootdrivethru = ({
   );
 };
 
-export default Bootdrivethru;
+export default SubmitForm;

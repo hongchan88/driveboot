@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import cogoToast from "cogo-toast";
+import React, { useRef, useState } from "react";
 import { EditText, EditTextarea } from "react-edit-text";
 import "react-edit-text/dist/index.css";
 import { Link } from "react-router-dom";
-import Shops from "../../shops/shops";
-import styles from "./addshopform.module.css";
-import SellerSearch from "../sellerProducts/sellerproducts";
-import SellerProducts from "../sellerProducts/sellerproducts";
 import ClipLoader from "react-spinners/ClipLoader";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Imageupload from "../../service/imageupload";
-import cogoToast from "cogo-toast";
+import SellerProducts from "../sellerProducts/sellerproducts";
+import styles from "./addshopform.module.css";
 
 const imageupload = new Imageupload();
 

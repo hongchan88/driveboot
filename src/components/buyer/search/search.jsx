@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import SearchList from "./searchlist";
 import ResultNone from "./resultNone";
+import SearchList from "./searchlist";
 
 const Search = ({
   filteredSearch,

@@ -1,8 +1,7 @@
-import React from "react";
-
-import { useEffect } from "react/cjs/react.development";
 import cogoToast from "cogo-toast";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react/cjs/react.development";
 
 const Welcome = ({ user }) => {
   useEffect(() => {

@@ -1,7 +1,5 @@
 import React from "react";
 
-import { useHistory } from "react-router-dom";
-
 const Globalheader = ({ authProvider }) => {
   return (
     <section class="flex font-mono justify-between px-10 py-10 ">

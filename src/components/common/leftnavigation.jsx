@@ -1,17 +1,15 @@
-import React, { useRef, useState } from "react";
-import styles from "./common.module.css";
-import { Link, useHistory } from "react-router-dom";
 import {
+  AtSymbolIcon,
   LockClosedIcon,
   SwitchHorizontalIcon,
-  AtSymbolIcon,
+  XIcon,
 } from "@heroicons/react/solid";
-import GoogleButton from "react-google-button";
-import Popup from "reactjs-popup";
-import { useForm } from "react-hook-form";
-import { XIcon } from "@heroicons/react/solid";
 import cogoToast from "cogo-toast";
-import { resetIdCounter } from "react-tabs";
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
+import Popup from "reactjs-popup";
+import styles from "./common.module.css";
 
 const Leftnavigation = ({
   authProvider,
