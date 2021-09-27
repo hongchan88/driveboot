@@ -25,7 +25,12 @@ const SearchList = ({ product, addonCart }) => {
             modal
           >
             <div className="flex justify-center">
-              <img class="" src={product?.productImg} alt="Product image" />
+              <img
+                class="w-1/2"
+                src={product?.productImg}
+                alt="Product image"
+              />
+              <span class="w-1/2 ml-5">{product?.desc}</span>
             </div>
           </Popup>
         </div>

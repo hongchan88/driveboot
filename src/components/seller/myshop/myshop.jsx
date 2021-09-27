@@ -19,7 +19,9 @@ const Myshop = ({ shop, user, addShop }) => {
                   }
                 />
                 <div class="font-bold text-xl mb-2">{shop.name}</div>
-                <p class="text-gray-700 text-base">{shop?.desc}</p>
+                <p class="text-gray-700 text-base overflow-hidden h-28">
+                  {shop?.desc}
+                </p>
               </div>
               <div class="px-6 pt-4 pb-2">
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">

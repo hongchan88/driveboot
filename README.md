@@ -76,14 +76,18 @@ Account login for demo version
 [] hello@boot.drive.thru // hello1234
 [] setup login popup and login
 
-new buyer fixed issue
+buyer accout fixed issue
 
 [x] pagination useEffect -> add "order" for re calculation page number -> while wait to calculate pagination it needs to have when order[key] is available to avoid error page
 
 [x] updateArriveStatus fixed issue (not updating backend properly)
+
+[x] shops list set min height + shop desc not showing
+[x] click product will show picture and desciption of product
 
 seller account fixed issue
 
 [x] my shop page edit css width
 [x] direct url to /myshop /manageorder -> app.jsx added path for "/myshop", "/manageorder", "/myshop/:id"
 [x] hashtag register for seller and show shop list card
+[x] limit word for info text -> overflow hidden

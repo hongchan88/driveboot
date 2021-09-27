@@ -79,11 +79,20 @@ const Leftnavigation = ({
       <div class="h-7/12">
         {isBuyer ? (
           <ul className={styles.listcontainer}>
-            <li class="flex justify-center mb-5">
-              <p>Buyer Account</p>
+            <li class="flex justify-center  mb-5">
+              <div className="flex-col ">
+                <div className="flex justify-center">
+                  <img
+                    className="inline object-scale-down w-16 h-16"
+                    src="https://res.cloudinary.com/dwbsxpk82/image/upload/v1632708383/default/fzwg7y978hsamttmmyoz.png"
+                    alt="buyer icon"
+                  />
+                </div>
+                <p>Buyer Account</p>
+              </div>
             </li>
             <li>
-              <Link to="/">Welcome Buyer</Link>
+              <Link to="/">Welcome</Link>
             </li>
             <li>
               <Link to="/shop">Shop</Link>
@@ -98,10 +107,19 @@ const Leftnavigation = ({
         ) : (
           <ul className={styles.listcontainer}>
             <li class="flex justify-center mb-5">
-              <p>Seller Account</p>
+              <div className="flex-col ">
+                <div className="flex justify-center">
+                  <img
+                    className="inline object-scale-down w-16 h-16"
+                    src="https://res.cloudinary.com/dwbsxpk82/image/upload/v1632708383/default/pkxz9unmefmsdwitval0.png"
+                    alt="buyer icon"
+                  />
+                </div>
+                <p>Seller Account</p>
+              </div>
             </li>
             <li>
-              <Link to="/">Welcome Seller</Link>
+              <Link to="/">Welcome</Link>
             </li>
             <li>
               <Link to="/myshop">My Shop</Link>
