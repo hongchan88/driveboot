@@ -9,14 +9,15 @@
 To view a live example, **[click here](https://boot-drive-thru.netlify.app)**.
 
 Account login for demo version
-hello@boot.drive.thru // hello1234
+email: hello@boot.drive.thru
+password: hello1234
 
 ## What is this project?
 
 - wouldn't it be nice instead of parking and shoping, you can just drive thru and get items you need?
 - Covid changed our way of shopping. contactless shopping , high scalability
 - Easy for small shop owers to publish their items online using boot drive thru platform.
-- Boot drive thru provides Contactless shopping for customers
+- Boot drive thru provides contactless shopping for customers
 
 ## Technologies Used
 
@@ -126,4 +127,4 @@ Seller issues
 
 ✔️ my shop / shop list card edit css width/height to show constant cards\
 ✔️ direct url to /myshop /manageorder show error page -> on app.jsx added path for "/myshop", "/manageorder", "/myshop/:id"\
-✔️ limit word for info text -> overflow hidden -> show ...
+✔️ limit word for info text -> overflow hidden + use substring
