@@ -13,23 +13,35 @@
 
 ## Technologies Used
 
-###Frontend
+##Frontend
 
 - Reactjs
 - Tailwind / CSS / CSS module
 
-###Backend
+##Backend
 
 - Firebase realtime database
 - cloudinary photo upload API
 
 ## To do Features
 
-###Common Features
+##Common Features
 _[x] navigation structure
 _[x] setup login popup and login with firebase google , email/password for demo
 
-[] page not found error page
+[x] page not found error page
+
+##More To do:
+[] mobile friendly
+[] refactoring and useMemo()
+
+_[] intergrate paypal api -> customer can pay when submit order  
+_[] email alert to customer and seller when status changed
+
+_[] shop search / search by tag
+_[] add more detail in order form (phone number, comment)
+\_[] seller can change date/time for pick up
+-[] Direct message with seller and buyer
 
 -Buyer account view
 -Shop list / order form / cart
@@ -92,11 +104,3 @@ _[x] limit word for info text -> overflow hidden -> show ...
 _Account login for demo version
 _[x] hello@boot.drive.thru // hello1234
 \*deployment
-_more to go..
-_[] intergrate paypal api -> customer can pay when submit order  
-_[] email alert to customer and seller when status changed
-_[] file restructure
-_[] refactoring
-_[] shop search / search by tag
-_[] add more detail in order form (phone number, comment)
-_[] seller can change date/time for pick up

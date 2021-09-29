@@ -1,5 +1,5 @@
-import React from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import React, { useEffect, useState } from "react";
+
 import Dropselect from "./dropselect";
 import Pagination from "./pagination";
 import SellerOrderList from "./sellerorderlist";

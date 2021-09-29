@@ -1,10 +1,9 @@
 import React from "react";
 import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
+
 import Orderproducts from "../../buyer/orderhistory/orderproducts";
 import Orderstatuscomponent from "./orderstatuscomponent";
 import "./style.css";
-
 const SellerOrderList = ({
   id,
   sellerOrder,
@@ -14,20 +13,21 @@ const SellerOrderList = ({
   const status = sellerOrder.OrderStatus;
 
   const statusBar = (status) => {
+    console.log(typeof status);
     switch (status) {
       case "0":
-        return "1/5";
+        return "transition-all ease-out duration-1000 h-full bg-green-500 relative w-1/5";
       case "1":
-        return "2/5";
+        return "transition-all ease-out duration-1000 h-full bg-green-500 relative w-2/5";
       case "2":
-        return "3/5";
+        return "transition-all ease-out duration-1000 h-full bg-green-500 relative w-3/5";
       case "3":
-        return "5/5";
+        return "transition-all ease-out duration-1000 h-full bg-green-500 relative w-5/5";
       default:
         break;
     }
   };
-
+  console.log(typeof statusBar(status));
   return (
     <div className="flex flex-col h-full">
       <section className="flex justify-between h-1/2 ">
@@ -139,12 +139,7 @@ const SellerOrderList = ({
               <div className="h-3 relative w-full rounded-full overflow-hidden">
                 <div className="w-full h-full bg-gray-200 absolute"></div>
 
-                <div
-                  id="bar"
-                  className={`transition-all ease-out duration-1000 h-full bg-green-500 relative w-${statusBar(
-                    status
-                  )}`}
-                ></div>
+                <div className={`${statusBar(status)}`}></div>
               </div>
             </div>
             <div className="col-start-1 col-end-1 text-sm">
