@@ -1,8 +1,8 @@
 import cogoToast from "cogo-toast";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useState } from "react/cjs/react.development";
+
 import ResultNone from "../../buyer/search/resultNone";
 import SellerSearchList from "./sellersearchlist";
 

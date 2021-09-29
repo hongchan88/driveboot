@@ -25,8 +25,7 @@
     "react-tabs": "^3.2.2",
     "reactjs-popup": "^2.0.5",
     "sass": "^1.42.0",
-    "web-vitals": "^1.1.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "craco start",
