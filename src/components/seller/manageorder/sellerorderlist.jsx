@@ -13,7 +13,6 @@ const SellerOrderList = ({
   const status = sellerOrder.OrderStatus;
 
   const statusBar = (status) => {
-    console.log(typeof status);
     switch (status) {
       case "0":
         return "transition-all ease-out duration-1000 h-full bg-green-500 relative w-1/5";
