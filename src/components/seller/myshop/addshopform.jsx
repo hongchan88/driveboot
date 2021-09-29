@@ -27,7 +27,6 @@ const Addshopform = ({
   setFiltered,
 }) => {
   const [isloading, setisLoading] = useState(false);
-  const [imageUrl, setImage] = useState(null);
 
   const infoRef = useRef();
   const pickupRef = useRef();
@@ -40,7 +39,6 @@ const Addshopform = ({
     if (file) {
       const imgUrl = await imageupload.upload(file);
 
-      console.log(imgUrl.url);
       cogoToast.success("Success uploaded the image!");
       return imgUrl.url;
     }
@@ -51,12 +49,10 @@ const Addshopform = ({
 
     setisLoading(true);
     const file = e.target.files[0];
-    console.log(e);
-    console.log(file);
+
     if (file) {
       const imgUrl = await imageupload.upload(file);
 
-      console.log(imgUrl.url);
       cogoToast.success("Success saved the image!");
 
       const updated = {
@@ -79,6 +75,8 @@ const Addshopform = ({
       case "productImg":
         productImgRef.current.click();
 
+        break;
+      default:
         break;
     }
   };
@@ -127,11 +125,11 @@ const Addshopform = ({
       </TabList>
 
       <TabPanel>
-        <section class="bg-white dark:bg-gray-800">
-          <div class="container px-6 py-8 mx-auto">
-            <div class="items-center lg:flex">
-              <div class="w-full">
-                <div class="text-3xl font-bold text-gray-800 dark:text-gray-100">
+        <section className="bg-white dark:bg-gray-800">
+          <div className="container px-6 py-8 mx-auto">
+            <div className="items-center lg:flex">
+              <div className="w-full">
+                <div className="text-3xl font-bold text-gray-800 dark:text-gray-100">
                   <EditText
                     onSave={onChange}
                     name="name"
@@ -140,7 +138,7 @@ const Addshopform = ({
                   />
                 </div>
 
-                <div class="mt-4 text-gray-500 dark:text-gray-400 ">
+                <div className="mt-4 text-gray-500 dark:text-gray-400 ">
                   <EditTextarea
                     onSave={onChange}
                     name="desc"
@@ -152,7 +150,7 @@ const Addshopform = ({
                 <span className="text-xl font-bold">
                   Add tags to your store
                 </span>
-                <div class="flex mt-4 text-gray-500 dark:text-gray-400 ">
+                <div className="flex mt-4 text-gray-500 dark:text-gray-400 ">
                   <EditTextarea
                     onSave={onChange}
                     name="hashtag1"
@@ -180,9 +178,9 @@ const Addshopform = ({
                 </div>
               </div>
 
-              <div class="mt-8 lg:mt-0 w-full">
-                <div class="flex items-center justify-center lg:justify-end lg:ml-5 ">
-                  <div class="max-w-lg ">
+              <div className="mt-8 lg:mt-0 w-full">
+                <div className="flex items-center justify-center lg:justify-end lg:ml-5 ">
+                  <div className="max-w-lg ">
                     <div className={styles.container}>
                       <div className={styles.loading}>
                         <ClipLoader
@@ -193,7 +191,7 @@ const Addshopform = ({
                       </div>
 
                       <img
-                        class="object-cover object-center w-full h-64 rounded-md shadow cursor-pointer hover:opacity-75"
+                        className="object-cover object-center w-full h-64 rounded-md shadow cursor-pointer hover:opacity-75"
                         src={
                           shop?.infoImg
                             ? shop.infoImg
@@ -207,15 +205,15 @@ const Addshopform = ({
                         <div className={styles.overlay}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 right-0 cursor-pointer"
+                            className="h-5 w-5 right-0 cursor-pointer"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                           >
                             <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                              clip-rule="evenodd"
+                              clipRule="evenodd"
                             />
                           </svg>
                         </div>
@@ -223,7 +221,7 @@ const Addshopform = ({
                     </div>
                     <input
                       type="file"
-                      class="hidden"
+                      className="hidden"
                       name="infoImg"
                       ref={infoRef}
                       onChange={isloading ? null : imageNewUpload}
@@ -236,15 +234,15 @@ const Addshopform = ({
         </section>
       </TabPanel>
       <TabPanel>
-        <section class="bg-white dark:bg-gray-800">
-          <div class="container px-6 py-8 mx-auto">
-            <div class="items-center lg:flex">
-              <div class="w-full">
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
+        <section className="bg-white dark:bg-gray-800">
+          <div className="container px-6 py-8 mx-auto">
+            <div className="items-center lg:flex">
+              <div className="w-full">
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
                   Pick up location
                 </h2>
 
-                <div class="mt-4 text-gray-500 dark:text-gray-400 ">
+                <div className="mt-4 text-gray-500 dark:text-gray-400 ">
                   <EditTextarea
                     onSave={onChange}
                     name="pickupdesc"
@@ -253,25 +251,25 @@ const Addshopform = ({
                     rows={7}
                   />
                 </div>
-                <div class="flex items-center w-full">
+                <div className="flex items-center w-full">
                   <Link to={{ pathname: `${shop?.location}` }} target="_blank">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                       />
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
@@ -281,7 +279,7 @@ const Addshopform = ({
                     name="location"
                     defaultValue={
                       shop.location
-                        ? shop.location != ""
+                        ? shop.location !== ""
                           ? shop.location
                           : false
                         : "Google Map URL include https://.."
@@ -291,9 +289,9 @@ const Addshopform = ({
                 </div>
               </div>
 
-              <div class="mt-8 lg:mt-0 w-full lg:ml-5">
-                <div class="flex items-center justify-center lg:justify-end">
-                  <div class="max-w-lg  ">
+              <div className="mt-8 lg:mt-0 w-full lg:ml-5">
+                <div className="flex items-center justify-center lg:justify-end">
+                  <div className="max-w-lg  ">
                     <div className={styles.container}>
                       <div className={styles.loading}>
                         <ClipLoader
@@ -304,7 +302,7 @@ const Addshopform = ({
                       </div>
 
                       <img
-                        class="object-cover object-center w-full h-64 rounded-md shadow cursor-pointer hover:opacity-75"
+                        className="object-cover object-center w-full h-64 rounded-md shadow cursor-pointer hover:opacity-75"
                         src={
                           shop.pickupImg
                             ? shop.pickupImg
@@ -318,15 +316,15 @@ const Addshopform = ({
                         <div className={styles.overlay}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 right-0 cursor-pointer"
+                            className="h-5 w-5 right-0 cursor-pointer"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                           >
                             <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                              clip-rule="evenodd"
+                              clipRule="evenodd"
                             />
                           </svg>
                         </div>
@@ -334,7 +332,7 @@ const Addshopform = ({
                     </div>
                     <input
                       type="file"
-                      class="hidden"
+                      className="hidden"
                       name="pickupImg"
                       ref={pickupRef}
                       onChange={isloading ? null : imageNewUpload}
@@ -347,25 +345,25 @@ const Addshopform = ({
         </section>
       </TabPanel>
       <TabPanel>
-        <section class="bg-white dark:bg-gray-800">
-          <div class="container px-6 py-8 mx-auto">
-            <div class="items-center lg:flex">
-              <div class="lg:w-1/2">
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
+        <section className="bg-white dark:bg-gray-800">
+          <div className="container px-6 py-8 mx-auto">
+            <div className="items-center lg:flex">
+              <div className="lg:w-1/2">
+                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
                   Trading Hours
                 </h2>
 
-                <div class="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-md">
+                <div className="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-md">
                   <ul>
                     <li>
-                      <span class="inline-block w-28">
+                      <span className="inline-block w-28">
                         <button
                           name="monday"
                           onClick={tradingToggleOn}
-                          class={styles.button}
+                          className={styles.button}
                         >
-                          <span class={styles.date}>Monday:</span>
-                          <span class={styles.openclose}>
+                          <span className={styles.date}>Monday:</span>
+                          <span className={styles.openclose}>
                             {tradingToggle?.["monday"] ? "Closing " : "Open"}
                           </span>
                         </button>
@@ -391,18 +389,18 @@ const Addshopform = ({
                           />
                         </span>
                       ) : (
-                        <span class="inline-block">Closed</span>
+                        <span className="inline-block">Closed</span>
                       )}
                     </li>
                     <li>
-                      <span class="inline-block w-28">
+                      <span className="inline-block w-28">
                         <button
                           name="tuesday"
                           onClick={tradingToggleOn}
-                          class={styles.button}
+                          className={styles.button}
                         >
-                          <span class={styles.date}>Tuesday:</span>
-                          <span class={styles.openclose}>
+                          <span className={styles.date}>Tuesday:</span>
+                          <span className={styles.openclose}>
                             {tradingToggle?.["tuesday"] ? "Closing " : "Open"}
                           </span>
                         </button>
@@ -428,18 +426,18 @@ const Addshopform = ({
                           />
                         </span>
                       ) : (
-                        <span class="inline-block">Closed</span>
+                        <span className="inline-block">Closed</span>
                       )}
                     </li>
                     <li>
-                      <span class="inline-block w-28">
+                      <span className="inline-block w-28">
                         <button
                           name="wednesday"
                           onClick={tradingToggleOn}
-                          class={styles.button}
+                          className={styles.button}
                         >
-                          <span class={styles.date}>Wednesday:</span>
-                          <span class={styles.openclose}>
+                          <span className={styles.date}>Wednesday:</span>
+                          <span className={styles.openclose}>
                             {tradingToggle?.["wednesday"] ? "Closing " : "Open"}
                           </span>
                         </button>
@@ -465,18 +463,18 @@ const Addshopform = ({
                           />
                         </span>
                       ) : (
-                        <span class="inline-block">Closed</span>
+                        <span className="inline-block">Closed</span>
                       )}
                     </li>
                     <li>
-                      <span class="inline-block w-28">
+                      <span className="inline-block w-28">
                         <button
                           name="thursday"
-                          class={styles.button}
+                          className={styles.button}
                           onClick={tradingToggleOn}
                         >
-                          <span class={styles.date}>Thursday:</span>
-                          <span class={styles.openclose}>
+                          <span className={styles.date}>Thursday:</span>
+                          <span className={styles.openclose}>
                             {tradingToggle?.["thursday"] ? "Closing " : "Open"}
                           </span>
                         </button>
@@ -502,18 +500,18 @@ const Addshopform = ({
                           />
                         </span>
                       ) : (
-                        <span class="inline-block">Closed</span>
+                        <span className="inline-block">Closed</span>
                       )}
                     </li>
                     <li>
-                      <span class="inline-block w-28">
+                      <span className="inline-block w-28">
                         <button
                           name="friday"
                           onClick={tradingToggleOn}
-                          class={styles.button}
+                          className={styles.button}
                         >
-                          <span class={styles.date}>Friday:</span>
-                          <span class={styles.openclose}>
+                          <span className={styles.date}>Friday:</span>
+                          <span className={styles.openclose}>
                             {tradingToggle?.["friday"] ? "Closing " : "Open"}
                           </span>
                         </button>
@@ -539,18 +537,18 @@ const Addshopform = ({
                           />
                         </span>
                       ) : (
-                        <span class="inline-block">Closed</span>
+                        <span className="inline-block">Closed</span>
                       )}
                     </li>
                     <li>
-                      <span class="inline-block w-28">
+                      <span className="inline-block w-28">
                         <button
                           name="saturday"
                           onClick={tradingToggleOn}
-                          class={styles.button}
+                          className={styles.button}
                         >
-                          <span class={styles.date}>Saturday:</span>
-                          <span class={styles.openclose}>
+                          <span className={styles.date}>Saturday:</span>
+                          <span className={styles.openclose}>
                             {tradingToggle?.["saturday"] ? "Closing " : "Open"}
                           </span>
                           :
@@ -577,24 +575,24 @@ const Addshopform = ({
                           />
                         </span>
                       ) : (
-                        <span class="inline-block">Closed</span>
+                        <span className="inline-block">Closed</span>
                       )}
                     </li>
                     <li>
-                      <span class="inline-block w-28">
+                      <span className="inline-block w-28">
                         <button
                           name="sunday"
                           onClick={tradingToggleOn}
-                          class={styles.button}
+                          className={styles.button}
                         >
-                          <span class={styles.date}>Sunday:</span>
-                          <span class={styles.openclose}>
+                          <span className={styles.date}>Sunday:</span>
+                          <span className={styles.openclose}>
                             {tradingToggle?.["sunday"] ? "Closing " : "Open"}
                           </span>
                         </button>
                       </span>
                       {tradingToggle?.["sunday"] ? (
-                        <span class="font-bold">
+                        <span className="font-bold">
                           <input
                             type="time"
                             className="cursor-pointer "
@@ -614,18 +612,18 @@ const Addshopform = ({
                           />
                         </span>
                       ) : (
-                        <span class="inline-block">Closed</span>
+                        <span className="inline-block">Closed</span>
                       )}
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div class="mt-8 lg:mt-0 lg:w-1/2">
-                <div class="flex items-center justify-center ">
-                  <div class="max-w-lg">
+              <div className="mt-8 lg:mt-0 lg:w-1/2">
+                <div className="flex items-center justify-center ">
+                  <div className="max-w-lg">
                     <img
-                      class="object-fit object-center w-full h-64 rounded-md shadow"
+                      className="object-fit object-center w-full h-64 rounded-md shadow"
                       src="../img/openclose.jpg"
                       alt=""
                     />
@@ -637,11 +635,11 @@ const Addshopform = ({
         </section>
       </TabPanel>
       <TabPanel>
-        <section class="bg-white dark:bg-gray-800">
-          <div class="container px-6 py-8 mx-auto">
-            <div class="items-center lg:flex">
-              <div class="">
-                <div class="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-4xl	">
+        <section className="bg-white dark:bg-gray-800">
+          <div className="container px-6 py-8 mx-auto">
+            <div className="items-center lg:flex">
+              <div className="">
+                <div className="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-4xl	">
                   <SellerProducts
                     shop={shop}
                     filteredSearch={filteredSearch}
@@ -657,11 +655,11 @@ const Addshopform = ({
                 </div>
               </div>
 
-              {/* <div class="mt-8 lg:mt-0 lg:w-1/2">
-                <div class="flex items-center justify-center lg:justify-end">
-                  <div class="max-w-lg">
+              {/* <div className="mt-8 lg:mt-0 lg:w-1/2">
+                <div className="flex items-center justify-center lg:justify-end">
+                  <div className="max-w-lg">
                     <img
-                      class="object-fit object-center w-full h-64 rounded-md shadow"
+                      className="object-fit object-center w-full h-64 rounded-md shadow"
                       src="../img/pickup.png"
                       alt=""
                     />

@@ -5,10 +5,8 @@ const useOutsideClick = (divComponent, callback) => {
     if (
       divComponent?.current?.id &&
       !divComponent.current.contains(e.target) &&
-      e.target.type != "button"
+      e.target.type !== "button"
     ) {
-      console.log("through");
-
       callback(divComponent.current.id);
     }
   };

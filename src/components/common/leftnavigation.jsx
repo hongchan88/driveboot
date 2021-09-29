@@ -33,7 +33,6 @@ const Leftnavigation = ({
     });
   };
   const logOut = () => {
-    console.log("logout");
     authProvider.signOut();
   };
   const changeAccount = () => {
@@ -58,11 +57,11 @@ const Leftnavigation = ({
   };
 
   return (
-    <div class="flex h-screen w-full flex-col justify-start">
-      <div class="h-7/12">
+    <div className="flex h-screen w-full flex-col justify-start">
+      <div className="h-7/12">
         {isBuyer ? (
           <ul className={styles.listcontainer}>
-            <li class="flex justify-center  mb-5">
+            <li className="flex justify-center  mb-5">
               <div className="flex-col ">
                 <div className="flex justify-center">
                   <img
@@ -105,7 +104,7 @@ const Leftnavigation = ({
           </ul>
         ) : (
           <ul className={styles.listcontainer}>
-            <li class="flex justify-center mb-5">
+            <li className="flex justify-center mb-5">
               <div className="flex-col ">
                 <div className="flex justify-center">
                   <img
@@ -141,7 +140,7 @@ const Leftnavigation = ({
           </ul>
         )}
       </div>
-      <div class="flex flex-col mt-10 ">
+      <div className="flex flex-col mt-10 ">
         <button
           onClick={changeAccount}
           className="group w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -183,7 +182,7 @@ const Leftnavigation = ({
             modal
           >
             {(close) => (
-              <div class="flex items-center justify-center">
+              <div className="flex items-center justify-center">
                 <XIcon
                   className="absolute right-5 top-3 h-5 w-5"
                   onClick={() => {
@@ -191,62 +190,56 @@ const Leftnavigation = ({
                   }}
                 />
 
-                <div class="w-full max-w-md">
+                <div className="w-full max-w-md">
                   <form
                     onSubmit={handleSubmit(onSubmit)}
-                    class="bg-white rounded px-12 pt-6 pb-8 mb-4"
+                    className="bg-white rounded px-12 pt-6 pb-8 mb-4"
                   >
-                    <div class="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
+                    <div className="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
                       Login
                     </div>
 
                     {error && <small className="text-red-500">{error}</small>}
-                    <div class="mb-4">
-                      <label
-                        class="block text-gray-700 text-sm font-normal mb-2"
-                        for="username"
-                      >
+                    <div className="mb-4">
+                      <label className="block text-gray-700 text-sm font-normal mb-2">
                         Email
                       </label>
                       <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         name="email"
                         v-model="form.email"
                         type="email"
                         required
-                        autofocus
+                        autoFocus
                         placeholder="Email"
                         {...register("email")}
                       />
                     </div>
-                    <div class="mb-6">
-                      <label
-                        class="block text-gray-700 text-sm font-normal mb-2"
-                        for="password"
-                      >
+                    <div className="mb-6">
+                      <label className="block text-gray-700 text-sm font-normal mb-2">
                         Password
                       </label>
                       <input
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         v-model="form.password"
                         type="password"
                         placeholder="Password"
                         name="password"
                         required
-                        autocomplete="current-password"
+                        autoComplete="current-password"
                         {...register("password")}
                       />
                     </div>
-                    <div class="flex items-center justify-between">
+                    <div className="flex items-center justify-between">
                       <button
-                        class="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-500 hover:bg-blue-600 focus:bg-blue-700"
+                        className="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-500 hover:bg-blue-600 focus:bg-blue-700"
                         type="submit"
                       >
                         Sign In
                       </button>
                     </div>
                   </form>
-                  <p class="text-center text-gray-500 text-xs"></p>
+                  <p className="text-center text-gray-500 text-xs"></p>
                 </div>
               </div>
             )}

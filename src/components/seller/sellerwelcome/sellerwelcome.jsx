@@ -33,7 +33,7 @@ const SellerWelcome = ({ user }) => {
             location , trading hour). 👏👏
           </p>
           <p>3. Add items that you are selling . 🛀</p>
-          <p>
+          <div>
             4. Manage your orders here ->
             <Link to="/manageorder">
               <span className="font-bold"> Manage order</span>
@@ -51,7 +51,7 @@ const SellerWelcome = ({ user }) => {
                 the items are ready to pick up at the location you assigned.
               </li>
             </ul>
-          </p>
+          </div>
           <p>
             5. When customer is arrived they can tap to notify that they are
             arrived. Once they tap it , "Customer not yet arrived" change to

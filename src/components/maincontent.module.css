@@ -14,6 +14,7 @@
 }
 .rightcontent {
   flex-basis: 80%;
+  min-width: 35rem;
   display: flex;
   justify-content: center;
 }

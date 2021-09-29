@@ -1,11 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
-import buyerRepo from "../../service/buyer_repository";
+
 import Orderform from "../orderform/orderform";
 import Shopinfopanel from "./shopinfopanel";
 
-const firebaseRepository = new buyerRepo();
 const Shopdetail = ({
   addOrder,
   user,
@@ -15,15 +14,16 @@ const Shopdetail = ({
   filtered,
   optionSearch,
   setFiltered,
+  searchOption,
 }) => {
   const { id } = useParams();
 
-  const { name, product } = shops ? shops[id] : {};
+  const { product } = shops ? shops[id] : {};
 
   return (
     <>
       {shops ? (
-        <section class="container w-11/12 flex flex-col">
+        <section className="container w-11/12 flex flex-col">
           <Shopinfopanel shops={shops} id={id} />
           <Orderform
             product={product}
@@ -36,6 +36,7 @@ const Shopdetail = ({
             optionSearch={optionSearch}
             setFiltered={setFiltered}
             user={user}
+            searchOption={searchOption}
           />
         </section>
       ) : (

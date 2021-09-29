@@ -2,10 +2,10 @@ import React from "react";
 
 const Globalheader = ({ authProvider }) => {
   return (
-    <section class="flex font-mono justify-between px-10 py-10 ">
+    <section className="flex font-mono justify-between px-10 py-10 ">
       <div>
         <a href="/">
-          <p class="font-bold text-white text-xl">Boot Drive Thru</p>
+          <p className="font-bold text-white text-xl">Boot Drive Thru</p>
         </a>
       </div>
       <div>

@@ -27,18 +27,12 @@ const SellerProducts = ({
   const [error, setError] = useState();
   const [isLoading, setisLoading] = useState(false);
 
-  console.log(isLoading);
   const onChangeImg = async (e) => {
     setisLoading(true);
     const url = await productImgUpload(e);
 
     setProductImg(url);
     setisLoading(false);
-    // console.log("hello");
-    // productImgUpload(e).then((url) => {
-    //   console.log(url);
-    // });
-    // console.log(productImg);
   };
 
   useEffect(() => {
@@ -47,18 +41,18 @@ const SellerProducts = ({
 
   const onSubmit = (data) => {
     let newId = 0;
-    if (product != undefined && Object.keys(product).length > 0) {
+    if (product !== undefined && Object.keys(product).length > 0) {
       newId = Object.keys(product).reduce(function (a, b) {
         return product[a] > product[b] ? a : b;
       });
-      console.log(newId, "highest number");
+
       newId = parseInt(newId) + 1;
     } else {
       newId = 1;
     }
-    const emptyValidation = Object.keys(data).filter((key) => data[key] == "");
+    const emptyValidation = Object.keys(data).filter((key) => data[key] === "");
 
-    if (emptyValidation.length != 0) {
+    if (emptyValidation.length !== 0) {
       setError(emptyValidation);
       cogoToast.error("Required fields are empty");
     } else if (!productImg) {
@@ -82,7 +76,7 @@ const SellerProducts = ({
   };
 
   return (
-    <section class="relative w-full max-w px-5 py-4 mx-auto rounded-md">
+    <section className="relative w-full max-w px-5 py-4 mx-auto rounded-md">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
           <div className="px-4 sm:px-0">
@@ -118,7 +112,9 @@ const SellerProducts = ({
                       />
                     </div>
                     {error?.includes("name") ? (
-                      <small class="text-red-400">product name requried</small>
+                      <small className="text-red-400">
+                        product name requried
+                      </small>
                     ) : null}
                   </div>
                   <div className="col-span-3 sm:col-span-2">
@@ -139,7 +135,9 @@ const SellerProducts = ({
                       />
                     </div>
                     {error?.includes("brand") ? (
-                      <small class="text-red-400">brand name requried</small>
+                      <small className="text-red-400">
+                        brand name requried
+                      </small>
                     ) : null}
                   </div>
                   <div className="col-span-3 sm:col-span-2">
@@ -160,7 +158,9 @@ const SellerProducts = ({
                       />
                     </div>
                     {error?.includes("size") ? (
-                      <small class="text-red-400">product size requried</small>
+                      <small className="text-red-400">
+                        product size requried
+                      </small>
                     ) : null}
                   </div>
                   <div className="col-span-3 sm:col-span-2">
@@ -181,7 +181,7 @@ const SellerProducts = ({
                       />
                     </div>
                     {error?.includes("price") ? (
-                      <small class="text-red-400">price requried</small>
+                      <small className="text-red-400">price requried</small>
                     ) : null}
                   </div>
                 </div>
@@ -204,7 +204,7 @@ const SellerProducts = ({
                     />
                   </div>
                   {error?.includes("desc") ? (
-                    <small class="text-red-400">description requried</small>
+                    <small className="text-red-400">description requried</small>
                   ) : null}
                 </div>
 
@@ -283,70 +283,18 @@ const SellerProducts = ({
         </div>
       </div>
 
-      {/* <form
-        onSubmit={handleSubmit(onSubmit)}
-        class="grid grid-cols-6 gap-6 mb-3"
-      >
-        <div class="col-span-6 ">
-          <label class="mr-5">Name</label>
-          <input
-            {...register("name")}
-            type="text"
-            id="name"
-            name="name"
-            class="w-2/3 py-3 px-3 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-          />
-        </div>
-        <div class="col-span-6 ">
-          <label class="mr-5">Brand</label>
-          <input
-            {...register("brand")}
-            type="text"
-            id="brand"
-            name="brand"
-            class="w-2/3 py-3 px-3 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-          />
-        </div>
-        <div class="col-span-6">
-          <label class="mr-5">Price</label>
-          <input
-            {...register("price")}
-            type="text"
-            id="price"
-            name="price"
-            class="w-2/3 py-3 px-3 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-          />
-        </div>
-
-        <div class="col-span-6  ">
-          <label class="mr-5">Size</label>
-          <input
-            {...register("size")}
-            type="text"
-            id="size"
-            name="size"
-            class="w-2/3 py-3 px-3 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-          />
-        </div>
-        <div class="col-span-2 ">
-          <div className="flex h-full items-end">
-            <button
-              type="submit"
-              className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-1 rounded"
-            >
-              Add
-            </button>
-          </div>
-        </div>
-      </form> */}
-      <div class="flex justify-center mt-10">
+      <div className="flex justify-center mt-10">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
           List of published products
         </h3>
       </div>
-      <div class="relative mt-10 ">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-          <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
+      <div className="relative mt-10 ">
+        <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+          <svg
+            className="w-5 h-5 text-gray-400"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
             <path
               d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
               stroke="currentColor"
@@ -357,16 +305,16 @@ const SellerProducts = ({
           </svg>
         </span>
 
-        <div class="flex justify-between">
+        <div className="flex justify-between">
           <input
             type="text"
-            class="w-4/6 shadow py-3 pl-10 pr-4 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            className="w-4/6 shadow py-3 pl-10 pr-4 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
             placeholder="Search"
             ref={searchRef}
             onChange={(e) => filteredSearch(product, searchRef.current.value)}
           />
           <select
-            class="py-3 pl-4 pr-4 w-2/6 shadow text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring "
+            className="py-3 pl-4 pr-4 w-2/6 shadow text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring "
             ref={optionRef}
             value={searchOption}
             onChange={() => optionSearch(optionRef.current.value)}
@@ -378,7 +326,7 @@ const SellerProducts = ({
       </div>
 
       {filtered?.length > 0 ? (
-        <div class="block sinset-x-0 px-6 py-3 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent">
+        <div className="block sinset-x-0 px-6 py-3 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent">
           {filtered.map((key) => {
             return (
               <SellerSearchList
@@ -390,13 +338,13 @@ const SellerProducts = ({
             );
           })}
         </div>
-      ) : filtered == 0 ? (
+      ) : filtered === 0 ? (
         <ResultNone message={"None product Found. Try other keywords."} />
-      ) : product === undefined || Object?.keys(product)?.length == 0 ? (
+      ) : product === undefined || Object?.keys(product)?.length === 0 ? (
         <ResultNone message={"There is no products listed"} />
       ) : (
         <div
-          class={`block inset-x-0 px-6 py-3 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent`}
+          className={`block inset-x-0 px-6 py-3 overflow-y-auto bg-white border border-gray-300 rounded-md max-h-72 dark:bg-gray-800 dark:border-transparent`}
         >
           {Object.keys(product)
             .reverse()

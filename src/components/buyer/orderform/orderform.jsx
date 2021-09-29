@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Bootdrivethru from "./submitform";
-
+import SubmitForm from "./submitform";
 const Orderform = ({
   product,
   addOrder,
@@ -12,13 +11,13 @@ const Orderform = ({
   optionSearch,
   setFiltered,
   user,
+  searchOption,
 }) => {
   // const [filtered, setFiltered] = useState();
 
   const [totalPrice, setTotal] = useState(0);
 
   const [cart, setCart] = useState({});
-  const [searchOption, setSearchOption] = useState("name");
 
   const addonCart = (
     itemId,
@@ -61,7 +60,7 @@ const Orderform = ({
 
   const removeItemonCart = (itemId, e) => {
     e.preventDefault();
-    console.log(itemId);
+
     const updated = { ...cart };
     delete updated[itemId.id];
     setCart(updated);
@@ -69,19 +68,14 @@ const Orderform = ({
 
   useEffect(() => {
     let totalPrice = 0;
-    Object.keys(cart).map((key) => {
-      totalPrice += cart[key].qty * cart[key].price;
-    });
+    Object.keys(cart).map(
+      (key) => (totalPrice += cart[key].qty * cart[key].price)
+    );
     setTotal(totalPrice.toFixed(2));
   }, [cart]);
 
-  // const optionSearch = (optionValue) => {
-  //   console.log(optionValue);
-  //   setSearchOption(optionValue);
-  // };
-
   return (
-    <Bootdrivethru
+    <SubmitForm
       optionSearch={optionSearch}
       product={product}
       addonCart={addonCart}
@@ -91,13 +85,11 @@ const Orderform = ({
       filtered={filtered}
       addQty={addQty}
       cart={cart}
-      optionSearch={optionSearch}
       addOrder={addOrder}
       shops={shops}
       shopid={shopid}
       profile={profile}
       filteredSearch={filteredSearch}
-      optionSearch={optionSearch}
       setFiltered={setFiltered}
       user={user}
     />

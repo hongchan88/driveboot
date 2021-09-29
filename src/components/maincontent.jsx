@@ -36,14 +36,13 @@ const Maincontent = ({
     const updated = { ...orderData };
     updated["arrived"] = true;
     const orderId = updated.id;
-    console.log(updated, "arrived");
+
     firebaseSellerRepo.updateOrderStatus(orderData.shopid, orderId, updated);
     firebaseBuyerRepo.updateUserStat(user.uid, orderId, updated);
   };
 
   const updatedSellerOrderStatus = (orderData, updateStatus) => {
     const updated = { ...orderData };
-    console.log(orderData, "update status");
 
     updated["OrderStatus"] = updateStatus["id"];
     const orderId = updated.id;
@@ -56,7 +55,6 @@ const Maincontent = ({
     if (!isBuyer && user) {
       const synoff = firebaseSellerRepo.syncOrders(user.uid, (data) => {
         setSellerOrder(data);
-        console.log(sellerOrders, "sellerorder updated");
       });
       return () => synoff();
     }
@@ -67,7 +65,7 @@ const Maincontent = ({
 
     if (filterOn) {
       setFiltered((prev) => {
-        return prev.filter((key) => key != productId);
+        return prev.filter((key) => key !== productId);
       });
     }
 
@@ -77,16 +75,14 @@ const Maincontent = ({
 
       firebaseSellerRepo.updateShopData(updatedProductShop);
 
-      console.log(filtered, "delete filter");
       return updatedProductShop;
     });
   };
 
   const addProduct = (data) => {
     setShops((prev) => {
-      const productId = data.id;
       const updatedProductShop = { ...prev };
-      if (data.id == 1) {
+      if (data.id === 1) {
         updatedProductShop[user.uid]["product"] = {
           [data.id]: { ...data },
         };
@@ -101,16 +97,15 @@ const Maincontent = ({
 
   const filteredSearch = (product, query) => {
     let filteredKey = [];
-    console.log(query);
 
     if (product === undefined) {
       return;
-    } else if (query != "" && searchOption == "name") {
+    } else if (query !== "" && searchOption === "name") {
       filteredKey = Object.keys(product).filter((key) =>
         product[key].name.toLowerCase().includes(query.toLowerCase())
       );
       return setFiltered(filteredKey);
-    } else if (query != "" && searchOption == "brand") {
+    } else if (query !== "" && searchOption === "brand") {
       filteredKey = Object.keys(product).filter((key) =>
         product[key].brand.toLowerCase().includes(query.toLowerCase())
       );
@@ -121,7 +116,6 @@ const Maincontent = ({
   };
 
   const optionSearch = (optionValue) => {
-    console.log(optionValue);
     setSearchOption(optionValue);
   };
 
@@ -146,7 +140,6 @@ const Maincontent = ({
     if (user) {
       const synoff = firebaseBuyerRepo.syncOrders(user.uid, (data) => {
         setOrder(data);
-        console.log(shops);
       });
       return () => synoff();
     } else {
@@ -157,7 +150,6 @@ const Maincontent = ({
   useEffect(() => {
     const synoff = firebaseBuyerRepo.syncShops((data) => {
       setShops(data);
-      console.log(shops, "shop updated");
     });
     return () => synoff();
   }, [user]);
@@ -165,9 +157,8 @@ const Maincontent = ({
   const addOrder = (newOrder) => {
     orderToSeller(newOrder);
     setOrder((prev) => {
-      console.log(prev);
       let updated = {};
-      if (prev == undefined) {
+      if (prev === undefined) {
         updated[newOrder.id] = { ...newOrder };
         firebaseBuyerRepo.writeUserOrder(user.uid, updated);
 
@@ -183,14 +174,13 @@ const Maincontent = ({
   };
 
   const orderToSeller = (newOrderData) => {
-    console.log(newOrderData.shopid);
     firebaseBuyerRepo.writeOrderToSeller(newOrderData);
   };
 
   const deleteOrder = (deleteOrderId, shopId) => {
     setOrder((prev) => {
       const updated = { ...prev };
-      updated[deleteOrderId].OrderStatus = 4;
+      updated[deleteOrderId].OrderStatus = "4";
       firebaseSellerRepo.updateOrderStatus(
         shopId,
         deleteOrderId,
@@ -267,6 +257,7 @@ const Maincontent = ({
               filtered={filtered}
               optionSearch={optionSearch}
               setFiltered={setFiltered}
+              searchOption={searchOption}
             />
           );
         case "/order":
@@ -287,6 +278,8 @@ const Maincontent = ({
               profile={profile}
             />
           );
+        default:
+          break;
       }
     } else if (user && !isBuyer) {
       switch (path) {
@@ -325,6 +318,8 @@ const Maincontent = ({
               updatedSellerOrderStatus={updatedSellerOrderStatus}
             />
           );
+        default:
+          break;
       }
     }
   };

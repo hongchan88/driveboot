@@ -18,13 +18,12 @@ const Dropselect = ({ filterManageOrder }) => {
   const ButtonRef = useRef();
 
   useOutsideClick(divComponent, () => {
-    if (ButtonRef.current.ariaExpanded != "false") {
+    if (ButtonRef.current.ariaExpanded !== "false") {
       ButtonRef.current.click();
     }
   });
 
   const updateStat = (e) => {
-    console.log(e);
     setSelected(e);
     filterManageOrder(e.id);
   };

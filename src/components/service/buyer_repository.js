@@ -1,10 +1,8 @@
 import { firebaseDatabase } from "./firebase";
 
 class buyerRepo {
-  constructor() {}
-
   // updateOrderStatus(uid, orderId, data) {
-  //   console.log(uid);
+  //
   //   firebaseDatabase.ref("orders/" + uid + "/" + orderId).set(data);
   // }
   updateUserStat(uid, orderId, data) {
@@ -34,7 +32,6 @@ class buyerRepo {
   }
 
   syncOrders(uid, getUpdated) {
-    console.log(uid);
     const starCountRef = firebaseDatabase.ref("orders/" + uid);
     starCountRef.on("value", (snapshot) => {
       const data = snapshot.val();

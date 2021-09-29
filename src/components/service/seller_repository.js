@@ -1,8 +1,6 @@
 import { firebaseDatabase } from "./firebase";
 
 class sellerRepo {
-  constructor() {}
-
   writeShopData(uid, data) {
     firebaseDatabase.ref("shops/" + uid).set(data);
   }
@@ -15,7 +13,6 @@ class sellerRepo {
   }
 
   updateOrderStatus(uid, orderId, data) {
-    console.log(uid);
     firebaseDatabase.ref("shops/" + uid + "/order/" + orderId).set(data);
   }
 
@@ -23,7 +20,7 @@ class sellerRepo {
     const starCountRef = firebaseDatabase.ref("shops/" + uid + "/order");
     starCountRef.on("value", (snapshot) => {
       const data = snapshot.val();
-      console.log(data, "check data");
+
       getUpdated(data);
     });
     return () => starCountRef.off();

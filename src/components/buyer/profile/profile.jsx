@@ -7,14 +7,12 @@ import styles from "./profile.module.css";
 
 const imageupload = new Imageupload();
 const Profile = ({ user, updateProfile, profile }) => {
-  const { register, handleSubmit, reset, setValue } = useForm();
+  const { register, handleSubmit } = useForm();
   const [editToggle, setEdit] = useState(false);
   const [Saveprofile, setSaveprofile] = useState();
   const uploadRef = useRef();
   const [imageUrl, setImage] = useState(null);
   const [isloading, setisLoading] = useState(false);
-
-  console.log(profile);
 
   useEffect(() => {
     setSaveprofile(profile);
@@ -28,12 +26,12 @@ const Profile = ({ user, updateProfile, profile }) => {
         "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632378336/boy_xkri9o.png"
       );
     }
-  }, []);
+  }, [profile]);
 
   const onSubmit = (data, event) => {
     setEdit(false);
     setSaveprofile(data);
-    console.log(imageUrl);
+
     const newData = {
       ...Saveprofile,
       id: user.uid,
@@ -74,7 +72,7 @@ const Profile = ({ user, updateProfile, profile }) => {
 
   return (
     <>
-      <section class="w-5/6 max-w-xl">
+      <section className="w-5/6 max-w-xl">
         <div className="mt-10 sm:mt-0">
           <div className="mt-5 md:mt-0">
             <div className="flex flex-col items-center px-4 mb-10 sm:px-0">
@@ -86,7 +84,7 @@ const Profile = ({ user, updateProfile, profile }) => {
               <div className="shadow overflow-hidden sm:rounded-md">
                 <div className="px-4 py-5 bg-white sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
-                    <div class="col-start-2 col-end-6 h-28 ">
+                    <div className="col-start-2 col-end-6 h-28 ">
                       <div className={styles.loadingCotainer}>
                         <div className={styles.loading}>
                           <ClipLoader
@@ -96,11 +94,11 @@ const Profile = ({ user, updateProfile, profile }) => {
                           />
                         </div>
                       </div>
-                      <div class="flex w-full justify-center">
-                        <div class="flex justify-center w-28 h-28 rounded-full overflow-hidden">
+                      <div className="flex w-full justify-center">
+                        <div className="flex justify-center w-28 h-28 rounded-full overflow-hidden">
                           <input
                             type="file"
-                            class="hidden"
+                            className="hidden"
                             id="img"
                             ref={uploadRef}
                             onChange={onChange}
@@ -108,26 +106,27 @@ const Profile = ({ user, updateProfile, profile }) => {
 
                           <div className={styles.container}>
                             <img
+                              alt="profileimg"
                               onClick={isloading ? null : () => uploadImg()}
                               src={
                                 imageUrl ||
                                 "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632378336/boy_xkri9o.png"
                               }
-                              class="cursor-pointer w-32 h-32 hover:opacity-75"
+                              className="cursor-pointer w-32 h-32 hover:opacity-75"
                             />
                             <div className={styles.overlay}>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 right-0 cursor-pointer"
+                                className="h-5 w-5 right-0 cursor-pointer"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                                 onClick={isloading ? null : () => uploadImg()}
                               >
                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                 <path
-                                  fill-rule="evenodd"
+                                  fillRule="evenodd"
                                   d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                  clip-rule="evenodd"
+                                  clipRule="evenodd"
                                 />
                               </svg>
                             </div>
@@ -147,7 +146,7 @@ const Profile = ({ user, updateProfile, profile }) => {
                         type="text"
                         name="firstname"
                         id="firstname"
-                        value={Saveprofile?.firstname}
+                        value={Saveprofile?.firstname || ""}
                         onChange={onChangeValue}
                         autoComplete="given-name"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -166,7 +165,7 @@ const Profile = ({ user, updateProfile, profile }) => {
                         type="text"
                         name="lastname"
                         id="lastname"
-                        value={Saveprofile?.lastname}
+                        value={Saveprofile?.lastname || ""}
                         onChange={onChangeValue}
                         autoComplete="family-name"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -185,7 +184,7 @@ const Profile = ({ user, updateProfile, profile }) => {
                         type="text"
                         name="email"
                         id="email"
-                        value={Saveprofile?.email}
+                        value={Saveprofile?.email || ""}
                         onChange={onChangeValue}
                         autoComplete="email"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -205,7 +204,7 @@ const Profile = ({ user, updateProfile, profile }) => {
                         name="plate"
                         id="plate"
                         onChange={onChangeValue}
-                        value={Saveprofile?.plate}
+                        value={Saveprofile?.plate || ""}
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>

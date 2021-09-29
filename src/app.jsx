@@ -6,6 +6,7 @@ import HeaderFooter from "./components/common/headerFooter";
 
 import { useEffect, useState } from "react";
 import cogoToast from "cogo-toast";
+import Pagenotfound from "./components/common/pagenotfound";
 
 function App({ authProvider }) {
   const [user, setUser] = useState();
@@ -26,7 +27,7 @@ function App({ authProvider }) {
       setUser(user);
       cogoToast.success("Successfully logged in");
     });
-  }, []);
+  }, [authProvider]);
 
   return (
     <HeaderFooter
@@ -86,17 +87,21 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
               />
             </Route>
+
+            <Route exact path={["/myshop", "/manageorder", "/myshop/:id"]}>
+              <Maincontent
+                path={"/"}
+                user={user}
+                authProvider={authProvider}
+                setLoggedInUser={setLoggedInUser}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+              />
+            </Route>
+            <Route>
+              <Pagenotfound />
+            </Route>
           </Switch>
-          <Route exact path={["/myshop", "/manageorder", "/myshop/:id"]}>
-            <Maincontent
-              path={"/"}
-              user={user}
-              authProvider={authProvider}
-              setLoggedInUser={setLoggedInUser}
-              isBuyer={isBuyer}
-              changeBuyerOrSeller={changeBuyerOrSeller}
-            />
-          </Route>
         </BrowserRouter>
       ) : (
         <BrowserRouter>
@@ -140,6 +145,9 @@ function App({ authProvider }) {
                 setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
               />
+            </Route>
+            <Route>
+              <Pagenotfound />
             </Route>
           </Switch>
         </BrowserRouter>

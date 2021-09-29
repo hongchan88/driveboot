@@ -32,7 +32,6 @@ const SubmitForm = ({
     setProfile(profile);
   }, [profile]);
 
-  console.log(getprofile);
   const onChange = (e) => {
     e.preventDefault();
 
@@ -65,14 +64,14 @@ const SubmitForm = ({
     };
 
     const emptyValidation = Object.keys(newOrder).filter(
-      (key) => newOrder[key] == ""
+      (key) => newOrder[key] === ""
     );
 
-    if (Object.keys(cart).length == 0) {
+    if (Object.keys(cart).length === 0) {
       cogoToast.error("Please add products in the cart");
-    } else if (emptyValidation.length != 0) {
+    } else if (emptyValidation.length !== 0) {
       setError(emptyValidation);
-      console.log(setError);
+
       cogoToast.error("Required fields are empty");
     } else {
       addOrder({ ...newOrder, arrived: false });
@@ -84,14 +83,16 @@ const SubmitForm = ({
   return (
     <>
       {aftersubmit ? (
-        <div class="flex justify-center text-2xl text-center mt-10 border-2 border-gray-200 rounded-lg px-10 py-10">
-          <div class="flex flex-col">
+        <div className="flex justify-center text-2xl text-center mt-10 border-2 border-gray-200 rounded-lg px-10 py-10">
+          <div className="flex flex-col">
             <p>Successfully submitted Boot Drive Thru Order Form!</p>
-            <p class="mt-10">Check your order detail in order history page!</p>
+            <p className="mt-10">
+              Check your order detail in order history page!
+            </p>
           </div>
         </div>
       ) : (
-        <section class="flex flex-col">
+        <section className="flex flex-col">
           <Search
             filteredSearch={filteredSearch}
             optionSearch={optionSearch}
@@ -102,7 +103,7 @@ const SubmitForm = ({
             setFiltered={setFiltered}
           />
 
-          <div class="mb-3">
+          <div className="mb-3">
             <Cart cart={cart} removeItem={removeItemonCart} addQty={addQty} />
           </div>
 
@@ -139,14 +140,14 @@ const SubmitForm = ({
                           {...register("firstname")}
                           type="text"
                           name="firstname"
-                          value={getprofile?.firstname}
+                          value={getprofile?.firstname || ""}
                           onChange={onChange}
                           id="firstname"
                           autoComplete="given-name"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {error?.includes("firstname") ? (
-                          <small class="text-red-400">
+                          <small className="text-red-400">
                             first name requried
                           </small>
                         ) : null}
@@ -161,7 +162,7 @@ const SubmitForm = ({
                         </label>
                         <input
                           {...register("lastname")}
-                          value={getprofile?.lastname}
+                          value={getprofile?.lastname || ""}
                           onChange={onChange}
                           type="text"
                           name="lastname"
@@ -170,7 +171,9 @@ const SubmitForm = ({
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {error?.includes("lastname") ? (
-                          <small class="text-red-400">last name requried</small>
+                          <small className="text-red-400">
+                            last name requried
+                          </small>
                         ) : null}
                       </div>
 
@@ -183,7 +186,7 @@ const SubmitForm = ({
                         </label>
                         <input
                           {...register("email")}
-                          value={getprofile?.email}
+                          value={getprofile?.email || ""}
                           onChange={onChange}
                           type="text"
                           name="email"
@@ -192,7 +195,7 @@ const SubmitForm = ({
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {error?.includes("email") ? (
-                          <small class="text-red-400">email requried</small>
+                          <small className="text-red-400">email requried</small>
                         ) : null}
                       </div>
                       <div className="col-span-6">
@@ -211,7 +214,7 @@ const SubmitForm = ({
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {error?.includes("date") ? (
-                          <small class="text-red-400">date requried</small>
+                          <small className="text-red-400">date requried</small>
                         ) : null}
                       </div>
 
@@ -231,7 +234,7 @@ const SubmitForm = ({
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {error?.includes("time") ? (
-                          <small class="text-red-400">
+                          <small className="text-red-400">
                             pick up time requried
                           </small>
                         ) : null}
@@ -245,7 +248,7 @@ const SubmitForm = ({
                         </label>
                         <input
                           {...register("plate")}
-                          value={getprofile?.plate}
+                          value={getprofile?.plate || ""}
                           onChange={onChange}
                           type="text"
                           name="plate"
@@ -253,7 +256,7 @@ const SubmitForm = ({
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {error?.includes("plate") ? (
-                          <small class="text-red-400">
+                          <small className="text-red-400">
                             car plate number requried
                           </small>
                         ) : null}
@@ -299,7 +302,7 @@ const SubmitForm = ({
                         <input
                           readOnly
                           type="text"
-                          value={`$ ${totalprice}`}
+                          value={`$ ${totalprice}` || ""}
                           name="totalprice"
                           id="totalprice"
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"

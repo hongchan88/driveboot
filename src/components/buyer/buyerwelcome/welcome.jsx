@@ -15,7 +15,7 @@ const Welcome = ({ user }) => {
       <div className="px-10">
         <div className="w-full flex justify-center">
           <img
-            className="w-96 h-80 rounded-xl"
+            className="w-96 h-80 rounded-xl "
             src="https://res.cloudinary.com/dwbsxpk82/image/upload/v1632721040/default/izufi56srgbfi3kzsizy.png"
             alt=""
           />

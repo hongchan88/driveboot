@@ -13,16 +13,16 @@ const PopupAsk = ({ askQ, custArrived }) => {
       >
         {(close) => (
           <div className="modal">
-            <div class="absolute right-2 top-0">
+            <div className="absolute right-2 top-0">
               <button className="close" onClick={close}>
                 &times;
               </button>
             </div>
 
-            <div class="text-2xl flex justify-center">{askQ}</div>
-            <div class="flex justify-evenly">
+            <div className="text-2xl flex justify-center">{askQ}</div>
+            <div className="flex justify-evenly">
               <button
-                class="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={() => {
                   close();
                   custArrived();
@@ -31,9 +31,8 @@ const PopupAsk = ({ askQ, custArrived }) => {
                 Confirm
               </button>
               <button
-                class="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className="w-1/3 mt-10 py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 onClick={() => {
-                  console.log("modal closed ");
                   close();
                 }}
               >

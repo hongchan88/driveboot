@@ -18,9 +18,9 @@ const Createshopform = ({
   setFiltered,
 }) => {
   const { id } = useParams();
-  console.log(tradingToggle);
+
   return (
-    <section class="container w-11/12 flex flex-col">
+    <section className="container w-11/12 flex flex-col">
       <Addshopform
         shop={shops[id]}
         id={id}

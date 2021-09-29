@@ -19,9 +19,9 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
       const getFilteredData = Object.keys(sellerOrders)
         .reverse()
         .filter((id) => {
-          return optionFilter == "all"
+          return optionFilter === "all"
             ? sellerOrders[id].OrderStatus
-            : sellerOrders[id].OrderStatus == optionFilter;
+            : sellerOrders[id].OrderStatus === optionFilter;
         });
       setFilteredData(getFilteredData);
 
@@ -32,7 +32,6 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
       };
 
       setData(currentTableData);
-      console.log(data);
     }
   }, [optionFilter, currentPage, sellerOrders]);
 
@@ -44,16 +43,21 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
       case option:
         setOptionFilter(option);
         break;
+      default:
+        break;
     }
   };
 
   return data ? (
-    <div class="flex flex-col w-11/12 h-full">
+    <div className="flex flex-col w-11/12 h-full">
       <div className="flex max-w-5xl min-w-custom justify-end ">
         <Dropselect filterManageOrder={filterManageOrder} />
       </div>
       {data.map((id) => (
-        <div class="border-2 border-gray-100 mt-10 rounded-lg w-full h-72 max-w-5xl min-w-custom shadow-sm py-4 px-6">
+        <div
+          key={id}
+          className="border-2 border-gray-100 mt-10 rounded-lg w-full h-72 max-w-5xl min-w-custom shadow-sm py-4 px-6"
+        >
           <SellerOrderList
             key={id}
             id={id}
@@ -76,8 +80,8 @@ const Manageorder = ({ sellerOrders, updatedSellerOrderStatus }) => {
     <div className="-mt-12 w-5/6 max-w-xl ">
       <div className="py-5">
         <div className="border-t border-gray-200 my-10" />
-        <div class="flex justify-center">
-          <p class="text-lg">Order does exist</p>
+        <div className="flex justify-center">
+          <p className="text-lg">Order does exist</p>
         </div>
         <div className="border-t border-gray-200 my-10" />
       </div>

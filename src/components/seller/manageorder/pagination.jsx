@@ -12,7 +12,6 @@ const Pagination = (props) => {
     className,
   } = props;
 
-  console.log(totalCount);
   const paginationRange = usePagination({
     currentPage,
     totalCount,
@@ -22,8 +21,6 @@ const Pagination = (props) => {
 
   // If there are less than 2 times in pagination range we shall not render the component
   if (currentPage === 0 || paginationRange.length < 1) {
-    console.log(currentPage);
-    console.log(paginationRange.length);
     return null;
   }
 
@@ -58,6 +55,7 @@ const Pagination = (props) => {
         // Render our Page Pills
         return (
           <li
+            key={pageNumber}
             className={classnames("pagination-item", {
               selected: pageNumber === currentPage,
             })}

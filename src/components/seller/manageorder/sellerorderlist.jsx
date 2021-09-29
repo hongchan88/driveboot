@@ -8,11 +8,10 @@ import "./style.css";
 const SellerOrderList = ({
   id,
   sellerOrder,
-  deleteOrder,
+
   updatedSellerOrderStatus,
 }) => {
   const status = sellerOrder.OrderStatus;
-  console.log(sellerOrder, "order");
 
   const statusBar = (status) => {
     switch (status) {
@@ -24,36 +23,40 @@ const SellerOrderList = ({
         return "3/5";
       case "3":
         return "5/5";
+      default:
+        break;
     }
   };
 
   return (
-    <div class="flex flex-col h-full">
-      <section class="flex justify-between h-1/2 ">
-        <section class="flex flex-col">
+    <div className="flex flex-col h-full">
+      <section className="flex justify-between h-1/2 ">
+        <section className="flex flex-col">
           <div>
-            <p class="font-bold text-lg">Order #{sellerOrder.id}</p>
+            <p className="font-bold text-lg">Order #{sellerOrder.id}</p>
           </div>
           <div>
             <Popup
               trigger={
-                <p class="test-sm cursor-pointer"> View ordered product </p>
+                <p className="test-sm cursor-pointer"> View ordered product </p>
               }
               modal
             >
-              <table class="w-full text-sm lg:text-base" cellSpacing="0">
+              <table className="w-full text-sm lg:text-base" cellSpacing="0">
                 <thead>
-                  <tr class="h-12 uppercase">
-                    <th class="hidden md:table-cell"></th>
-                    <th class="text-left">Product</th>
-                    <th class="lg:text-right md:text-center text-left pl-5 lg:pl-0">
-                      <span class="lg:hidden" title="Quantity">
+                  <tr className="h-12 uppercase">
+                    <th className="hidden md:table-cell"></th>
+                    <th className="text-left">Product</th>
+                    <th className="lg:text-right md:text-center text-left pl-5 lg:pl-0">
+                      <span className="lg:hidden" title="Quantity">
                         Qtd
                       </span>
-                      <span class="hidden lg:inline">Quantity</span>
+                      <span className="hidden lg:inline">Quantity</span>
                     </th>
-                    <th class="hidden text-right md:table-cell">Unit price</th>
-                    <th class="text-right">Total price</th>
+                    <th className="hidden text-right md:table-cell">
+                      Unit price
+                    </th>
+                    <th className="text-right">Total price</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,8 +67,8 @@ const SellerOrderList = ({
                   })}
                 </tbody>
               </table>
-              <div class="flex w-full justify-center">
-                <p class="font-bold text-xl">
+              <div className="flex w-full justify-center">
+                <p className="font-bold text-xl">
                   Total: ${sellerOrder.totalprice}
                 </p>
               </div>
@@ -74,9 +77,9 @@ const SellerOrderList = ({
           <div className="container flex px-5 py-5 ">
             <div className="flex justify-center items-center">
               <img
-                class="inline object-cover w-16 h-16 mr-2 rounded-full"
+                className="inline object-cover w-16 h-16 mr-2 rounded-full"
                 src={sellerOrder?.buyerProfileImg}
-                alt="Profile image"
+                alt="Profile"
               />
             </div>
             <div className="flex justify-center items-center">
@@ -92,26 +95,26 @@ const SellerOrderList = ({
             </div>
           </div>
         </section>
-        <section class="flex justify-end w-1/2">
-          <div class="grid grid-cols-2 w-full ">
+        <section className="flex justify-end w-1/2">
+          <div className="grid grid-cols-2 w-full ">
             <div>
-              <p class="font-bold">Payment</p>
+              <p className="font-bold">Payment</p>
 
               <p>{sellerOrder.payment}</p>
             </div>
             <div>
-              <p class="font-bold">Car Number</p>
+              <p className="font-bold">Car Number</p>
               <p>{sellerOrder.plate}</p>
             </div>
             <div>
-              <p class="font-bold">Pick up Date/Time</p>
+              <p className="font-bold">Pick up Date/Time</p>
               <p>
                 {sellerOrder.date} / {sellerOrder.time}
               </p>
             </div>
 
             <div>
-              <p class="font-bold">Order created</p>
+              <p className="font-bold">Order created</p>
               <p>{sellerOrder.createdTime}</p>
             </div>
           </div>
@@ -119,8 +122,8 @@ const SellerOrderList = ({
       </section>
 
       <div className="border-t border-gray-200 w-full mt-12"></div>
-      <div class="flex flex-col justify-center text-lg h-3/6">
-        <span class="font-bold text-lg">
+      <div className="flex flex-col justify-center text-lg h-3/6">
+        <span className="font-bold text-lg">
           <Orderstatuscomponent
             status={status}
             updatedSellerOrderStatus={updatedSellerOrderStatus}
@@ -129,32 +132,32 @@ const SellerOrderList = ({
           />
         </span>
       </div>
-      {status == "4" ? null : (
-        <section class="flex h-1/2 items-center">
-          <div class="grid grid-cols-6 w-full">
-            <div class="col-span-6">
-              <div class="h-3 relative w-full rounded-full overflow-hidden">
-                <div class="w-full h-full bg-gray-200 absolute"></div>
+      {status === "4" ? null : (
+        <section className="flex h-1/2 items-center">
+          <div className="grid grid-cols-6 w-full">
+            <div className="col-span-6">
+              <div className="h-3 relative w-full rounded-full overflow-hidden">
+                <div className="w-full h-full bg-gray-200 absolute"></div>
 
                 <div
                   id="bar"
-                  class={`transition-all ease-out duration-1000 h-full bg-green-500 relative w-${statusBar(
+                  className={`transition-all ease-out duration-1000 h-full bg-green-500 relative w-${statusBar(
                     status
                   )}`}
                 ></div>
               </div>
             </div>
-            <div class="col-start-1 col-end-1 text-sm">
+            <div className="col-start-1 col-end-1 text-sm">
               <span>Order Placed</span>
             </div>
-            <div class="col-start-3 col-end-3 text-sm">
-              <span class="flex justify-start">Process</span>
+            <div className="col-start-3 col-end-3 text-sm">
+              <span className="flex justify-start">Process</span>
             </div>
-            <div class="col-start-4 col-span-1 text-sm ">
-              <span class="flex justify-center">Ready</span>
+            <div className="col-start-4 col-span-1 text-sm ">
+              <span className="flex justify-center">Ready</span>
             </div>
-            <div class="col-start-6 col-end-6 text-sm ">
-              <span class="flex justify-end">Picked up</span>
+            <div className="col-start-6 col-end-6 text-sm ">
+              <span className="flex justify-end">Picked up</span>
             </div>
           </div>
         </section>
