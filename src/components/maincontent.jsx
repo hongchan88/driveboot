@@ -23,6 +23,7 @@ const Maincontent = ({
   setLoggedInUser,
   isBuyer,
   changeBuyerOrSeller,
+  setUserNull,
 }) => {
   const [order, setOrder] = useState();
   const [sellerOrders, setSellerOrder] = useState();
@@ -332,6 +333,7 @@ const Maincontent = ({
           user={user}
           changeBuyerOrSeller={changeBuyerOrSeller}
           isBuyer={isBuyer}
+          setUserNull={setUserNull}
         />
       </section>
       <section className={styles.rightcontent}>{pathsNavi(path)}</section>

@@ -17,6 +17,7 @@ const Leftnavigation = ({
   user,
   isBuyer,
   changeBuyerOrSeller,
+  setUserNull,
 }) => {
   const { register, handleSubmit, reset } = useForm();
   const [error, setError] = useState();
@@ -34,6 +35,7 @@ const Leftnavigation = ({
   };
   const logOut = () => {
     authProvider.signOut();
+    setUserNull();
   };
   const changeAccount = () => {
     history.push("/");
@@ -207,7 +209,7 @@ const Leftnavigation = ({
                       <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         name="email"
-                        v-model="form.email"
+                        value="hello@boot.drive.thru"
                         type="email"
                         required
                         autoFocus
@@ -221,7 +223,7 @@ const Leftnavigation = ({
                       </label>
                       <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                        v-model="form.password"
+                        value="hello1234"
                         type="password"
                         placeholder="Password"
                         name="password"
@@ -244,6 +246,13 @@ const Leftnavigation = ({
               </div>
             )}
           </Popup>
+        )}
+        {!user && (
+          <div className="mt-5 font-sans border-2 flex justify-center border-gray-300 py-3 px-3">
+            <span className="text-red-500 font-bold flex ">
+              Please sign in !
+            </span>
+          </div>
         )}
       </div>
     </div>

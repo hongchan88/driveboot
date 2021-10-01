@@ -26,7 +26,7 @@ const SellerOrderList = ({
         break;
     }
   };
-  console.log(typeof statusBar(status));
+
   return (
     <div className="flex flex-col h-full">
       <section className="flex justify-between h-1/2 ">

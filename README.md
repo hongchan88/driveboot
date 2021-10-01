@@ -6,7 +6,7 @@
 
 ## Live Example
 
-To view a live example, **[click here](https://boot-drive-thru.netlify.app)**.
+To view a live website deployed on Netflify, **[click here](https://boot-drive-thru.netlify.app)**.
 
 Account login for demo version
 email: hello@boot.drive.thru

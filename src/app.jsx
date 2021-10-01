@@ -9,7 +9,7 @@ import cogoToast from "cogo-toast";
 import Pagenotfound from "./components/common/pagenotfound";
 
 function App({ authProvider }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [isBuyer, setisBuyer] = useState(true);
 
   const changeBuyerOrSeller = () => {
@@ -18,16 +18,24 @@ function App({ authProvider }) {
     });
   };
 
-  const setLoggedInUser = (user) => {
-    setUser(user);
+  const setLoggedInUser = (result) => {
+    setUser(result.user);
+    cogoToast.success("Successfully logged in");
+  };
+  const setUserNull = () => {
+    setUser(null);
   };
 
   useEffect(() => {
-    authProvider.onAuthChange((user) => {
-      setUser(user);
-      cogoToast.success("Successfully logged in");
-    });
-  }, [authProvider]);
+    if (user && user !== null) {
+      authProvider.onAuthChange((user) => {
+        setUser(user);
+      });
+    }
+    if (user === null) {
+      cogoToast.error("Please Sign in");
+    }
+  }, [user, authProvider]);
 
   return (
     <HeaderFooter
@@ -42,49 +50,54 @@ function App({ authProvider }) {
               <Maincontent
                 path={"/shop"}
                 user={user}
-                authProvider={authProvider}
                 setLoggedInUser={setLoggedInUser}
                 isBuyer={isBuyer}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route exact path="/">
               <Maincontent
                 path={"/"}
                 user={user}
-                authProvider={authProvider}
                 setLoggedInUser={setLoggedInUser}
                 isBuyer={isBuyer}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route path="/shop/:id">
               <Maincontent
                 path={"/shop/:id"}
                 user={user}
-                authProvider={authProvider}
                 setLoggedInUser={setLoggedInUser}
                 isBuyer={isBuyer}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route exact path="/order">
               <Maincontent
                 path={"/order"}
                 user={user}
-                authProvider={authProvider}
                 setLoggedInUser={setLoggedInUser}
                 isBuyer={isBuyer}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route exact path="/profile">
               <Maincontent
                 path={"/profile"}
                 user={user}
-                authProvider={authProvider}
                 isBuyer={isBuyer}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
 
@@ -92,10 +105,11 @@ function App({ authProvider }) {
               <Maincontent
                 path={"/"}
                 user={user}
-                authProvider={authProvider}
                 setLoggedInUser={setLoggedInUser}
                 isBuyer={isBuyer}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route>
@@ -110,40 +124,44 @@ function App({ authProvider }) {
               <Maincontent
                 path={"/"}
                 user={user}
-                authProvider={authProvider}
                 isBuyer={isBuyer}
                 setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route exact path="/myshop">
               <Maincontent
                 path={"/myshop"}
                 user={user}
-                authProvider={authProvider}
                 isBuyer={isBuyer}
                 setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route exact path="/myshop/:id">
               <Maincontent
                 path={"/myshop/:id"}
                 user={user}
-                authProvider={authProvider}
                 isBuyer={isBuyer}
                 setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route exact path="/manageorder">
               <Maincontent
                 path={"/manageorder"}
                 user={user}
-                authProvider={authProvider}
                 isBuyer={isBuyer}
                 setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
               />
             </Route>
             <Route>

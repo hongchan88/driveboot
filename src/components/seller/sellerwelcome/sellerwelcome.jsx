@@ -1,14 +1,7 @@
-import cogoToast from "cogo-toast";
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const SellerWelcome = ({ user }) => {
-  useEffect(() => {
-    if (!user) {
-      cogoToast.error("Please log in");
-    }
-  });
-
+const SellerWelcome = () => {
   return (
     <>
       <div className="px-10">
