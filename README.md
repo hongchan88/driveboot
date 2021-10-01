@@ -8,8 +8,8 @@
 
 To view a live website deployed on Netflify, **[click here](https://boot-drive-thru.netlify.app)**.
 
-Account login for demo version
-email: hello@boot.drive.thru
+Account login for demo version\
+email: hello@boot.drive.thru\
 password: hello1234
 
 ## What is this project?
