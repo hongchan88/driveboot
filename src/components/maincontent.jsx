@@ -239,7 +239,7 @@ const Maincontent = ({
 
   const pathsNavi = (path) => {
     if (!user) {
-      return <Welcome />;
+      return <Welcome user={user} />;
     } else if (user && isBuyer) {
       switch (path) {
         case "/shop":

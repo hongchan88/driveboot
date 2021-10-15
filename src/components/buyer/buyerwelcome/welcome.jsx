@@ -1,7 +1,14 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import cogoToast from "cogo-toast";
 
-const Welcome = () => {
+const Welcome = ({ user }) => {
+  useEffect(() => {
+    if (!user) {
+      cogoToast.error("Please Sign in ( Use Demo Account to login)");
+    }
+  });
+
   return (
     <>
       <div className="px-10">
@@ -15,7 +22,7 @@ const Welcome = () => {
         <h1 className="font-bold text-2xl">Boot Drive Thru</h1>
         <div className="group text-xl space-y-3 mt-5 font-sans w-full">
           <p>
-            1. Choose shop and order items on
+            1. Choose a shop and order items on
             <Link to="/shop">
               <span className="font-bold"> Shop menu</span>
             </Link>

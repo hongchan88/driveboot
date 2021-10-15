@@ -57,11 +57,11 @@ const Leftnavigation = ({
         setError(error.message);
       });
   };
-  useEffect(() => {
-    if (!user) {
-      cogoToast.error("Please Sign in ( Use Demo Account to login)");
-    }
-  });
+  // useEffect(() => {
+  //   if (!user) {
+  //     cogoToast.error("Please Sign in ( Use Demo Account to login)");
+  //   }
+  // });
 
   return (
     <div className="flex h-screen w-full flex-col justify-start">
