@@ -32,9 +32,9 @@ function App({ authProvider }) {
         setUser(user);
       });
     }
-    if (user === null) {
-      cogoToast.error("Please Sign in");
-    }
+    // if (user === null) {
+    //   cogoToast.error("Please Sign in");
+    // }
   }, [user, authProvider]);
 
   return (

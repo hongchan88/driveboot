@@ -128,3 +128,7 @@ Seller issues
 ✔️ my shop / shop list card edit css width/height to show constant cards\
 ✔️ direct url to /myshop /manageorder show error page -> on app.jsx added path for "/myshop", "/manageorder", "/myshop/:id"\
 ✔️ limit word for info text -> overflow hidden + use substring
+
+Common issues
+
+✔️ Please login pop up to show everytime user try to use menu\

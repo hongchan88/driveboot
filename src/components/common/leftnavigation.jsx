@@ -5,7 +5,7 @@ import {
   XIcon,
 } from "@heroicons/react/solid";
 import cogoToast from "cogo-toast";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import Popup from "reactjs-popup";
@@ -57,6 +57,11 @@ const Leftnavigation = ({
         setError(error.message);
       });
   };
+  useEffect(() => {
+    if (!user) {
+      cogoToast.error("Please Sign in ( Use Demo Account to login)");
+    }
+  });
 
   return (
     <div className="flex h-screen w-full flex-col justify-start">
@@ -247,13 +252,13 @@ const Leftnavigation = ({
             )}
           </Popup>
         )}
-        {!user && (
+        {/* {!user && (
           <div className="mt-5 font-sans border-2 flex justify-center border-gray-300 py-3 px-3">
             <span className="text-red-500 font-bold flex ">
               Please sign in !
             </span>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
