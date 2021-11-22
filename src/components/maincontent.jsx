@@ -111,6 +111,7 @@ const Maincontent = ({
   };
 
   const updateProfile = (data) => {
+    console.log(data);
     const updated = { ...data };
     setProfile(updated);
     firebaseBuyerRepo.writeProfile(user.uid, updated);

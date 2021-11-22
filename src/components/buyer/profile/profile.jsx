@@ -20,14 +20,11 @@ const Profile = ({ user, updateProfile, profile }) => {
 
   useEffect(() => {
     if (profile?.profileimage) {
+      console.log(profile.profileimage);
       setImage(profile?.profileimage);
-    } else {
-      setImage(
-        "https://res.cloudinary.com/dwbsxpk82/image/upload/v1632378336/boy_xkri9o.png"
-      );
     }
-  }, [profile]);
-
+  }, []);
+  console.log(imageUrl);
   const onSubmit = (data, event) => {
     setEdit(false);
     setSaveprofile(data);
