@@ -13,9 +13,6 @@ import SellerWelcome from "./seller/sellerwelcome/sellerwelcome";
 import buyerRepo from "./service/buyer_repository";
 import sellerRepo from "./service/seller_repository";
 
-const firebaseBuyerRepo = new buyerRepo();
-const firebaseSellerRepo = new sellerRepo();
-
 const Maincontent = ({
   path,
   user,
@@ -24,6 +21,8 @@ const Maincontent = ({
   isBuyer,
   changeBuyerOrSeller,
   setUserNull,
+  firebaseBuyerRepo,
+  firebaseSellerRepo,
 }) => {
   const [order, setOrder] = useState();
   const [sellerOrders, setSellerOrder] = useState();
@@ -51,15 +50,6 @@ const Maincontent = ({
     firebaseSellerRepo.updateOrderStatus(user.uid, orderId, updated);
     firebaseBuyerRepo.updateUserStat(orderData.buyerId, orderId, updated);
   };
-
-  useEffect(() => {
-    if (!isBuyer && user) {
-      const synoff = firebaseSellerRepo.syncOrders(user.uid, (data) => {
-        setSellerOrder(data);
-      });
-      return () => synoff();
-    }
-  }, [isBuyer, user]);
 
   const deleteProduct = (productId, e, filterOn) => {
     e.preventDefault();
@@ -126,33 +116,36 @@ const Maincontent = ({
     firebaseBuyerRepo.writeProfile(user.uid, updated);
   };
 
+  console.log(user);
+  useEffect(() => {
+    if (!isBuyer && user) {
+      const synoff = firebaseSellerRepo.syncOrders(user.uid, (data) => {
+        setSellerOrder(data);
+      });
+      return () => synoff();
+    }
+  }, [isBuyer, user]);
+
   useEffect(() => {
     if (user) {
       const synoff = firebaseBuyerRepo.syncProfile(user.uid, (data) => {
         setProfile(data);
       });
       return () => synoff();
-    } else {
-      return;
     }
   }, [user]);
+
+  const setOrderData = (data) => {
+    setOrder(data);
+  };
 
   useEffect(() => {
     if (user) {
-      const synoff = firebaseBuyerRepo.syncOrders(user.uid, (data) => {
-        setOrder(data);
+      const synoff = firebaseBuyerRepo.syncShops((data) => {
+        setShops(data);
       });
       return () => synoff();
-    } else {
-      return;
     }
-  }, [user]);
-
-  useEffect(() => {
-    const synoff = firebaseBuyerRepo.syncShops((data) => {
-      setShops(data);
-    });
-    return () => synoff();
   }, [user]);
 
   const addOrder = (newOrder) => {
@@ -264,10 +257,12 @@ const Maincontent = ({
         case "/order":
           return (
             <Ordermain
+              setOrderData={setOrderData}
               order={order}
               user={user}
               deleteOrder={deleteOrder}
               updateArriveStatus={updateArriveStatus}
+              firebaseBuyerRepo={firebaseBuyerRepo}
             />
           );
 

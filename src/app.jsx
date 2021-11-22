@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import cogoToast from "cogo-toast";
 import Pagenotfound from "./components/common/pagenotfound";
 
-function App({ authProvider }) {
+function App({ authProvider, firebaseBuyerRepo, firebaseSellerRepo }) {
   const [user, setUser] = useState(null);
   const [isBuyer, setisBuyer] = useState(true);
 
@@ -25,17 +25,19 @@ function App({ authProvider }) {
   const setUserNull = () => {
     setUser(null);
   };
+  console.log("app");
+  console.log(user);
 
-  useEffect(() => {
-    if (user && user !== null) {
-      authProvider.onAuthChange((user) => {
-        setUser(user);
-      });
-    }
-    // if (user === null) {
-    //   cogoToast.error("Please Sign in");
-    // }
-  }, [user, authProvider]);
+  // useEffect(() => {
+  //   if (user && user !== null) {
+  //     authProvider.onAuthChange((user) => {
+  //       setUser(user);
+  //     });
+  //   }
+  //   // if (user === null) {
+  //   //   cogoToast.error("Please Sign in");
+  //   // }
+  // }, [user, authProvider]);
 
   return (
     <HeaderFooter
@@ -46,17 +48,6 @@ function App({ authProvider }) {
       {isBuyer ? (
         <BrowserRouter>
           <Switch>
-            <Route exact path="/shop">
-              <Maincontent
-                path={"/shop"}
-                user={user}
-                setLoggedInUser={setLoggedInUser}
-                isBuyer={isBuyer}
-                changeBuyerOrSeller={changeBuyerOrSeller}
-                setUserNull={setUserNull}
-                authProvider={authProvider}
-              />
-            </Route>
             <Route exact path="/">
               <Maincontent
                 path={"/"}
@@ -66,6 +57,21 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
+              />
+            </Route>
+            <Route exact path="/shop">
+              <Maincontent
+                path={"/shop"}
+                user={user}
+                setLoggedInUser={setLoggedInUser}
+                isBuyer={isBuyer}
+                changeBuyerOrSeller={changeBuyerOrSeller}
+                setUserNull={setUserNull}
+                authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route path="/shop/:id">
@@ -77,6 +83,8 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route exact path="/order">
@@ -88,6 +96,8 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route exact path="/profile">
@@ -95,9 +105,12 @@ function App({ authProvider }) {
                 path={"/profile"}
                 user={user}
                 isBuyer={isBuyer}
+                setLoggedInUser={setLoggedInUser}
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
 
@@ -110,6 +123,8 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route>
@@ -129,6 +144,8 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route exact path="/myshop">
@@ -140,6 +157,8 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route exact path="/myshop/:id">
@@ -151,6 +170,8 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route exact path="/manageorder">
@@ -162,6 +183,8 @@ function App({ authProvider }) {
                 changeBuyerOrSeller={changeBuyerOrSeller}
                 setUserNull={setUserNull}
                 authProvider={authProvider}
+                firebaseBuyerRepo={firebaseBuyerRepo}
+                firebaseSellerRepo={firebaseSellerRepo}
               />
             </Route>
             <Route>

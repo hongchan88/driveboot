@@ -1,15 +1,33 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "../../seller/manageorder/pagination";
+import buyerRepo from "../../service/buyer_repository";
 import Buyerdropselect from "./buyerOrderselect";
 import Order from "./order";
 
 let PageSize = 3;
-const Ordermain = ({ order, deleteOrder, updateArriveStatus }) => {
+const Ordermain = ({
+  order,
+  deleteOrder,
+  updateArriveStatus,
+  setOrderData,
+  user,
+  firebaseBuyerRepo,
+}) => {
   const [optionFilter, setOptionFilter] = useState("all");
   const [data, setData] = useState();
   const [filteredData, setFilteredData] = useState();
 
   const [currentPage, setcurrentPage] = useState(1);
+
+  useEffect(() => {
+    if (user) {
+      const synoff = firebaseBuyerRepo.syncOrders(user.uid, (data) => {
+        setOrderData(data);
+        console.log("order updated");
+      });
+      return () => synoff();
+    }
+  }, [user]);
 
   const filterManageOrder = (option) => {
     switch (option) {
