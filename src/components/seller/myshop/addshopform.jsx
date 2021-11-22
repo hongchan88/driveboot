@@ -624,7 +624,7 @@ const Addshopform = ({
                   <div className="max-w-lg">
                     <img
                       className="object-fit object-center w-full h-64 rounded-md shadow"
-                      src="../img/openclose.jpg"
+                      src="https://res.cloudinary.com/dwbsxpk82/image/upload/v1631880978/default/khachik-simonian-XYavU5BGF9o-unsplash_iqfr5k.jpg"
                       alt=""
                     />
                   </div>
